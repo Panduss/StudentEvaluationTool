@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {login} from '../../actions/users'
 import LoginForm from './LoginForm'
 import {Redirect} from 'react-router-dom'
+import './login.css'
+
 
 class LoginPage extends PureComponent {
 	handleSubmit = (data) => {
@@ -15,8 +17,8 @@ class LoginPage extends PureComponent {
 		)
 
 		return (
-			<div>
-				<h1>Login</h1>
+			<div className="login">
+				<h1 className="loginTitle">Login</h1>
 
 				<LoginForm onSubmit={this.handleSubmit} />
 
@@ -29,7 +31,7 @@ class LoginPage extends PureComponent {
 const mapStateToProps = function (state) {
 	return {
 		currentUser: state.currentUser,
-    error: state.login.error
+    	error: state.login.error
 	}
 }
 

@@ -1,0 +1,26 @@
+.students {
+    margin-left: 25%;
+    width: 50%;
+    height: 50%;
+    margin-left: 25%;
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid blue;
+}
+
+.studentName {
+    font-size: 2em;
+    text-align: center;
+}
+
+.studentPicture {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    object-fit: cover;
+    width:200px;
+    height:200px;
+}
+.studentInfo {
+    font-size: 1.6em;
+    text-align: center;
+}

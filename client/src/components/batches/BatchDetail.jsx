@@ -8,6 +8,7 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
+import './batch.css'
 
 class BatchDetail extends PureComponent {
 
@@ -27,28 +28,19 @@ class BatchDetail extends PureComponent {
     const { students } = this.props
 
     return (
-    <Card key={student.id} className="game-card">
-        <Button className="button">
+        <div 
+        key={student.id} 
+        className="students">
             <Link
                 className="link"
                 to={`/students/${student.id}`}
                 onClick={() => this.showStudent(student.id)}
                 >
-                <Typography variant="headline" component="h2">
-                    Name: {student.firstName} {student.lastName}
-                </Typography>
+                <p className="studentName">Name: {student.firstName} {student.lastName}</p>
             </Link>
-            <CardContent>
-                {/* <Typography variant="headline" component="h2">
-                    Picture: {student.profilePic}
-                </Typography> */}
-                <Typography color="textSecondary">
-                    Last evaluation: {student.lastEvaluation}
-                </Typography>
-            </CardContent>
-        </Button>
-    </Card>)
-  }
+            <p className="studentInfo">Last evaluation: {student.lastEvaluation}</p>
+    </div>
+    )}
 
   render() {
     const {students, authenticated} = this.props

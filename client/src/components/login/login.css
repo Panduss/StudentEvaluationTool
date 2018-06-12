@@ -1,0 +1,18 @@
+.login {
+    margin: auto;
+    max-width: 50%;
+    text-align: center;
+}
+
+.loginInfo {
+    margin: 5px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.loginButton {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px 5px 5px 5px;
+}

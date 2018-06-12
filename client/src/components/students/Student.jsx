@@ -7,6 +7,7 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
+import './student.css'
 
 class ShowOneStudent extends PureComponent {
 
@@ -21,31 +22,15 @@ class ShowOneStudent extends PureComponent {
     const { student } = this.props
 
     return (
-    <Card key={one.id} className="game-card">
-        <Button className="button">
-            {/* <Link
-                className="link"
-                to={`/students/${one.id}`}
-                onClick={() => this.showStudent(student.id)}
-                >
-                <Typography variant="headline" component="h2">
-                    Name: {student.firstName} {student.lastName}
-                </Typography>
-            </Link> */}
-            <CardContent>
-            <Typography variant="headline" component="h2">
-                    Name: {one.firstName} {one.lastName}
-                </Typography>
-                <Typography variant="headline" component="h2">
-                    Picture: {one.profilePic}
-                </Typography>
-                <Typography color="textSecondary">
-                    Last evaluation: {one.lastEvaluation}
-                </Typography>
-            </CardContent>
-        </Button>
-    </Card>)
-  }
+    <div 
+    key={one.id} 
+    className="students"
+    >
+            <p className="studentName">Name: {one.firstName} {one.lastName}</p>
+            <img className="studentPicture" src={one.profilePic} />
+            <p className="studentInfo">Last evaluation: {one.lastEvaluation}</p>
+    </div>
+    )}
 
   render() {
     const {student, authenticated} = this.props

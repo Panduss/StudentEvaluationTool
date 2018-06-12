@@ -4,7 +4,7 @@ import {logout} from './users'
 import {isExpired} from '../jwt'
 
 
-export const GET_STUDENT = 'GET_BATCH'
+export const GET_STUDENT = 'GET_STUDENT'
 
 export const showStudent = (id) => (dispatch, getState) => {
     const state = getState()
@@ -19,7 +19,7 @@ export const showStudent = (id) => (dispatch, getState) => {
       .then(result => 
         dispatch({
             type: GET_STUDENT,
-            payload: result.body
+            payload: result.body.studentById
         })
     )
       .catch(err => console.error(err))

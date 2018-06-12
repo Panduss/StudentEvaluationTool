@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react'
-import {showBatch} from '../../actions/batches'
 import {showStudent} from '../../actions/student'
 import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
@@ -9,41 +8,39 @@ import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 
-class BatchDetail extends PureComponent {
+class ShowOneStudent extends PureComponent {
 
   componentWillMount() {
     if (this.props.authenticated) {
-      if (this.props.oneBatch === null) this.props.showBatch()
+      if (this.props.student === null) this.props.showStudent()
       if (this.props.users === null) this.props.getUsers()
     }
   }
 
-  showStudent(studentId) {
-    this.props.showStudent(studentId)
-
-}
-
-  renderStudent = (student) => {
-    const { students } = this.props
+  renderOneStudent = (one) => {
+    const { student } = this.props
 
     return (
-    <Card key={student.id} className="game-card">
+    <Card key={one.id} className="game-card">
         <Button className="button">
-            <Link
+            {/* <Link
                 className="link"
-                to={`/students/${student.id}`}
+                to={`/students/${one.id}`}
                 onClick={() => this.showStudent(student.id)}
                 >
                 <Typography variant="headline" component="h2">
                     Name: {student.firstName} {student.lastName}
                 </Typography>
-            </Link>
+            </Link> */}
             <CardContent>
-                {/* <Typography variant="headline" component="h2">
-                    Picture: {student.profilePic}
-                </Typography> */}
+            <Typography variant="headline" component="h2">
+                    Name: {one.firstName} {one.lastName}
+                </Typography>
+                <Typography variant="headline" component="h2">
+                    Picture: {one.profilePic}
+                </Typography>
                 <Typography color="textSecondary">
-                    Last evaluation: {student.lastEvaluation}
+                    Last evaluation: {one.lastEvaluation}
                 </Typography>
             </CardContent>
         </Button>
@@ -51,17 +48,17 @@ class BatchDetail extends PureComponent {
   }
 
   render() {
-    const {students, authenticated} = this.props
+    const {student, authenticated} = this.props
 
     if (!authenticated) return (
 			<Redirect to="/login" />
 		)
 
-    if (students === null) return null
+    if (student === null) return null
 
     return (
       <div>
-        {students.map(student => this.renderStudent(student))}
+        {student.map(one => this.renderOneStudent(one))}
       </div>
     )
   }
@@ -69,8 +66,8 @@ class BatchDetail extends PureComponent {
 
 const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
-  students: state.oneBatch
+  student: state.student
   
 })
 
-export default connect(mapStateToProps, {showBatch, showStudent})(BatchDetail)
+export default connect(mapStateToProps, {showStudent})(ShowOneStudent)

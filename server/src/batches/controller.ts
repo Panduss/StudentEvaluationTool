@@ -19,7 +19,7 @@ export default class BatchController {
         return batchById
     }
 
-    @Authorized()
+    // @Authorized()
     @Post('/batches')
     @HttpCode(201)
     async createBatch(

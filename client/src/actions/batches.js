@@ -4,8 +4,10 @@ import {logout} from './users'
 import {isExpired} from '../jwt'
 
 export const GET_BATCHES = 'GET_BATCHES'
-export const ADD_BATCH = 'ADD_BATCH'
 export const GET_BATCH = 'GET_BATCH'
+
+export const ADD_BATCH_SUCCESS = 'ADD_BATCH_SUCCESS'
+export const ADD_BATCH_FAILED = 'ADD_BATCH_FAILED'
 
 export const showBatch = (id) => (dispatch, getState) => {
     const state = getState()
@@ -46,6 +48,53 @@ export const showBatches = () => (dispatch, getState) => {
   }
 
 
+  export const newBatch = (batchNumber, startDate, endDate) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+
+  request
+    .post(`${baseUrl}/batches`)
+    .send({ batchNumber, startDate, endDate })
+    .then(result => {
+      dispatch({
+        type: ADD_BATCH_SUCCESS
+      })
+    })
+    .catch(err => {
+      if (err.status === 400) {
+        dispatch({
+          type: ADD_BATCH_FAILED,
+          payload: err.response.body.message || 'Unknown error'
+        })
+      }
+      else {
+        console.error(err)
+      }
+    })
+}
+
+
+//   export const createBatch = (batchNumber, startDate, endDate) => (dispatch, getState) => {
+//     const state = getState()
+//     const jwt = state.currentUser.jwt
+  
+//     if (isExpired(jwt)) return dispatch(logout())
+  
+//     request
+//       .post(`${baseUrl}/batches`)
+//       .set('Authorization', `Bearer ${jwt}`)
+//       .send(batch)
+//       .then(result => dispatch({
+//           type: ADD_BATCH,
+//           payload: batch
+//       })
+//       )
+//       .catch(err => console.error(err))
+//   }
+
+
 // export const UPDATE_BATCHES = 'UPDATE_BATCHES'
 // export const UPDATE_BATCH_SUCCESS = 'UPDATE_BATCH_SUCCESS'
 
@@ -63,19 +112,7 @@ export const showBatches = () => (dispatch, getState) => {
 
 
 
-// export const createBatch = () => (dispatch, getState) => {
-//   const state = getState()
-//   const jwt = state.currentUser.jwt
 
-//   if (isExpired(jwt)) return dispatch(logout())
-
-//   request
-//     .post(`${baseUrl}/batches`)
-//     .set('Authorization', `Bearer ${jwt}`)
-//     .send(batch)
-//     .then(result => dispatch(addBatch(batch)))
-//     .catch(err => console.error(err))
-// }
 
 // export const updateBatch = (batchId, board) => (dispatch, getState) => {
 //   const state = getState()

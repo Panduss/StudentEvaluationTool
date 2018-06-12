@@ -7,13 +7,15 @@ import BatchDetail from './components/batches/BatchDetail'
 import showOneStudent from './components/students/Student'
 import LogoutPage from './components/logout/LogoutPage'
 import TopBar from './components/layout/TopBar'
+import NewBatchPage from './components/batches/addBatchPage'
+import NewStudentPage from './components/batches/addStudentPage'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
     <Router>
-      <div>
+      <div className="App">
         <nav>
           <TopBar />
         </nav>
@@ -22,8 +24,10 @@ class App extends Component {
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/batches" component={BatchList} />
+            <Route exact path="/batch/create" component={NewBatchPage} />
             <Route exact path="/batches/:id" component={BatchDetail} />
             <Route exact path="/students/:id" component={showOneStudent} />
+            <Route exact path="/student/create" component={NewStudentPage} />
             <Route exact path="/" render={ () => <Redirect to="/login" /> } />
           </main>
           </div>

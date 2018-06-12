@@ -7,6 +7,7 @@ import {withRouter} from 'react-router'
 import {userId} from '../../jwt'
 import {connect} from 'react-redux'
 import AccountIcon from 'material-ui-icons/AccountBox'
+import './TopBar.css'
 
 const TopBar = (props) => {
   const { location, history, user } = props
@@ -31,8 +32,12 @@ const TopBar = (props) => {
           <Button color="inherit" onClick={() => history.push('/signup')}>Sign up</Button>
         }
         {
-          location.pathname.indexOf('games/') > 0 &&
-          <Button color="inherit" onClick={() => history.push('/games')}>All Games</Button>
+          location.pathname.indexOf('batches') > 0 &&
+          <Button color="inherit" onClick={() => history.push('/batches')}>All Batches</Button>
+        }
+        {
+          location.pathname.indexOf('batch/create') > 0 &&
+          <Button color="inherit" onClick={() => history.push('/batch/create')}>Create Batch</Button>
         }
         {
           /games$/.test(location.pathname) &&

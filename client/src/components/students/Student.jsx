@@ -1,12 +1,8 @@
 import React, {PureComponent} from 'react'
 import {showStudent} from '../../actions/student'
-import {getUsers} from '../../actions/users'
+// import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
 import './student.css'
 
 class ShowOneStudent extends PureComponent {
@@ -24,9 +20,9 @@ class ShowOneStudent extends PureComponent {
     return (
     <div 
     key={one.id} 
-    className="students"
+    className="student"
     >
-            <p className="studentName">Name: {one.firstName} {one.lastName}</p>
+            <p className="studentName">{one.firstName} {one.lastName}</p>
             <img className="studentPicture" src={one.profilePic} />
             <p className="studentInfo">Last evaluation: {one.lastEvaluation}</p>
     </div>

@@ -20,7 +20,7 @@ export default class StudentController {
         return {studentById}
     }
 
-    @Authorized()
+    // @Authorized()
     @Post('/students')
     async createStudent(
         @Body() students: Students,

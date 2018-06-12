@@ -1,0 +1,26 @@
+.signup {
+    margin: auto;
+    max-width: 50%;
+    text-align: center;
+}
+
+.signupInfo {
+    margin: 5px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.signupButton {
+    width: 70px;
+    height: 30px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.newBatchButton {
+    width: 30%;
+    height: 7%;
+    border-radius: 5px 5px 5px 5px;
+    margin-left: 35%;
+    margin-right: 35%;
+}

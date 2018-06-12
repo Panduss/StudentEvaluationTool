@@ -27,7 +27,6 @@ export default class UserController {
     async getOneUser(
         @Param('id') id: number
     ){
-        const user = await User.findOne(id)
-        return { user }
+        return User.findOne(id)
     }
 }

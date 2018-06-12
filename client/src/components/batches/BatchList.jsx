@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
-import {showBatches, showBatch} from '../../actions/batches'
-import {getUsers} from '../../actions/users'
+import {showBatches, showBatch, newBatch} from '../../actions/batches'
+// import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import './batch.css'
@@ -18,7 +18,10 @@ componentWillMount() {
 
 showBatch(batchId) {
     this.props.showBatch(batchId)
+}
 
+newBatch() {
+    this.props.addBatch()
 }
 
   renderBatch = (batch) => {
@@ -49,10 +52,17 @@ showBatch(batchId) {
     if (batches === null) return null
 
     return (
+    <div>
       <div>
-        {batches.map(batch => this.renderBatch(batch))
-    }
+      <button className="newBatchButton">
+        <Link
+            to={`/batch/create`}>
+            Create a new Batch
+        </Link>
+      </button>
       </div>
+      {batches.map(batch => this.renderBatch(batch))}
+    </div>
     )
   }
 }
@@ -63,4 +73,4 @@ const mapStateToProps = state => ({
     null : Object.values(state.batches).sort((a, b) => a.id - b.id)
 })
 
-export default connect(mapStateToProps, {showBatches, showBatch})(BatchList)
+export default connect(mapStateToProps, {showBatches, showBatch, newBatch})(BatchList)

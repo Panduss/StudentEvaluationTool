@@ -1,4 +1,4 @@
-import {JsonController, Get, Param, Body, Post, NotFoundError, HttpCode } from 'routing-controllers'
+import {JsonController, Get, Param, Body, Post, NotFoundError, HttpCode, Delete } from 'routing-controllers'
 import Students from './entity'
 import Batch from '../batches/entity';
 
@@ -44,6 +44,59 @@ export default class StudentController {
         return student.save()
     }
 
+    // @Get('/batches/:batchId/students/:studentId')
+    // async isThisWorking(
+    //     @Param('batchId') batchId: number,
+    //     @Param('studentId') studentId: number
+    // ) {
+    //     const studentById = await Students.findOne(studentId)
+    //     const batch = await Batch.findOne(batchId)
+    //     return studentById
+    // }
+
+    // @Authorized()
+    @Delete('/batches/:batchId/students/:studentId')
+    async deleteStudent(
+        @Param('batchId') batchId: number,
+        @Param('studentId') studentId: number
+    ) {
+        const batch = await Batch.findOne(batchId)
+        const studentById = await Students.findOne(studentId)
+        if (!studentById) throw new NotFoundError("Student doesn't exist")
+        
+        await Students.remove(studentById)
+
+        return `${studentById.firstName} was deleted successfully`
+        }
+
+
+    // @Delete('/:id') 
+    // deleteOne(
+    //     @Req() request, 
+    //     @Res() response, 
+    //     @Param('id') id
+    // ) { 
+    //     var entityManager; 
+    //     return DatabaseManager
+    //     .getInstance()
+    //     .getConnection()
+    //     .then(
+    //         connection => { 
+    //             entityManager = connection
+    //             .entityManager; 
+    //             return entityManager.findOneById(Block, id); 
+    //         })
+    //         .then(
+    //             block => { 
+    //                 return entityManager.remove(block);
+    //             }) 
+    //             .catch((error: HttpError) => { 
+    //                 response.status(error.code).send({message: error.message});
+    //              }) 
+    //              .catch(error => { response.status(500).send({message: "Internal error"});
+    //              })
+    //             }
+
     // // @Authorized()
     // @Put('/batches/:id')
     // async editStudent(
@@ -56,15 +109,5 @@ export default class StudentController {
     //     return Batch.merge(batch, update).save()
     // }
 
-    // // @Authorized()
-    // @Delete('/batches/:id')
-    // async deleteBatch(
-    //     @Param('id') id: number
-    // ) {
-    //     const batch = await Batch.findOne(id)
-    //     if (!batch) throw new NotFoundError('Batch doesn\'t exist')
 
-    //     if (batch) Batch.delete(id)
-    //     return 'successfully deleted'
-    // }
 }

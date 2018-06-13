@@ -4,18 +4,21 @@ import {logout} from './users'
 import {isExpired} from '../jwt'
 // import {batchId} from '../constants'
 
-
+export const GET_EVALUATION = "GET_EVALUATION"
 export const GET_STUDENT = 'GET_STUDENT'
 export const ADD_STUDENT_SUCCESS = "ADD_STUDENT_SUCCESS"
 export const ADD_STUDENT_FAILED = "ADD_STUDENT_FAILED"
+
+export const DELETE_STUDENT_SUCCESS = "DELETE_STUDENT_SUCCESS"
+export const DELETE_STUDENT_FAILED = "DELETE_STUDENT_FAILED"
 
 export const showStudent = (id) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
-    
-    
+     
     const batchId = ((window.location.href).split('/')[4])
+    console.log((window.location.href).split('/'))
   
     if (isExpired(jwt)) return dispatch(logout())
   
@@ -25,7 +28,11 @@ export const showStudent = (id) => (dispatch, getState) => {
       .then(result => 
         dispatch({
             type: GET_STUDENT,
-            payload: result.body.studentById
+            payload: result.body.studentById,
+        },
+        {
+            type: GET_EVALUATION,
+            payload: result.body.studentById.evalu 
         })
     )
       .catch(err => console.error(err))
@@ -52,6 +59,35 @@ export const showStudent = (id) => (dispatch, getState) => {
         if (err.status === 400) {
           dispatch({
             type: ADD_STUDENT_FAILED,
+            payload: err.response.body.message || 'Unknown error'
+          })
+        }
+        else {
+          console.error(err)
+        }
+      })
+  }
+
+  export const deleteStudent = (studentId) => (dispatch, getState) => {
+    const state = getState()
+    const jwt = state.currentUser.jwt
+
+    const batchId = ((window.location.href).split('/')[4])
+    console.log((window.location.href).split('/')[4])
+  
+    if (isExpired(jwt)) return dispatch(logout())
+  
+    request
+      .delete(`${baseUrl}/batches/${batchId}/students/${studentId}`)
+      .then(result => {
+        dispatch({
+          type: DELETE_STUDENT_SUCCESS
+        })
+      })
+      .catch(err => {
+        if (err.status === 400) {
+          dispatch({
+            type: DELETE_STUDENT_FAILED,
             payload: err.response.body.message || 'Unknown error'
           })
         }

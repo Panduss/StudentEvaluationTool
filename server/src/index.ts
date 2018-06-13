@@ -7,6 +7,7 @@ import User from './users/entity'
 import { secret, verify } from './jwt'
 import BatchController from './batches/controller';
 import StudentController from './students/controller';
+import EvaluController from './evaluation/controller';
 
 
 const port = process.env.PORT || 4000
@@ -17,7 +18,8 @@ const app = createKoaServer({
     UserController,
     LoginController,
     BatchController,
-    StudentController
+    StudentController,
+    EvaluController
   ],
 
   authorizationChecker: (action: Action) => {

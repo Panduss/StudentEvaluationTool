@@ -21,25 +21,25 @@ class BatchDetail extends PureComponent {
 }
 
   renderStudent = (student) => {
-    const { students } = this.props
+    const { batchId, students } = this.props
 
     return (
         <div 
         key={student.id} 
-        className="students">
+        className="students" style={{backgroundColor: `${student.lastEvaluation}`}}>
             <Link
                 className="link"
-                to={`/students/${student.id}`}
+                to={`/batches/${batchId}/students/${student.id}`}
                 onClick={() => this.showStudent(student.id)}
                 >
                 <p className="studentName">{student.firstName} {student.lastName}</p>
             </Link>
-            <p className="studentInfo">Last evaluation: {student.lastEvaluation}</p>
+            <p className="studentInfo" >Last evaluation: {student.lastEvaluation}</p>
     </div>
     )}
 
   render() {
-    const {students, batch, authenticated} = this.props
+    const {students, batchId, authenticated} = this.props
 
     if (!authenticated) return (
 			<Redirect to="/login" />
@@ -52,7 +52,7 @@ class BatchDetail extends PureComponent {
         <div>
         <button className="newBatchButton">
             <Link
-                to={`/student/create`}>
+                to={`/batches/${batchId}/students`}>
                 Create a new Student
               </Link>
         </button>
@@ -63,11 +63,14 @@ class BatchDetail extends PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => {
+  console.log(((window.location.href).split('/')[4]), 'halo')
+  return {
   authenticated: state.currentUser !== null,
-  students: state.oneBatch,
-  batch: state.oneBatch
-  
-})
+  batchId : ((window.location.href).split('/')[4]),
+  students: state.oneBatch
+
+  }
+}
 
 export default connect(mapStateToProps, {showBatch, showStudent})(BatchDetail)

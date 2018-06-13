@@ -23,7 +23,14 @@
 	float: left;
 	margin: 1.33%;
     border-radius: 10px 10px 10px 10px;
-    border: 2px solid blue;
+    border: 2px solid white;
+}
+
+.studentName.a:link {
+    font-style: black;
+}
+.studentName.a:visited {
+    font-style: black;
 }
 
 .studentName {

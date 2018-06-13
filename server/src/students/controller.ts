@@ -1,35 +1,47 @@
-import { Authorized, JsonController, Get, Param, Put, Body, Post, Delete, NotFoundError, HttpCode } from 'routing-controllers'
+import { Authorized, JsonController, Get, Param, Put, Body, Post, Delete, NotFoundError, HttpCode, BadRequestError } from 'routing-controllers'
 import Students from './entity'
 import Batch from '../batches/entity';
 
 @JsonController()
 export default class StudentController {
     
-    @Authorized()
-    @Get('/students')
-    allBatches() {
-        return Students.find()
+    // @Authorized()
+    @Get('/batches/:id/students')
+    @HttpCode(200)
+    async students(
+      @Param('id') batchId: number
+    ) {
+      const batch = await Batch.findOne(batchId)
+      if (!batch) throw new NotFoundError('Batch not found!')
+  
+      return batch.students
+
     }
     
-    @Authorized()
-    @Get('/students/:id')
-    async getStudentById(
-        @Param('id') id: number
-    ) {
-        const studentById = await Students.findOne(id)
-        return {studentById}
-    }
+    // @Authorized()
+    @Get('/batches/:batchId/students/:studentId')
+    async studentById(
+            @Param('batchId') batchId: number,
+            @Param('studentId') studentId: number
+          ) {
+            const batch = await Batch.findOne(batchId)
+            const studentById = await Students.findOne(studentId)
+            if (!batch) throw new NotFoundError('Batch not found!')
+        
+            return {studentById}
+      
+          }
 
     // @Authorized()
-    @Post('/students')
-    async createStudent(
-        @Body() students: Students,
+    @Post('/batches/:batchId/students/')
+    async createStudent(            
+        @Param('batchId') batchId: number,
+        @Body() student: Students,
     ){
-        const batch = (await Batch.findOne(students.batch))!
-        students.batch = batch
+        const batch = await Batch.findOne(batchId)
         if(!batch) throw new NotFoundError("Batch doesn't exist")
 
-        return students.save()
+        return student.save()
     }
 
     // // @Authorized()

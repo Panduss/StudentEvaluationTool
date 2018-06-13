@@ -6,8 +6,9 @@ import {Redirect} from 'react-router-dom'
 import './newBatch.css'
 
 class NewStudentPage extends PureComponent {
-	handleSubmit = (data) => {
-		this.props.postNewStudent(data.firstName, data.lastName, data.profilePic, data.lastEvaluation="null", data.batch)
+    
+    handleSubmit = (data) => {
+		this.props.postNewStudent(data.firstName, data.lastName, data.profilePic, data.lastEvaluation="null", data.batchId)
 	}
 
 	render() {
@@ -29,6 +30,7 @@ class NewStudentPage extends PureComponent {
 
 const mapStateToProps = function (state) {
 	return {
+        batchId : ((window.location.href).split('/')[4]),
         newStudent: state.newStudent,
         batches: state.batches
 	}

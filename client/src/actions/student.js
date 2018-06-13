@@ -2,6 +2,7 @@ import * as request from 'superagent'
 import {baseUrl} from '../constants'
 import {logout} from './users'
 import {isExpired} from '../jwt'
+// import {batchId} from '../constants'
 
 
 export const GET_STUDENT = 'GET_STUDENT'
@@ -12,11 +13,14 @@ export const showStudent = (id) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
+    
+    
+    const batchId = ((window.location.href).split('/')[4])
   
     if (isExpired(jwt)) return dispatch(logout())
   
     request
-      .get(`${baseUrl}/students/${id}`)
+      .get(`${baseUrl}/batches/${batchId}/students/${id}`)
       .set('Authorization', `Bearer ${jwt}`)
       .then(result => 
         dispatch({
@@ -30,12 +34,15 @@ export const showStudent = (id) => (dispatch, getState) => {
   export const newStudent = (firstName, lastName, profilePic, lastEvaluation, batch ) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
+
+    const batchId = ((window.location.href).split('/')[4])
+    console.log((window.location.href).split('/')[4])
   
     if (isExpired(jwt)) return dispatch(logout())
   
     request
-      .post(`${baseUrl}/students`)
-      .send({ firstName, lastName, profilePic, lastEvaluation, batch })
+      .post(`${baseUrl}/batches/${batchId}/students`)
+      .send({ firstName, lastName, profilePic, lastEvaluation, batch: batchId })
       .then(result => {
         dispatch({
           type: ADD_STUDENT_SUCCESS

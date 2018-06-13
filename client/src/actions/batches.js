@@ -5,6 +5,7 @@ import {isExpired} from '../jwt'
 
 export const GET_BATCHES = 'GET_BATCHES'
 export const GET_BATCH = 'GET_BATCH'
+export const GET_BATCH_ID = 'GET_BATCH_ID'
 
 export const ADD_BATCH_SUCCESS = 'ADD_BATCH_SUCCESS'
 export const ADD_BATCH_FAILED = 'ADD_BATCH_FAILED'
@@ -13,6 +14,7 @@ export const showBatch = (id) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
+    
   
     if (isExpired(jwt)) return dispatch(logout())
   
@@ -27,6 +29,26 @@ export const showBatch = (id) => (dispatch, getState) => {
     )
       .catch(err => console.error(err))
   }
+
+
+  // export const showBatchId = (id) => (dispatch, getState) => {
+  //   const state = getState()
+  //   if (!state.currentUser) return null
+  //   const jwt = state.currentUser.jwt
+  
+  //   if (isExpired(jwt)) return dispatch(logout())
+  
+  //   request
+  //     .get(`${baseUrl}/batches/${id}`)
+  //     .set('Authorization', `Bearer ${jwt}`)
+  //     .then(result => 
+  //       dispatch({
+  //           type: GET_BATCH_ID,
+  //           payload: {batchId: id}
+  //       })
+  //   )
+  //     .catch(err => console.error(err))
+  // }
 
 export const showBatches = () => (dispatch, getState) => {
     const state = getState()

@@ -25,12 +25,12 @@ export default class AddEvaluationForm extends PureComponent {
 				<div className="signup">
 					<div>
 						<input 
-						type="remark" 
-						name="remark" 
+						type="remarks" 
+						name="remarks" 
 						className="signupInfo"
-						placeholder="Remark" 
-						id="remark" 
-						value={this.state.remark || ''} 
+						placeholder="Remarks" 
+						id="remarks" 
+						value={this.state.remarks || ''} 
 						onChange={ this.handleChange } />
 					</div>
 

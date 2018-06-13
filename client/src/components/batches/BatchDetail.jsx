@@ -1,10 +1,13 @@
 import React, {PureComponent} from 'react'
 import {showBatch} from '../../actions/batches'
-import {showStudent} from '../../actions/student'
+import {showStudent, deleteStudent} from '../../actions/student'
+import {showEvaluation} from '../../actions/evaluation'
 import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import './batch.css'
+
+
 
 class BatchDetail extends PureComponent {
 
@@ -17,8 +20,42 @@ class BatchDetail extends PureComponent {
 
   showStudent(studentId) {
     this.props.showStudent(studentId)
-
 }
+
+  showEvaluation(studentId) {
+  this.props.showEvaluation(studentId)
+}
+
+  deleteStudent(studentId) {
+    this.props.deleteStudent(studentId)
+  }
+
+  renderBoxes = (student) => {
+    const { students } = this.props
+
+    // if(student.lastEvaluation == "red") {
+    //   this.redCol = redCol.push("red")
+    //   return redCol
+    // }
+    // if(student.lastEvaluation == "yellow") yellowCol.push("yellow")
+    // if(student.lastEvaluation == "green") {
+    //   this.greenCol= greenCol.push("green")
+    //   return greenCol
+    // }
+
+    // const progbar0 = redCol.concat(yellowCol)
+    // const progbar1 = progbar0.concat(greenCol)
+
+    // console.log(lastEvaluation, "hello")
+
+    return (
+      <button 
+      key={student.id}
+      className="progressionBar" 
+      style={{background: `${student.lastEvaluation}`}}
+      > </button>
+    )
+  }
 
   renderStudent = (student) => {
     const { batchId, students } = this.props
@@ -30,11 +67,13 @@ class BatchDetail extends PureComponent {
             <Link
                 className="link"
                 to={`/batches/${batchId}/students/${student.id}`}
-                onClick={() => this.showStudent(student.id)}
+                onClick={() => this.showStudent(student.id) && this.showEvaluation(student.id)}
                 >
-                <p className="studentName">{student.firstName} {student.lastName}</p>
+                <img className="studentPicture" src={student.profilePic} />
             </Link>
-            <p className="studentInfo" >Last evaluation: {student.lastEvaluation}</p>
+            <p className="studentName">{student.firstName} {student.lastName}</p>
+            <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>
+            <button className="deleteStudent" onClick={() => this.deleteStudent(student.id)}>EXTERMINATE</button>
     </div>
     )}
 
@@ -49,15 +88,21 @@ class BatchDetail extends PureComponent {
 
     return (
       <div>
-        <div>
-        <button className="newBatchButton">
-            <Link
-                to={`/batches/${batchId}/students`}>
-                Create a new Student
-              </Link>
-        </button>
-        </div>
-          {students.map(student => this.renderStudent(student))} 
+        <div className="bar">
+        Latest evaluation for current batch:<br />
+        {students.map(student => this.renderBoxes(student))}
+        </div><br />
+          <div>
+            <button className="newBatchButton">
+                <Link
+                    to={`/batches/${batchId}/students`}>
+                    Create a new Student
+                  </Link>
+            </button>
+          </div>
+          <div>
+              {students.map(student => this.renderStudent(student))} 
+          </div>
       </div>
     )
   }
@@ -65,6 +110,7 @@ class BatchDetail extends PureComponent {
 
 const mapStateToProps = state => {
   console.log(((window.location.href).split('/')[4]), 'halo')
+  console.log(((window.location.href).split('/')), 'halo')
   return {
   authenticated: state.currentUser !== null,
   batchId : ((window.location.href).split('/')[4]),
@@ -73,4 +119,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {showBatch, showStudent})(BatchDetail)
+export default connect(mapStateToProps, {showBatch, showStudent, showEvaluation, deleteStudent})(BatchDetail)

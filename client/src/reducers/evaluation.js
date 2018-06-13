@@ -1,9 +1,9 @@
-import {GET_BATCH_ID} from '../actions/batches'
+import {GET_EVALUATION} from '../actions/evaluation'
 
 export default (state = [], action ) => {
     switch (action.type) {
         
-        case GET_BATCH_ID:
+        case GET_EVALUATION:
             return action.payload
 
         default:

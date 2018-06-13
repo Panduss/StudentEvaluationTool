@@ -33,11 +33,10 @@ export default class EvaluController {
 
     // @Authorized()
     @Post('/batches/:batchId/students/:studentId/evaluations')
-    @HttpCode(201)
     async createEvaluation(
-      @Body() evaluation: Evalu,
-      @Param('id') studentId: number,
-      @Param('batchId') batchId: number
+      @Param('studentId') studentId: number,
+      @Param('batchId') batchId: number,
+      @Body() evaluation: Evalu
     ) {
         const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)

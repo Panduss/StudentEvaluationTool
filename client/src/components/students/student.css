@@ -24,3 +24,14 @@
     font-size: 1.6em;
     text-align: center;
 }
+
+.evalButton {
+    min-width: 10%;
+    min-height: 2em;
+    border: none;
+    padding: 0;
+}
+
+.studenPage {
+    float: left;
+}

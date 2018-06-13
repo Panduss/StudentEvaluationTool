@@ -10,7 +10,7 @@ let today  = new Date().toLocaleDateString("en-US");
 export default class Evalu extends BaseEntity {
 
     @PrimaryGeneratedColumn()
-    id?: number
+    id: number
 
     @Column('text', {nullable: true})
     remarks: string
@@ -21,9 +21,9 @@ export default class Evalu extends BaseEntity {
     @Column('text', {default: today} )
     date: string
 
-    @ManyToOne(_ => Student, student => student.evalu, { nullable: false})
+    @ManyToOne(_ => Student, student => student.evalu, { onDelete: 'CASCADE' })
     student: Student
 
-    @ManyToOne(_ => Batch, batch => batch.evalu, { nullable: false})
+    @ManyToOne(_ => Batch, batch => batch.evalu)
     batch: Batch
 }

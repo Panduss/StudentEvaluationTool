@@ -4,8 +4,8 @@ import {ADD_STUDENT_SUCCESS, ADD_STUDENT_FAILED} from '../actions/student'
 The state will contain the games in an object with the game ID as key
 */
 
-export default (state = {}, {type, payload} ) => {
-  switch (type) {
+export default (state = {}, action ) => {
+  switch (action.type) {
 
     case ADD_STUDENT_SUCCESS:
         return {
@@ -14,7 +14,7 @@ export default (state = {}, {type, payload} ) => {
     
     case ADD_STUDENT_FAILED:
       return {
-        error: payload
+        error: action.payload
       }
 
     default:

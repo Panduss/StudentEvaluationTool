@@ -1,4 +1,5 @@
 import {GET_STUDENT} from '../actions/student'
+// import { ADD_EVALUATION } from '../actions/evaluation';
 
 export default (state = [], action ) => {
     switch (action.type) {
@@ -10,3 +11,5 @@ export default (state = [], action ) => {
             return state
     }
   }
+
+//   state.concat(action.payload)

@@ -43,6 +43,23 @@
     text-align: center;
 }
 
+.deleteStudent {
+    width: 30%;
+    border-radius: 5px 5px 5px 5px;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+.progressionBar {
+    min-width: 10%;
+    min-height: 2em;
+    border: none;
+}
+
+.bar {
+    width: 100%;
+}
+
 /* .newBatchButton {
     width: 200px;
     height: 200px;

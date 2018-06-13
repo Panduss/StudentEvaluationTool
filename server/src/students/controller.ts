@@ -1,4 +1,4 @@
-import { Authorized, JsonController, Get, Param, Put, Body, Post, Delete, NotFoundError, HttpCode, BadRequestError } from 'routing-controllers'
+import {JsonController, Get, Param, Body, Post, NotFoundError, HttpCode } from 'routing-controllers'
 import Students from './entity'
 import Batch from '../batches/entity';
 

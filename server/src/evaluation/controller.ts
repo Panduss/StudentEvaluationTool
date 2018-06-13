@@ -1,13 +1,13 @@
-import { Authorized, JsonController, Get, Param, Put, Body, Post, Delete, NotFoundError, HttpCode, BadRequestError } from 'routing-controllers'
+import { JsonController, Get, Param, Body, Post, NotFoundError, HttpCode, BadRequestError } from 'routing-controllers'
 import Students from '../students/entity'
 import Evalu from './entity';
+import Batch from '../batches/entity'
 
 @JsonController()
 export default class EvaluController {
 
     // @Authorized()
     @Get('/students/:id/evaluations')
-    @HttpCode(200)
     async getEvaluations(
       @Param('id') studentId: number
     ) {
@@ -17,19 +17,33 @@ export default class EvaluController {
       return student.evalu
     }
 
+    @Get('/batches/:batchId/students/:studentId/evaluations')
+    async getAllEvaluations(
+      @Param('studentId') studentId: number,
+      @Param('batchId') batchId: number
+    ) {
+        
+        const batch = await Batch.findOne(batchId)
+        const student = await Students.findOne(studentId)
+        if(!student) throw new BadRequestError(`Student not found`)
+        if(!batch) throw new NotFoundError('Student does not exist')
+  
+      return student.evalu
+    }
 
     // @Authorized()
-    @Post('/students/:id/evaluations')
+    @Post('/batches/:batchId/students/:studentId/evaluations')
     @HttpCode(201)
     async createEvaluation(
       @Body() evaluation: Evalu,
-      @Param('id') studentId: number
+      @Param('id') studentId: number,
+      @Param('batchId') batchId: number
     ) {
-      const student = await Students.findOne(studentId)
-      if(!student) throw new NotFoundError('Student does not exist')
+        const batch = await Batch.findOne(batchId)
+        const student = await Students.findOne(studentId)
+        if(!student) throw new NotFoundError('Student does not exist')
+        if(!batch) throw new NotFoundError('Student does not exist')
   
-      const createdEvaluation = await Evalu.create({...evaluation, student}).save()
-  
-      return createdEvaluation
+      return evaluation.save()
     }
 }

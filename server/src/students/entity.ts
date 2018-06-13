@@ -30,6 +30,9 @@ export default class Students extends BaseEntity  {
     @ManyToOne(_ => Batch, batch => batch.students)
     batch: Batch
 
+    // @Column({ name: 'batch' })
+    // batchNumber: string
+
     @OneToMany(_ => Evalu, evalu => evalu.student, {eager:true}) 
     evalu: Evalu[]
 }

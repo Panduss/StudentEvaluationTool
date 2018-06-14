@@ -56,7 +56,7 @@ export const showStudent = (id) => (dispatch, getState) => {
   
     request
       .post(`${baseUrl}/batches/${batchId}/students`)
-      .send({ firstName, lastName, profilePic, lastEvaluation, batch: batchId })
+      .send({ firstName, lastName, profilePic, lastEvaluation: 'white', batch: batchId })
       .then(result => {
         dispatch({
           type: ADD_STUDENT_SUCCESS

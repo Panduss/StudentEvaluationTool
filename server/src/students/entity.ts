@@ -3,7 +3,7 @@ import Batch from "../batches/entity";
 import Evalu from "../evaluation/entity";
 import { IsString } from "class-validator";
 
-type Colour = "red" | "yellow" | "green" | "white"
+type Colour = 'red' | 'yellow' | 'green' | 'white'
 
 @Entity()
 export default class Students extends BaseEntity  {
@@ -24,7 +24,7 @@ export default class Students extends BaseEntity  {
     profilePic: string 
 
     @IsString()
-    @Column('text', {default: "white"})
+    @Column('text', { default: 'white' })
     lastEvaluation: Colour
     
     @ManyToOne(_ => Batch, batch => batch.students)

@@ -144,7 +144,7 @@ class GetRandom extends PureComponent {
         return ( 
         <div>   
             <div>
-                <button onClick={this.selectStudent}>RandRand</button>
+                <button onClick={this.selectStudent}>Ask a question!</button>
             </div>
         </div>
         )

@@ -54,35 +54,6 @@ export default class AddStudentForm extends PureComponent {
 						onChange={ this.handleChange } />
 					</div>
 
-                    {/* <div>
-						<input 
-						type="lastEvaluation" 
-						name="lastEvaluation" 
-						className="signupInfo"
-						placeholder="Last Evaluation" 
-						id="lastEvaluation" 
-						value={this.state.lastEvaluation || ''} 
-						onChange={ this.handleChange } />
-					</div> */}
-
-                    <div>
-						<input 
-						type="remarks" 
-						name="remark" 
-						className="signupInfo"
-						placeholder="Remark? Default: white" 
-						id="remarks" 
-						value={this.state.remarks || ''} 
-						onChange={ this.handleChange } />
-					</div>
-
-					{/* {
-						this.state.password &&
-						this.state.confirmPassword &&
-						this.state.password !== this.state.confirmPassword &&
-						<p style={{color:'red'}}>The passwords do not match!</p>
-					} */}
-
 					<button 
 						type="submit"
 						className="newBatchButton"

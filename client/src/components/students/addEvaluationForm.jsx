@@ -1,8 +1,10 @@
 import React, {PureComponent} from 'react'
 import {Link} from 'react-router-dom/Link';
+import {baseURL} from '../../constants'
 
 export default class AddEvaluationForm extends PureComponent {
-	state = {}
+  state = {}
+
 
 	handleSubmit = (e) => {
 		e.preventDefault()
@@ -16,8 +18,6 @@ export default class AddEvaluationForm extends PureComponent {
       [name]: value
     })
   }
-
-  
 
 	render() {
 		return (
@@ -92,7 +92,8 @@ export default class AddEvaluationForm extends PureComponent {
           <button 
           type="submit" 
           className="newEvalButton"
-          onClick={<Link to="/batches/"/>}>
+          // onClick={this.redirect}
+          >
           Save
           </button>
 				</div>

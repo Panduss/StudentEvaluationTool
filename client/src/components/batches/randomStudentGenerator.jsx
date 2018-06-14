@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {getAllStudent} from '../../actions/student'
 import {connect} from 'react-redux'
-import {Redirect, Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 class GetRandom extends PureComponent {
 
@@ -17,7 +17,7 @@ class GetRandom extends PureComponent {
     }
         
     selectStudent = () => {
-        const { randStud, student, authenticated } = this.props
+        const { randStud, authenticated } = this.props
 
         if (!authenticated) return (
             <Redirect to="/login" />
@@ -64,7 +64,7 @@ class GetRandom extends PureComponent {
         
         const classSize = getEvals.length
         console.log(classSize, "size")
-        const randNumb = Math.floor(Math.random() * classSize-1)
+        const randNumb = Math.floor(Math.random() * classSize+1)
         console.log(randNumb, "randNumb")
 
 
@@ -103,14 +103,12 @@ class GetRandom extends PureComponent {
         }
 
         if ( !chooseStud && getReds.length === 0 && getYellows.length <= 3 ) {
-            //  stud = noReds[Math.floor(Math.random() * getEvals.length)]
              randomStudent = getYellowGreen[Math.floor(Math.random() * getYellowGreen.length)]
              console.log("i ran 2")
              window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
 
         if ( !chooseStud && getReds.length === 0 && getYellows.length > 3 ) {
-            //  stud = noReds[Math.floor(Math.random() * getEvals.length)]
              randomStudent = noReds[Math.floor(Math.random() * noReds.length)]
              console.log("i ran 3")
              window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
@@ -139,16 +137,10 @@ class GetRandom extends PureComponent {
             console.log("i ran 6")
             window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
-        
-
-        // return(
-        // <div>You should ask:${randomStudent.firstName}, with ${randomStudent.lastEvaluation} evaluation.</div>
-        // )
     }
 
     
     render() {
-        // const {randomStudent, chosenStudent} = this.props
         return ( 
         <div>   
             <div>
@@ -164,12 +156,6 @@ const mapStateToProps = state => {
     return {
     authenticated: state.currentUser !== null,
     randStud: state.oneBatch,
-    // chosenStudent: {   id: 2,
-    //     firstName: "Dean",
-    //     lastName: "Winchester",
-    //     profilePic: "https://cdn.costumewall.com/wp-content/uploads/2017/01/dean-winchester.jpg",
-    //     lastEvaluation: "green"
-    // }
     }
   }
 

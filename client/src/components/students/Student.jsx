@@ -2,15 +2,15 @@ import React, {PureComponent} from 'react'
 import {showStudent} from '../../actions/student'
 // import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
-import {Redirect, Link} from 'react-router-dom'
-import {showEvaluation, newEvaluation} from '../../actions/evaluation'
+import {Redirect} from 'react-router-dom'
+import {showEvaluation} from '../../actions/evaluation'
 import NewEvaluationPage from './addEvaluationPage'
 import './student.css'
 
 class ShowOneStudent extends PureComponent {
 
   componentWillMount() {
-    this.props.showEvaluation()
+    // this.props.showEvaluation()
     if (this.props.authenticated) {
       if (this.props.student === null) this.props.showStudent()
       if (this.props.evalus === null) this.props.showEvaluation()
@@ -24,7 +24,6 @@ class ShowOneStudent extends PureComponent {
 
 
   renderBoxes = (evalu) => {
-    const { evalus } = this.props
 
     return (
       <button 
@@ -36,7 +35,6 @@ class ShowOneStudent extends PureComponent {
   }
 
   renderOneStudent = (one) => {
-    const { student } = this.props
 
     return (
 
@@ -47,7 +45,7 @@ class ShowOneStudent extends PureComponent {
           style={{backgroundColor: `${one.lastEvaluation}`}}
           >
             <p className="studentName">{one.firstName} {one.lastName}</p>
-            <img className="studentPicture" src={one.profilePic} />
+            <img className="studentPicture" src={one.profilePic} alt={one.firstName}/>
             <p className="studentInfo">Last evaluation: {(one.lastEvaluation).toUpperCase()}</p>
             <button className="newEvalButton" onClick={() => this.showEvaluation(one.id)}>Show Evaluation</button>
         </div>

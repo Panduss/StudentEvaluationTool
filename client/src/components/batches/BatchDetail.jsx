@@ -3,7 +3,6 @@ import {showBatch} from '../../actions/batches'
 import {showStudent, deleteStudent} from '../../actions/student'
 import {showEvaluation} from '../../actions/evaluation'
 import GetRandom from './randomStudentGenerator'
-import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import './batch.css'
@@ -58,7 +57,6 @@ class BatchDetail extends PureComponent {
 
   }
   renderBoxes = (student) => {
-    const { students } = this.props
 
     return (
       <button 
@@ -70,7 +68,7 @@ class BatchDetail extends PureComponent {
   }
 
   renderStudent = (student) => {
-    const { batchId, students, redPercent, yellowPercent, greenPercent } = this.props
+    const { batchId } = this.props
 
     return (
         <div 
@@ -81,7 +79,7 @@ class BatchDetail extends PureComponent {
                 to={`/batches/${batchId}/students/${student.id}`}
                 onClick={() => this.showStudent(student.id)}
                 >
-                <img className="studentPicture" src={student.profilePic} />
+                <img className="studentPicture" src={student.profilePic} alt={student.firstName} />
             </Link>
             <p className="studentName">{student.firstName} {student.lastName}</p>
             <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>

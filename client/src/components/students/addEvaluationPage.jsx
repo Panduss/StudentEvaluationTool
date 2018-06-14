@@ -21,6 +21,7 @@ class NewEvaluationPage extends PureComponent {
 				<h1>Create a new evaluation</h1>
 
 				<AddEvaluationForm onSubmit={this.handleSubmit} />
+                {/* <button type="submit" className="newBatchButton">Save!</button> */}
 			</div>
 		)
 	}

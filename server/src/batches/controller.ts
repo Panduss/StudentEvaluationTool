@@ -4,13 +4,13 @@ import Batch from './entity'
 @JsonController()
 export default class BatchController {
 
-    @Authorized()
+    // @Authorized()
     @Get('/batches')
     allBatches() {
         return Batch.find()
     }
     
-    @Authorized()
+    // @Authorized()
     @Get('/batches/:id')
     async getBatchById(
         @Param('id') id: number

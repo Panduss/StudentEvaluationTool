@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {showBatches, showBatch, newBatch} from '../../actions/batches'
-// import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
+import GetRandom from './randomStudentGenerator'
 import {Redirect, Link} from 'react-router-dom'
 import './batch.css'
 
@@ -53,6 +53,9 @@ newBatch() {
 
     return (
     <div>
+      <div>
+          <GetRandom />
+      </div>
       <div>
       <button className="newBatchButton">
         <Link

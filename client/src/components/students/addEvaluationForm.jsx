@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import {Link, Redirect} from 'react-router-dom/Link';
 // import './newBatch.css'
 
 export default class AddEvaluationForm extends PureComponent {
@@ -89,12 +90,7 @@ export default class AddEvaluationForm extends PureComponent {
 						onChange={ this.handleChange } />
 					</div> */}
 
-					<button 
-						type="submit"
-						className="newBatchButton"
-					>
-						Create Evaluation!
-					</button>
+					<button type="submit" onClick={<Link to="/batches/"/>}className="newBatchButton">Save</button>
 				</div>
 			</form>
 		)

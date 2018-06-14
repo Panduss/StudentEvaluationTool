@@ -8,7 +8,7 @@ export default class StudentController {
     // @Authorized()
     @Get('/batches/:id/students')
     @HttpCode(200)
-    async students(
+    async studentsByBatch(
       @Param('id') batchId: number
     ) {
       const batch = await Batch.findOne(batchId)
@@ -16,6 +16,13 @@ export default class StudentController {
   
       return batch.students
 
+    }
+
+        // @Authorized()
+    @Get('/students')
+    allStudents() {
+        return Students.find()
+    
     }
     
     // @Authorized()

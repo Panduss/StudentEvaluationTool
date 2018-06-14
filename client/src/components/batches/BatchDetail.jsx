@@ -22,6 +22,7 @@ class BatchDetail extends PureComponent {
     this.props.showStudent(studentId)
 }
 
+
   showEvaluation(studentId) {
   this.props.showEvaluation(studentId)
 }
@@ -67,7 +68,7 @@ class BatchDetail extends PureComponent {
             <Link
                 className="link"
                 to={`/batches/${batchId}/students/${student.id}`}
-                onClick={() => this.showStudent(student.id) && this.showEvaluation(student.id)}
+                onClick={() => this.showStudent(student.id)}
                 >
                 <img className="studentPicture" src={student.profilePic} />
             </Link>

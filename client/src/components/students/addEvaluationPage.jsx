@@ -17,7 +17,7 @@ class NewEvaluationPage extends PureComponent {
 		// )
 
 		return (
-			<div className="signup">
+			<div>
 				<h1>Create a new evaluation</h1>
 
 				<AddEvaluationForm onSubmit={this.handleSubmit} />

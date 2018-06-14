@@ -22,12 +22,12 @@ export default class AddEvaluationForm extends PureComponent {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<div className="signup">
+				<div className="evaluationForm">
 					<div>
 						<input 
 						type="remarks" 
-						name="remarks" 
-						className="signupInfo"
+            name="remarks" 
+            className="newEval"
 						placeholder="Remarks" 
 						id="remarks" 
 						value={this.state.remarks || ''} 
@@ -37,8 +37,8 @@ export default class AddEvaluationForm extends PureComponent {
           <div>
 						<input 
 						type="colour" 
-						name="colour" 
-						className="signupInfo"
+            name="colour" 
+            className="newEval"
 						placeholder="Colour" 
 						id="colour" 
 						value={this.state.colour || ''} 
@@ -89,7 +89,12 @@ export default class AddEvaluationForm extends PureComponent {
 						onChange={ this.handleChange } />
 					</div> */}
 
-					<button type="submit" onClick={<Link to="/batches/"/>}className="newBatchButton">Save</button>
+          <button 
+          type="submit" 
+          className="newEvalButton"
+          onClick={<Link to="/batches/"/>}>
+          Save
+          </button>
 				</div>
 			</form>
 		)

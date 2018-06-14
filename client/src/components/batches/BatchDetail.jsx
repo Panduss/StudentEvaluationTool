@@ -100,25 +100,29 @@ class BatchDetail extends PureComponent {
 
     return (
       <div>
-        <div className="bar">
-        Latest evaluation for current batch:<br />
-        {students.map(student => this.renderBoxes(student))}<br />
-        Current stat:
-        {this.calculatePercent()}
-        </div><br />
-          <div>
-          <GetRandom />
-          </div>
-          <div>
-            <button className="newBatchButton">
+        <div className="percentageBar">
+            Latest evaluation for current batch:<br />
+              {students.map(student => this.renderBoxes(student))}<br />
+        </div>
+        <div className="percentages">
+            Current stat:
+              {this.calculatePercent()}
+        </div>
+        <div className="batchPage">
+            <div className="batchPageButtons">
+              <GetRandom />
+              </div>
+              <div className="batchPageButtons">
+              <button>
                 <Link
-                    to={`/batches/${batchId}/students`}>
-                    Create a new Student
-                  </Link>
-            </button>
+                  to={`/batches/${batchId}/students`}>
+                  Create a new Student
+                </Link>
+              </button>
+              </div>
           </div>
           <div>
-              {students.map(student => this.renderStudent(student))} 
+            {students.map(student => this.renderStudent(student))} 
           </div>
       </div>
     )

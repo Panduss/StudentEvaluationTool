@@ -55,10 +55,10 @@ class GetRandom extends PureComponent {
             stud = randStud.filter(student => student.lastEvaluation == "green")
         }
 
-
+        const chooseStud = stud[Math.floor(Math.random() *stud.length)]
         // const redS = this.randStud.filter(student => student.lastEvaluation)
         // stud = randStud.filter(student => student.id === randNumb)
-        console.log(stud, "student")
+        console.log(chooseStud, "student")
 
         if (!student) return randomStudent = chosenStudent
         if (student) return randomStudent = student

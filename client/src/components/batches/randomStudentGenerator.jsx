@@ -37,19 +37,21 @@ class GetRandom extends PureComponent {
         const redNum = parseInt(redLength.toFixed())
         const yellowNum = parseInt(yellowLength.toFixed())
         const greenNum = parseInt(greenLength.toFixed())
+        const secondWall = redNum+yellowNum
         console.log(redNum, "redNum")
         console.log(yellowNum, "yellowNum")
         console.log(greenNum, "greenNum")
+        console.log(secondWall, "secondWall")
 
         console.log(redNum+yellowNum+greenNum, "meow")
 
         if (randNumb <= redNum) {
-            stud = randStud.map(student => student.lastEvaluation == "red")
+            stud = randStud.filter(student => student.lastEvaluation == "red")
         }
-        if (randNumb > redNum && randNumb <= (parseInt((redNum+yellowNum).toFixed()))) {
+        if (randNumb <= secondWall && randNumb > redNum) {
             stud = randStud.filter(student => student.lastEvaluation == "yellow")
         }
-        if (randNumb > yellowNum && randNumb <= classSize) {
+        if (randNumb <= classSize && randNumb > secondWall) {
             stud = randStud.filter(student => student.lastEvaluation == "green")
         }
 

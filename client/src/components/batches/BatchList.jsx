@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react'
 import {showBatches, showBatch, newBatch} from '../../actions/batches'
 import {connect} from 'react-redux'
-import GetRandom from './randomStudentGenerator'
 import {Redirect, Link} from 'react-router-dom'
 import './batch.css'
 
@@ -25,7 +24,6 @@ newBatch() {
 }
 
   renderBatch = (batch) => {
-    const { batches } = this.props
 
     return (
     <div key={batch.id} className="game-card">
@@ -54,15 +52,14 @@ newBatch() {
     return (
     <div>
       <div>
-          <GetRandom />
-      </div>
-      <div>
       <button className="newBatchButton">
         <Link
             to={`/batch/create`}>
             Create a new Batch
         </Link>
       </button>
+      <div className="newBatchButton">
+      </div>
       </div>
       {batches.map(batch => this.renderBatch(batch))}
     </div>

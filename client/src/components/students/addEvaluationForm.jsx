@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
-import {Link, Redirect} from 'react-router-dom/Link';
-// import './newBatch.css'
+import {Link} from 'react-router-dom/Link';
 
 export default class AddEvaluationForm extends PureComponent {
 	state = {}

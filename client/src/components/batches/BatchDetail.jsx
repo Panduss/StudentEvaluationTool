@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import {showBatch} from '../../actions/batches'
 import {showStudent, deleteStudent} from '../../actions/student'
 import {showEvaluation} from '../../actions/evaluation'
+import GetRandom from './randomStudentGenerator'
 import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
@@ -31,23 +32,33 @@ class BatchDetail extends PureComponent {
     this.props.deleteStudent(studentId)
   }
 
-  renderBoxes = (student) => {
+  calculatePercent() {
     const { students } = this.props
 
-    // if(student.lastEvaluation == "red") {
-    //   this.redCol = redCol.push("red")
-    //   return redCol
-    // }
-    // if(student.lastEvaluation == "yellow") yellowCol.push("yellow")
-    // if(student.lastEvaluation == "green") {
-    //   this.greenCol= greenCol.push("green")
-    //   return greenCol
-    // }
+    const getEvals = students.filter(student => student.lastEvaluation !== "white")
+    console.log(getEvals, "evals?")
+    const getReds = getEvals.filter(student => student.lastEvaluation === "red")
+    console.log(getReds, "reds?")
+    const getYellow = getEvals.filter(student => student.lastEvaluation === "yellow")
+    console.log(getYellow, "yellows?")
+    const getGreen = getEvals.filter(student => student.lastEvaluation === "green")
+    console.log(getGreen, "greens?")
 
-    // const progbar0 = redCol.concat(yellowCol)
-    // const progbar1 = progbar0.concat(greenCol)
+    const redPercent = (getReds.length/getEvals.length * 100).toFixed()
+    const yellowPercent = (getYellow.length/getEvals.length * 100).toFixed()
+    const greenPercent = (getGreen.length/getEvals.length * 100).toFixed()
+    
+  return (
+    <div>
+        <p>Red Percentage: {redPercent}%</p>
+        <p>Yellow Percentage: {yellowPercent}%</p>
+        <p>Green Percentage: {greenPercent}%</p>
+    </div>
+  )
 
-    // console.log(lastEvaluation, "hello")
+  }
+  renderBoxes = (student) => {
+    const { students } = this.props
 
     return (
       <button 
@@ -59,7 +70,7 @@ class BatchDetail extends PureComponent {
   }
 
   renderStudent = (student) => {
-    const { batchId, students } = this.props
+    const { batchId, students, redPercent, yellowPercent, greenPercent } = this.props
 
     return (
         <div 
@@ -91,8 +102,13 @@ class BatchDetail extends PureComponent {
       <div>
         <div className="bar">
         Latest evaluation for current batch:<br />
-        {students.map(student => this.renderBoxes(student))}
+        {students.map(student => this.renderBoxes(student))}<br />
+        Current stat:
+        {this.calculatePercent()}
         </div><br />
+          <div>
+          <GetRandom />
+          </div>
           <div>
             <button className="newBatchButton">
                 <Link
@@ -120,4 +136,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {showBatch, showStudent, showEvaluation, deleteStudent})(BatchDetail)
+export default connect(mapStateToProps, { showBatch, showStudent, showEvaluation, deleteStudent })(BatchDetail)
+
+
+
+// console.log(redPercent, "whytho1")
+// console.log(yellowPercent, "whytho2")
+// console.log(greenPercent, "whytho3")

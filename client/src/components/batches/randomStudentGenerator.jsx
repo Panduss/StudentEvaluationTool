@@ -17,7 +17,7 @@ class GetRandom extends PureComponent {
     }
         
     selectStudent = () => {
-        const { randStud, chosenStudent, student, authenticated } = this.props
+        const { randStud, student, authenticated } = this.props
 
         if (!authenticated) return (
             <Redirect to="/login" />
@@ -26,17 +26,53 @@ class GetRandom extends PureComponent {
         let randomStudent;
         let stud
 
-        const classSize = randStud.length
-        console.log(classSize, "size")
-        const randNumb = Math.floor(Math.random() * classSize)
-        console.log(randNumb, "randNumb")
-        const redLength = classSize * 0.45
-        const yellowLength = classSize * 0.35
-        const greenLength = classSize * 0.20
+        //// GETTING ALL THE INFO ABOUT THE BATCH AND STUDENTS IN IT & THE RANDOM NUMBER
 
-        const redNum = parseInt(redLength.toFixed())
-        const yellowNum = parseInt(yellowLength.toFixed())
-        const greenNum = parseInt(greenLength.toFixed())
+        //getting all the students that has an evaluation already
+        const getEvals = randStud.filter(student => student.lastEvaluation !== "white")
+
+        // check if there are reds
+        const getReds = getEvals.filter(student => student.lastEvaluation === "red")
+        //if there are no reds, every question that would go to reds, goes to yellows
+        const noReds = getEvals.filter(student => student.lastEvaluation === "yellow")
+
+        const getYellows = getEvals.filter(student => student.lastEvaluation === "yellow")
+        // if there are no yellows, every question goes to reds
+        const noYellows = getEvals.filter(student => student.lastEvaluation === "red")
+
+        const getGreens = getEvals.filter(student => student.lastEvaluation === "green")
+        // if there are no greens, every question goes to yellow + red
+        const noGreens = getEvals.filter(student => student.lastEvaluation !== "green")
+
+        const getRedYellow = getEvals.filter(student => student.lastEvaluation === "red" || "yellow" )
+        // no red or yellow => questions for greens!
+        const noRedYellow = getEvals.filter(student => student.lastEvaluation === "green")
+
+        const getRedGreen = getEvals.filter(student => student.lastEvaluation !== "yellow")
+
+        const getYellowGreen = getEvals.filter(student => student.lastEvaluation !== "red")
+
+        console.log(getReds, "onlyReds here")
+        console.log(getYellows, "onlyYellows here")
+        console.log(getGreens, "onlyGreens here")     
+        console.log(getRedYellow, "onlyRedandYellow here")  
+        
+        console.log(noReds, "no Reds here")
+        console.log(noYellows, "no Yellows here")
+        console.log(noGreens, "no Greens here")     
+        console.log(noRedYellow, "no RedandYellow here") 
+        
+        const classSize = getEvals.length
+        console.log(classSize, "size")
+        const randNumb = Math.floor(Math.random() * classSize-1)
+        console.log(randNumb, "randNumb")
+
+
+        ////// CALCULATING THE PERCENTAGES
+
+        const redNum = classSize * 0.45
+        const yellowNum = classSize * 0.35
+        const greenNum = classSize * 0.20
         const secondWall = redNum+yellowNum
         console.log(redNum, "redNum")
         console.log(yellowNum, "yellowNum")
@@ -46,32 +82,78 @@ class GetRandom extends PureComponent {
         console.log(redNum+yellowNum+greenNum, "meow")
 
         if (randNumb <= redNum) {
-            stud = randStud.filter(student => student.lastEvaluation == "red")
+            stud = randStud.filter(student => student.lastEvaluation === "red") 
         }
         if (randNumb <= secondWall && randNumb > redNum) {
-            stud = randStud.filter(student => student.lastEvaluation == "yellow")
+            stud = randStud.filter(student => student.lastEvaluation === "yellow")
         }
         if (randNumb <= classSize && randNumb > secondWall) {
-            stud = randStud.filter(student => student.lastEvaluation == "green")
+            stud = randStud.filter(student => student.lastEvaluation === "green")
         }
 
-        const chooseStud = stud[Math.floor(Math.random() *stud.length)]
-        // const redS = this.randStud.filter(student => student.lastEvaluation)
-        // stud = randStud.filter(student => student.id === randNumb)
+        ///// GETTING A RANDOM STUDENT BASED ON THE PREVIOUSLY GOT DATA 
+
+        const chooseStud = stud[Math.floor(Math.random() * stud.length)]
         console.log(chooseStud, "student")
 
-        if (!student) return randomStudent = chosenStudent
-        if (student) return randomStudent = student
+        if ( chooseStud ) {
+            randomStudent = chooseStud
+            console.log("i ran 1")
+            window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
 
-        return(
-        <div>You should ask:${randomStudent.firstName}, with ${randomStudent.lastEvaluation} evaluation.</div>
-        )
+        if ( !chooseStud && getReds.length === 0 && getYellows.length <= 3 ) {
+            //  stud = noReds[Math.floor(Math.random() * getEvals.length)]
+             randomStudent = getYellowGreen[Math.floor(Math.random() * getYellowGreen.length)]
+             console.log("i ran 2")
+             window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
+
+        if ( !chooseStud && getReds.length === 0 && getYellows.length > 3 ) {
+            //  stud = noReds[Math.floor(Math.random() * getEvals.length)]
+             randomStudent = noReds[Math.floor(Math.random() * noReds.length)]
+             console.log("i ran 3")
+             window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
+
+        if ( !chooseStud && getYellows.length === 0 && getReds.length <= 3) {
+            randomStudent = getRedGreen[Math.floor(Math.random() * getRedGreen.length)]
+            console.log("i ran 4")
+            window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
+
+        if ( !chooseStud && getYellows.length === 0 && getReds.length > 3) {
+            randomStudent = noYellows[Math.floor(Math.random() * noYellows.length)]
+            console.log("i ran 4")
+            window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
+
+        if ( !chooseStud && getGreens.lenght === 0 ) {
+            randomStudent = noGreens[Math.floor(Math.random() * noGreens.length)]
+            console.log("i ran 5")
+            window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
+
+        if ( !chooseStud && getRedYellow.length === 0 ) {
+            randomStudent = noRedYellow[Math.floor(Math.random() * noRedYellow.length)]
+            console.log("i ran 6")
+            window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
+        
+
+        // return(
+        // <div>You should ask:${randomStudent.firstName}, with ${randomStudent.lastEvaluation} evaluation.</div>
+        // )
     }
+
     
     render() {
-        return (    
-        <div>
-            <button onClick={this.selectStudent}>RandRand</button>
+        // const {randomStudent, chosenStudent} = this.props
+        return ( 
+        <div>   
+            <div>
+                <button onClick={this.selectStudent}>RandRand</button>
+            </div>
         </div>
         )
     }
@@ -81,14 +163,21 @@ const mapStateToProps = state => {
     console.log(state.randStud, "heelooo")
     return {
     authenticated: state.currentUser !== null,
-    randStud: state.randStud,
-    chosenStudent: {   id: 2,
-        firstName: "Dean",
-        lastName: "Winchester",
-        profilePic: "https://cdn.costumewall.com/wp-content/uploads/2017/01/dean-winchester.jpg",
-        lastEvaluation: "green"
-    }
+    randStud: state.oneBatch,
+    // chosenStudent: {   id: 2,
+    //     firstName: "Dean",
+    //     lastName: "Winchester",
+    //     profilePic: "https://cdn.costumewall.com/wp-content/uploads/2017/01/dean-winchester.jpg",
+    //     lastEvaluation: "green"
+    // }
     }
   }
 
   export default connect(mapStateToProps, {getAllStudent})(GetRandom)
+
+
+
+
+//   const redNum = Math.round(classSize * 0.45)
+//   const yellowNum = Math.round(classSize * 0.35)
+//   const greenNum = Math.round(classSize * 0.20)

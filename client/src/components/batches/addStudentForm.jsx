@@ -67,12 +67,12 @@ export default class AddStudentForm extends PureComponent {
 
                     <div>
 						<input 
-						type="batch" 
-						name="batch" 
+						type="remarks" 
+						name="remark" 
 						className="signupInfo"
-						placeholder="Batch Number" 
-						id="batch" 
-						value={this.state.batch || ''} 
+						placeholder="Remark? Default: white" 
+						id="remarks" 
+						value={this.state.remarks || ''} 
 						onChange={ this.handleChange } />
 					</div>
 

@@ -1,15 +1,21 @@
-.student {
-    margin-left: 25%;
-    width: 50%;
+.oneStudent {
+    width: 40%;
     height: 50%;
-    margin-left: 25%;
     border-radius: 10px 10px 10px 10px;
-    border: 2px solid blue;
 }
-
+.evaluation .box {
+    width: 50%;
+    float: left;
+    text-align: center
+}
 .studentName {
     font-size: 2em;
     text-align: center;
+}
+
+.box {
+    width: 50%;
+    text-align: center
 }
 
 .studentPicture {
@@ -21,11 +27,14 @@
     height:200px;
 }
 .studentInfo {
-    font-size: 1.6em;
+    font-size: 1.4em;
     text-align: center;
+    padding: 20px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 10px 0 0 10px;
 }
 
-.evalButton {
+.button {
     min-width: 10%;
     min-height: 2em;
     border: none;
@@ -33,5 +42,24 @@
 }
 
 .studenPage {
-    float: left;
+    display: block; 
+}
+
+/* .signup {
+    margin: auto;
+    max-width: 50%;
+    text-align: center;
+} */
+
+.newEval {
+    margin: 5px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.newEvalButton {
+    width: 70px;
+    height: 30px;
+    border-radius: 5px 5px 5px 5px;
 }

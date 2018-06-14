@@ -1,4 +1,4 @@
-import {JsonController, Get, Param, Body, Post, NotFoundError, HttpCode, Delete } from 'routing-controllers'
+import {JsonController, Get, Param, Body, Post, NotFoundError, HttpCode, Delete, Put } from 'routing-controllers'
 import Students from './entity'
 import Batch from '../batches/entity';
 
@@ -8,7 +8,7 @@ export default class StudentController {
     // @Authorized()
     @Get('/batches/:id/students')
     @HttpCode(200)
-    async students(
+    async studentsByBatch(
       @Param('id') batchId: number
     ) {
       const batch = await Batch.findOne(batchId)
@@ -16,6 +16,13 @@ export default class StudentController {
   
       return batch.students
 
+    }
+
+        // @Authorized()
+    @Get('/students')
+    allStudents() {
+        return Students.find()
+    
     }
     
     // @Authorized()
@@ -64,50 +71,26 @@ export default class StudentController {
         const studentById = await Students.findOne(studentId)
         if (!studentById) throw new NotFoundError("Student doesn't exist")
         
-        await Students.remove(studentById)
+        await Students.delete(studentById)
 
         return `${studentById.firstName} was deleted successfully`
         }
 
 
-    // @Delete('/:id') 
-    // deleteOne(
-    //     @Req() request, 
-    //     @Res() response, 
-    //     @Param('id') id
-    // ) { 
-    //     var entityManager; 
-    //     return DatabaseManager
-    //     .getInstance()
-    //     .getConnection()
-    //     .then(
-    //         connection => { 
-    //             entityManager = connection
-    //             .entityManager; 
-    //             return entityManager.findOneById(Block, id); 
-    //         })
-    //         .then(
-    //             block => { 
-    //                 return entityManager.remove(block);
-    //             }) 
-    //             .catch((error: HttpError) => { 
-    //                 response.status(error.code).send({message: error.message});
-    //              }) 
-    //              .catch(error => { response.status(500).send({message: "Internal error"});
-    //              })
-    //             }
-
     // // @Authorized()
-    // @Put('/batches/:id')
-    // async editStudent(
-    //     @Param('id') id: number,
-    //     @Body() update: Partial<Batch>
-    // ) {
-    //     const batch = await Batch.findOne(id)
-    //     if (!batch) throw new NotFoundError('Batch doesn\'t exist')
+    @Put('/batches/:batchId/students/:studentId')
+    async editStudent(
+        @Param('batchId') batchId: number,
+        @Param('studentId') studentId: number,
+        @Body() update: Partial<Students>
+    ) {
+        const batch = await Batch.findOne(batchId)
+        const student = await Students.findOne(studentId)
+        if (!batch) throw new NotFoundError("Batch doesn't exist")
+        if (!student) throw new NotFoundError("Batch doesn't exist")
 
-    //     return Batch.merge(batch, update).save()
-    // }
+        return Students.merge(student, update).save()
+    }
 
 
 }

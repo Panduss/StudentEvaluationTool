@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
 import {showBatches, showBatch, newBatch} from '../../actions/batches'
-// import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import './batch.css'
@@ -25,7 +24,6 @@ newBatch() {
 }
 
   renderBatch = (batch) => {
-    const { batches } = this.props
 
     return (
     <div key={batch.id} className="game-card">
@@ -60,6 +58,8 @@ newBatch() {
             Create a new Batch
         </Link>
       </button>
+      <div className="newBatchButton">
+      </div>
       </div>
       {batches.map(batch => this.renderBatch(batch))}
     </div>

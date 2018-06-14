@@ -9,7 +9,7 @@ export default (state = {}, action ) => {
 
     case ADD_EVALUATION:
         return action.payload
-        
+
     default:
         return state
   }

@@ -10,6 +10,8 @@ import newStudent from './newStudent'
 import deleteStudent from './deleteStudent'
 import newEvaluation from './newEvaluation'
 import oneEvaluation from './evaluation'
+import newLastEval from './updateLastEval'
+import randStud from './randStud'
 
 
 export default {
@@ -24,5 +26,7 @@ export default {
   newStudent,
   deleteStudent,
   newEvaluation,
-  oneEvaluation
+  oneEvaluation,
+  newLastEval,
+  randStud
 }

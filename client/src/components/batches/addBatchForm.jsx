@@ -37,7 +37,7 @@ export default class AddBatchForm extends PureComponent {
 						type="startDate" 
 						name="startDate" 
 						className="signupInfo"
-						placeholder="Start date: DD-MM-YYY" 
+						placeholder="Start date: MM/DD/YYYY" 
 						id="startDate" 
 						value={this.state.startDate || ''} 
 						onChange={ this.handleChange } />
@@ -48,7 +48,7 @@ export default class AddBatchForm extends PureComponent {
 						type="endDate" 
 						name="endDate" 
 						className="signupInfo"
-						placeholder="End date: DD-MM-YYY" 
+						placeholder="End date: MM/DD/YYYY" 
 						id="endDate" 
 						value={this.state.endDate || ''} 
 						onChange={ this.handleChange } />

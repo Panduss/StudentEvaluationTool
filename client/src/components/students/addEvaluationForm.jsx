@@ -1,8 +1,10 @@
 import React, {PureComponent} from 'react'
-// import './newBatch.css'
+import {Link} from 'react-router-dom/Link';
+import {baseURL} from '../../constants'
 
 export default class AddEvaluationForm extends PureComponent {
-	state = {}
+  state = {}
+
 
 	handleSubmit = (e) => {
 		e.preventDefault()
@@ -17,28 +19,26 @@ export default class AddEvaluationForm extends PureComponent {
     })
   }
 
-  
-
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<div className="signup">
+				<div className="evaluationForm">
 					<div>
 						<input 
-						type="remark" 
-						name="remark" 
-						className="signupInfo"
-						placeholder="Remark" 
-						id="remark" 
-						value={this.state.remark || ''} 
+						type="remarks" 
+            name="remarks" 
+            className="newEval"
+						placeholder="Remarks" 
+						id="remarks" 
+						value={this.state.remarks || ''} 
 						onChange={ this.handleChange } />
 					</div>
 
           <div>
 						<input 
 						type="colour" 
-						name="colour" 
-						className="signupInfo"
+            name="colour" 
+            className="newEval"
 						placeholder="Colour" 
 						id="colour" 
 						value={this.state.colour || ''} 
@@ -89,12 +89,13 @@ export default class AddEvaluationForm extends PureComponent {
 						onChange={ this.handleChange } />
 					</div> */}
 
-					<button 
-						type="submit"
-						className="newBatchButton"
-					>
-						Create Evaluation!
-					</button>
+          <button 
+          type="submit" 
+          className="newEvalButton"
+          // onClick={this.redirect}
+          >
+          Save
+          </button>
 				</div>
 			</form>
 		)

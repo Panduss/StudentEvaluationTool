@@ -44,7 +44,7 @@ class GetRandom extends PureComponent {
         // if there are no greens, every question goes to yellow + red
         const noGreens = getEvals.filter(student => student.lastEvaluation !== "green")
 
-        const getRedYellow = getEvals.filter(student => student.lastEvaluation === "red" || "yellow" )
+        const getRedYellow = getEvals.filter(student => student.lastEvaluation !== "green" )
         // no red or yellow => questions for greens!
         const noRedYellow = getEvals.filter(student => student.lastEvaluation === "green")
 

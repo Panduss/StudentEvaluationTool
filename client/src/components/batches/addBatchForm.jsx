@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import {Link} from 'react-router-dom'
 import './newBatch.css'
 
 export default class AddBatchForm extends PureComponent {
@@ -20,12 +21,12 @@ export default class AddBatchForm extends PureComponent {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<div className="signup">
+				<div>
 					<div>
 						<input 
 						type="batchNumber" 
 						name="batchNumber" 
-						className="signupInfo"
+						// className="signupInfo"
 						placeholder="Batch number" 
 						id="batchNumber" 
 						value={this.state.batchNumber || ''} 
@@ -36,7 +37,7 @@ export default class AddBatchForm extends PureComponent {
 						<input 
 						type="startDate" 
 						name="startDate" 
-						className="signupInfo"
+						// className="signupInfo"
 						placeholder="Start date: MM/DD/YYYY" 
 						id="startDate" 
 						value={this.state.startDate || ''} 
@@ -47,25 +48,20 @@ export default class AddBatchForm extends PureComponent {
 						<input 
 						type="endDate" 
 						name="endDate" 
-						className="signupInfo"
+						// className="signupInfo"
 						placeholder="End date: MM/DD/YYYY" 
 						id="endDate" 
 						value={this.state.endDate || ''} 
 						onChange={ this.handleChange } />
 					</div>
 
-					{/* {
-						this.state.password &&
-						this.state.confirmPassword &&
-						this.state.password !== this.state.confirmPassword &&
-						<p style={{color:'red'}}>The passwords do not match!</p>
-					} */}
-
 					<button 
 						type="submit"
-						className="newBatchButton"
-					>
+						// className="newBatchButton"
+						// ><Link to={`/batches`}>
+						>
 						Create Batch!
+						{/* // </Link> */}
 					</button>
 				</div>
 			</form>

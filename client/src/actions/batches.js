@@ -6,11 +6,15 @@ import {isExpired} from '../jwt'
 export const GET_BATCHES = 'GET_BATCHES'
 export const GET_BATCH = 'GET_BATCH'
 export const GET_BATCH_ID = 'GET_BATCH_ID'
+// export const ADD_STUDENT = "ADD_STUDENT"
+export const ADD_BATCH= 'ADD_BATCH'
 
-export const ADD_BATCH_SUCCESS = 'ADD_BATCH_SUCCESS'
-export const ADD_BATCH_FAILED = 'ADD_BATCH_FAILED'
+// const addStudent = student => ({
+//   type: ADD_STUDENT,
+//   payload: student
+// })
 
-export const showBatch = (id) => (dispatch, getState) => {
+export const showBatch = (batchId) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
@@ -19,12 +23,12 @@ export const showBatch = (id) => (dispatch, getState) => {
     if (isExpired(jwt)) return dispatch(logout())
   
     request
-      .get(`${baseUrl}/batches/${id}`)
+      .get(`${baseUrl}/batches/${batchId}`)
       .set('Authorization', `Bearer ${jwt}`)
       .then(result => 
         dispatch({
             type: GET_BATCH,
-            payload: result.body.students
+            payload: result.body
         })
     )
       .catch(err => console.error(err))
@@ -49,7 +53,6 @@ export const showBatches = () => (dispatch, getState) => {
       .catch(err => alert(err))
   }
 
-
   export const newBatch = (batchNumber, startDate, endDate) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
@@ -61,18 +64,19 @@ export const showBatches = () => (dispatch, getState) => {
       .send({ batchNumber, startDate, endDate })
       .then(result => {
         dispatch({
-          type: ADD_BATCH_SUCCESS
+          type: ADD_BATCH,
+          payload: result.body
         })
       })
-      .catch(err => {
-        if (err.status === 400) {
-          dispatch({
-            type: ADD_BATCH_FAILED,
-            payload: err.response.body.message || 'Unknown error'
-          })
-        }
-        else {
-          console.error(err)
-        }
-      })
-}
+    
+    // request
+    //   .get(`${baseUrl}/batches`)
+    //   .set('Authorization', `Bearer ${jwt}`)
+    //   .then(result => 
+    //     dispatch({
+    //         type: GET_BATCHES,
+    //         payload: state.batches
+    //     })
+    // )
+      .catch(err => console.error(err))
+  }

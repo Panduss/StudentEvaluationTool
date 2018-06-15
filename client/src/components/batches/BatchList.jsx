@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import {showBatches, showBatch, newBatch} from '../../actions/batches'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
+import NewBatchPage from './addBatchPage'
 import './batch.css'
 
 class BatchList extends PureComponent {
@@ -50,19 +51,25 @@ newBatch() {
     if (batches === null) return null
 
     return (
-    <div>
+    <div className="batchPage">
       <div>
-      <button className="newBatchButton">
-        <Link
+      {/* <button className="newBatchButton">
+        {/* <Link
             to={`/batch/create`}>
             Create a new Batch
         </Link>
-      </button>
-      <div className="newBatchButton">
-      </div>
-      </div>
-      {batches.map(batch => this.renderBatch(batch))}
-    </div>
+      </button> */}
+      {/* <div className="newBatchButton">
+
+      </div> */}
+      <div className="batches">
+        {batches.map(batch => this.renderBatch(batch))}
+        </div>          
+        <div className="box">
+            <NewBatchPage />
+         </div>
+        </div>
+        </div>
     )
   }
 }

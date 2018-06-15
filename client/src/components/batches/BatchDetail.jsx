@@ -13,8 +13,8 @@ class BatchDetail extends PureComponent {
 
   componentWillMount() {
     if (this.props.authenticated) {
-      if (this.props.oneBatch === null) this.props.showBatch()
-      if (this.props.users === null) this.props.getUsers()
+      this.props.showBatch()
+      // this.props.getUsers()
     }
   }
 
@@ -146,7 +146,7 @@ const mapStateToProps = state => {
   return {
   authenticated: state.currentUser !== null,
   batchId : ((window.location.href).split('/')[4]),
-  students: state.oneBatch
+  students: state.students
 
   }
 }

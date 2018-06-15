@@ -13,41 +13,41 @@ class ShowOneStudent extends PureComponent {
     // this.props.showEvaluation()
     if (this.props.authenticated) {
       if (this.props.student === null) this.props.showStudent()
-      if (this.props.evalus === null) this.props.showEvaluation()
+      // if (this.props.evalus === null) this.props.showEvaluation()
       if (this.props.users === null) this.props.getUsers()
     }
   }
 
-  showEvaluation(studentId) {
-    this.props.showEvaluation(studentId)
-  }
+  // showEvaluation(studentId) {
+  //   this.props.showEvaluation(studentId)
+  // }
 
 
-  renderBoxes = (evalu) => {
+  // renderBoxes = (evalu) => {
 
-    return (
-      <button 
-      key={evalu.id}
-      className="progressionBar" 
-      style={{background: `${evalu.colour}`}}
-      > </button>
-    )
-  }
+  //   return (
+  //     <button 
+  //     key={evalu.id}
+  //     className="progressionBar" 
+  //     style={{background: `${evalu.colour}`}}
+  //     > </button>
+  //   )
+  // }
 
-  renderOneStudent = (one) => {
+  renderOneStudent = (student) => {
 
     return (
 
       <div>
         <div 
           className="studentInfo"
-          key={one.id} 
-          style={{backgroundColor: `${one.lastEvaluation}`}}
+          key={student.id} 
+          style={{backgroundColor: `${student.lastEvaluation}`}}
           >
-            <p className="studentName">{one.firstName} {one.lastName}</p>
-            <img className="studentPicture" src={one.profilePic} alt={one.firstName}/>
-            <p className="studentInfo">Last evaluation: {(one.lastEvaluation).toUpperCase()}</p>
-            <button className="newEvalButton" onClick={() => this.showEvaluation(one.id)}>Show Evaluation</button>
+            <p className="studentName">{student.firstName} {student.lastName}</p>
+            <img className="studentPicture" src={student.profilePic} alt={student.firstName}/>
+            <p className="studentInfo">Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>
+            <button className="newEvalButton" onClick={() => this.showEvaluation(student.id)}>Show Evaluation</button>
         </div>
       </div>
     )}
@@ -60,16 +60,16 @@ class ShowOneStudent extends PureComponent {
     if (!authenticated) return (
 			<Redirect to="/login" />
     )
-    if (student === null) return null
+    // if (student === null) return null
 
     return (
       <div className="studentPage">
         <div>
-          Student's progression:  {evalus.map(evalu => this.renderBoxes(evalu))}
+          {/* Student's progression:  {evalus.map(evalu => this.renderBoxes(evalu))} */}
       </div>
       <div className="evaluation">
         <div className="box" >
-            {student.map(one => this.renderOneStudent(one))}
+            {student.map(student => this.renderOneStudent(student))}
           </div>
           <div className="box">
             <NewEvaluationPage />
@@ -80,13 +80,13 @@ class ShowOneStudent extends PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   // console.log(state.oneStudent.map(a => a.evalu), "hiii")
 
   return {
-  authenticated: state.currentUser !== null,
-  student: state.oneStudent,
-  evalus: state.oneEvaluation
+    authenticated: state.currentUser !== null,
+    student: state.students,
+    // evalus: state.oneEvaluation
   
   }
 }

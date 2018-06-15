@@ -3,11 +3,12 @@ import login from './login'
 import currentUser from './currentUser'
 import signup from './signup'
 import batches from './batches'
-import oneBatch from './batch'
-import oneStudent from './student'
-import newBatch from './newBatch'
-import newStudent from './newStudent'
-import deleteStudent from './deleteStudent'
+// import oneBatch from './batches'
+// import student from './oneStudent'
+import students from './students'
+// import newBatch from './newBatch'
+// import newStudent from './newStudent'
+// import deleteStudent from './deleteStudent'
 import newEvaluation from './newEvaluation'
 import oneEvaluation from './evaluation'
 import newLastEval from './updateLastEval'
@@ -20,11 +21,13 @@ export default {
   currentUser,
   signup,
   batches,
-  oneBatch,
-  oneStudent,
-  newBatch,
-  newStudent,
-  deleteStudent,
+  students,
+  // student,
+  // oneBatch,
+  // oneStudent,
+  // newBatch,
+  // newStudent,
+  // deleteStudent,
   newEvaluation,
   oneEvaluation,
   newLastEval,

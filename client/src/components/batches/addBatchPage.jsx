@@ -11,17 +11,15 @@ class NewBatchPage extends PureComponent {
 	}
 
 	render() {
-		if (this.props.newBatch.success) return (
-			<Redirect to="/batches" />
-		)
+		// if (this.props.newBatch !== null) return (
+		// 	<Redirect to="/batches" />
+		// )
 
 		return (
-			<div className="signup">
+			<div>
 				<h1>Create a new batch</h1>
 
 				<AddBatchForm onSubmit={this.handleSubmit} />
-
-				<p style={{color:'red'}}>{ this.props.newBatch.error }</p>
 			</div>
 		)
 	}

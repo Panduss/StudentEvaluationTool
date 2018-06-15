@@ -17,7 +17,7 @@ class ShowPerc extends PureComponent {
   }
 
   render() {
-    const { evalus=evalus[0] , student, authenticated} = this.props
+    const { evalus=evalus[0], student, authenticated} = this.props
     console.log(evalus, 'bye')
     return (
         <div>

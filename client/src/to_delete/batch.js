@@ -4,7 +4,8 @@ import {ADD_STUDENT} from '../actions/student'
 export default (state = [], action ) => {
     switch (action.type) {
         
-
+        case GET_BATCH:
+            return action.payload
 
         case ADD_STUDENT:
             return {

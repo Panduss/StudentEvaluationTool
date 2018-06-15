@@ -18,7 +18,7 @@ export default class StudentController {
 
     }
 
-        // @Authorized()
+    // @Authorized()
     @Get('/students')
     allStudents() {
         return Students.find()
@@ -32,10 +32,10 @@ export default class StudentController {
             @Param('studentId') studentId: number
           ) {
             const batch = await Batch.findOne(batchId)
-            const studentById = await Students.findOne(studentId)
+            const student = await Students.findOne(studentId)
             if (!batch) throw new NotFoundError('Batch not found!')
         
-            return {studentById}
+            return student
       
           }
 
@@ -51,29 +51,17 @@ export default class StudentController {
         return student.save()
     }
 
-    // @Get('/batches/:batchId/students/:studentId')
-    // async isThisWorking(
-    //     @Param('batchId') batchId: number,
-    //     @Param('studentId') studentId: number
-    // ) {
-    //     const studentById = await Students.findOne(studentId)
-    //     const batch = await Batch.findOne(batchId)
-    //     return studentById
-    // }
-
     // @Authorized()
-    @Delete('/batches/:batchId/students/:studentId')
+    @Delete('/students/:studentId')
     async deleteStudent(
-        @Param('batchId') batchId: number,
         @Param('studentId') studentId: number
     ) {
-        const batch = await Batch.findOne(batchId)
-        const studentById = await Students.findOne(studentId)
-        if (!studentById) throw new NotFoundError("Student doesn't exist")
+        const student = await Students.findOne(studentId)
+        if (!student) throw new NotFoundError("Student doesn't exist")
         
-        await Students.delete(studentById)
+        await Students.delete(student)
 
-        return `${studentById.firstName} was deleted successfully`
+        return `${student.firstName} was deleted successfully`
         }
 
 

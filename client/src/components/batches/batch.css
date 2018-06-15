@@ -1,8 +1,8 @@
 .batches {
-    width: 30%;
-    height: 50%;
+    /* width: 30%;
+    height: 50%; */
 	float: left;
-	margin: 1.33%;
+	/* margin: 1.33%; */
     border-radius: 10px 10px 10px 10px;
     border: 2px solid rgb(73, 199, 182);
     background: rgb(73, 199, 182);
@@ -18,7 +18,21 @@
     text-align: center;
 }
 
-.students {
+.bachPage .box {
+    width: 50%;
+    text-align: center
+}
+
+.bachPage .batches {
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+.box {
+    width: 50%;
+    text-align: center
+}
+/* .students {
     width: 30%;
     height: 50%;
 	float: left;
@@ -26,9 +40,9 @@
     border-radius: 10px 10px 10px 10px;
     border: 2px solid white;
     padding: 0 0 15px 0;
-}
+} */
 
-.studentName.a:link {
+/* .studentName.a:link {
     font-style: black;
 }
 .studentName.a:visited {
@@ -50,7 +64,7 @@
     border-radius: 5px 5px 5px 5px;
     margin-left: 35%;
     margin-right: 35%;
-}
+} */
 
 .progressionBar {
     max-width: 10%;

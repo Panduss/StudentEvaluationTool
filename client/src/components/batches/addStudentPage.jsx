@@ -8,13 +8,13 @@ import './newBatch.css'
 class NewStudentPage extends PureComponent {
     
     handleSubmit = (data) => {
-		this.props.postNewStudent(data.firstName, data.lastName, data.profilePic, data.lastEvaluation="null", data.batchId)
+		this.props.postNewStudent(data.firstName, data.lastName, data.profilePic, data.lastEvaluation, data.batchId)
 	}
 
 	render() {
-		if (this.props.newStudent.success) return (
-			<Redirect to="/batches" />
-		)
+		// if (this.props.newStudent.success) return (
+		// 	<Redirect to="/batches" />
+		// )
 
 		return (
 			<div className="signup">
@@ -22,7 +22,7 @@ class NewStudentPage extends PureComponent {
 
 				<AddStudentForm onSubmit={this.handleSubmit} />
 
-				<p style={{color:'red'}}>{ this.props.newStudent.error }</p>
+				{/* // <p style={{color:'red'}}>{ this.props.newStudent.error }</p> */}
 			</div>
 		)
 	}

@@ -27,7 +27,7 @@ export default class Students extends BaseEntity  {
     @Column('text', { default: 'white' })
     lastEvaluation: Colour
     
-    @ManyToOne(_ => Batch, batch => batch.students)
+    @ManyToOne(_ => Batch, batch => batch.students, { onDelete: 'CASCADE' })
     batch: Batch
 
     // @Column({ name: 'batch' })

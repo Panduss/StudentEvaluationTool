@@ -14,11 +14,9 @@ export default (state = [], action ) => {
             return [...state, action.payload]
 
         case DELETE_STUDENT: 
-            return state.filter(student => student.id !== action.payload.id)
-
+            return state.filter(student => student.id !== action.payload)
+            
         default:
             return state
     }
   }
-
-//   state.concat(action.payload)

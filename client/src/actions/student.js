@@ -23,6 +23,11 @@ const addStudent = student => ({
     payload: student
 })
 
+// const exterminate = studentId => ({
+//   type: DELETE_STUDENT,
+//   payload: studentId
+// })
+
 
 export const showStudent = (studentId) => (dispatch, getState) => {
     const state = getState()
@@ -87,23 +92,31 @@ export const showStudent = (studentId) => (dispatch, getState) => {
   .catch(err => console.error(err))
 }
 
-  export const deleteStudent = (studentId) => (dispatch, getState) => {
+  export const deleteStudent = (id) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
 
-    // const batchId = ((window.location.href).split('/')[4])
-    // console.log((window.location.href).split('/')[4])
-  
-    if (isExpired(jwt)) return dispatch(logout())
-  
+  if (isExpired(jwt)) return dispatch(logout())
+    
     request
-      .delete(`${baseUrl}/students/${studentId}`)
-      .then(result => {
-        dispatch({
-          type: DELETE_STUDENT,
-          payload: result.body
+    .delete(`${baseUrl}/students/${id}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => dispatch({
+      type: DELETE_STUDENT,
+      payload: id
+    }))
+  }
 
-        })
-      })
-    .catch(err => console.error(err))
-    }
+    // export const deleteStudent = (id) => (dispatch, getState) => {
+    //   const state = getState()
+    //   const jwt = state.currentUser.jwt
+    
+    //   if (isExpired(jwt)) return dispatch(logout())
+    
+    //   request
+    //     .delete(`${baseUrl}/students/${studentId}`)
+    //     .then(result => {
+    //       dispatch(exterminate(studentId))
+    //     })
+    //   .catch(err => console.error(err))
+    //   }

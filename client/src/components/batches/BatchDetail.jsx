@@ -36,19 +36,32 @@ class BatchDetail extends PureComponent {
 
     const getEvals = students.filter(student => student.lastEvaluation !== "white")
     console.log(getEvals, "evals?")
-    const getReds = getEvals.filter(student => student.lastEvaluation === "red")
-    console.log(getReds, "reds?")
+    const getRed = getEvals.filter(student => student.lastEvaluation === "red")
+    console.log(getRed, "reds?")
     const getYellow = getEvals.filter(student => student.lastEvaluation === "yellow")
     console.log(getYellow, "yellows?")
     const getGreen = getEvals.filter(student => student.lastEvaluation === "green")
     console.log(getGreen, "greens?")
 
-    const redPercent = (getReds.length/getEvals.length * 100).toFixed()
+    // const bar = Array.prototype.concat.apply([], arrayOfArraysToConcat)
+    let bar = Array.prototype.concat.apply([], [getRed, getYellow, getGreen])
+
+    console.log(bar, "showmeabar")
+
+    const redPercent = (getRed.length/getEvals.length * 100).toFixed()
     const yellowPercent = (getYellow.length/getEvals.length * 100).toFixed()
     const greenPercent = (getGreen.length/getEvals.length * 100).toFixed()
+
+    // const bar = getRed.push(getYellow)
+
+    // console.log(bar, "showmeabar")
     
   return (
     <div>
+        <div className="percentageBar">
+          Latest evaluation for current batch:<br />
+              {bar.map(student => this.renderBoxes(student))}<br />
+        </div>
         <p>Red Percentage: {redPercent}%</p>
         <p>Yellow Percentage: {yellowPercent}%</p>
         <p>Green Percentage: {greenPercent}%</p>
@@ -88,7 +101,7 @@ class BatchDetail extends PureComponent {
     )}
 
   render() {
-    const {students, batchId, authenticated} = this.props
+    const {students, bar, batchId, authenticated} = this.props
 
     if (!authenticated) return (
 			<Redirect to="/login" />
@@ -98,10 +111,10 @@ class BatchDetail extends PureComponent {
 
     return (
       <div>
-        <div className="percentageBar">
+        {/* <div className="percentageBar">
             Latest evaluation for current batch:<br />
-              {students.map(student => this.renderBoxes(student))}<br />
-        </div>
+              {bar.map(student => this.renderBoxes(student))}<br />
+        </div> */}
         <div className="percentages">
             Current stat:
               {this.calculatePercent()}

@@ -6,7 +6,7 @@ import AddEvaluationForm from './addEvaluationForm'
 class NewEvaluationPage extends PureComponent {
     
     handleSubmit = (data) => {
-		const {batches, students} = this.props
+		const {batchId, studentId} = this.props
 
 		// const firstName = students.map(student => student.firstName)
 

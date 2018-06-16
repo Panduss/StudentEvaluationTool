@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {newBatch} from '../../actions/batches'
 import AddBatchForm from './addBatchForm'
-import {Redirect} from 'react-router-dom'
 import './newBatch.css'
 
 class NewBatchPage extends PureComponent {
@@ -11,9 +10,6 @@ class NewBatchPage extends PureComponent {
 	}
 
 	render() {
-		// if (this.props.newBatch !== null) return (
-		// 	<Redirect to="/batches" />
-		// )
 
 		return (
 			<div>

@@ -1,6 +1,4 @@
 import React, {PureComponent} from 'react'
-import {Link} from 'react-router-dom/Link';
-import {baseURL} from '../../constants'
 
 export default class AddEvaluationForm extends PureComponent {
   state = {}
@@ -92,7 +90,6 @@ export default class AddEvaluationForm extends PureComponent {
           <button 
           type="submit" 
           className="newEvalButton"
-          // onClick={this.redirect}
           >
           Save
           </button>

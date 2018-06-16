@@ -7,15 +7,16 @@ export const GET_EVALUATION = "GET_EVALUATION"
 export const ADD_EVALUATION = "ADD_EVALUATION"
 export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
 
-  export const showEvaluation = (id) => (dispatch, getState) => {
+  export const showEvaluation = (studentId) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
 
     if (isExpired(jwt)) return dispatch(logout())
 
+    // let studentId = Number((window.location.href).split('/').pop())
     request
-    .get(`${baseUrl}/students/${id}/evaluations`)
+    .get(`${baseUrl}/students/${studentId}/evaluations`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(result => 
         dispatch({
@@ -26,13 +27,14 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
     .catch(err => console.error(err))
     }
 
-  export const newEvaluation = (student, batch, colour, remarks ) => (dispatch, getState) => {
+  export const newEvaluation = (studentId, batchId, colour, remarks ) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
 
-    const studentId = Number((window.location.href).split('/').pop())
+    const studentId = (window.location.href).split('/').pop()
+    console.log((window.location.href).split('/').pop(), "heyystudentid")
     const batchId = ((window.location.href).split('/')[4])
-    // console.log((window.location.href).split('/')[4])
+    console.log(((window.location.href).split('/')[4]), "heyyybatchid")
   
     if (isExpired(jwt)) return dispatch(logout())
 
@@ -44,8 +46,8 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
             type: LAST_EVAL_UPD,
             payload: result.body
         })
-    })  
-  
+    }) 
+
     request
         .post(`${baseUrl}/batches/${batchId}/students/${studentId}/evaluations`)
         .send({ student: studentId, batch: batchId, colour, remarks  })
@@ -56,7 +58,16 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
             })
         })
 
-    .catch(err => {console.error(err)})
+    // request
+    //     .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
+    //     .send({ student: studentId, batch: batchId, lastEvaluation: colour})
+    //     .then(result => {
+    //         dispatch({
+    //             type: LAST_EVAL_UPD,
+    //             payload: result.body
+    //         })
+    //     }) 
+.catch(err => {console.error(err)})
 }
 
 // export const getEvaluations =

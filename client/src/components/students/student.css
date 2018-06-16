@@ -18,6 +18,11 @@
     text-align: center
 }
 
+/* h2.stat {
+    margin-left: 20px;
+    margin-bottom: 0;
+} */
+
 .studentPicture {
     margin-left: auto;
     margin-right: auto;
@@ -43,6 +48,11 @@
 
 .studenPage {
     display: block; 
+}
+
+.stat {
+    width: 80%;
+    margin: 0 15% 0 15%;
 }
 
 /* .signup {

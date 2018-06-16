@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
 import {showStudent} from '../../actions/student'
-// import {getUsers} from '../../actions/users'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {showEvaluation} from '../../actions/evaluation'
@@ -10,29 +9,49 @@ import './student.css'
 class ShowOneStudent extends PureComponent {
 
   componentWillMount() {
-    // this.props.showEvaluation()
     if (this.props.authenticated) {
-      if (this.props.student === null) this.props.showStudent()
-      // if (this.props.evalus === null) this.props.showEvaluation()
-      if (this.props.users === null) this.props.getUsers()
+      this.props.showStudent()
+      this.props.showEvaluation()
     }
   }
 
-  // showEvaluation(studentId) {
-  //   this.props.showEvaluation(studentId)
-  // }
+  showEvaluation(studentId) {
+    this.props.showEvaluation(studentId)
+  }
 
+  calculatePercent() {
+    const { evaluations } = this.props
 
-  // renderBoxes = (evalu) => {
+    const getRed = evaluations.filter(evalu => evalu.colour === "red")
+    console.log(getRed, "reds?")
+    const getYellow = evaluations.filter(evalu => evalu.colour === "yellow")
+    console.log(getYellow, "yellows?")
+    const getGreen = evaluations.filter(evalu => evalu.colour === "green")
+    console.log(getGreen, "greens?")
 
-  //   return (
-  //     <button 
-  //     key={evalu.id}
-  //     className="progressionBar" 
-  //     style={{background: `${evalu.colour}`}}
-  //     > </button>
-  //   )
-  // }
+    const redPercent = (getRed.length/evaluations.length * 100).toFixed()
+    const yellowPercent = (getYellow.length/evaluations.length * 100).toFixed()
+    const greenPercent = (getGreen.length/evaluations.length * 100).toFixed()
+
+    return (
+      <div>
+          <p>Red Percentage: {redPercent}%</p>
+          <p>Yellow Percentage: {yellowPercent}%</p>
+          <p>Green Percentage: {greenPercent}%</p>
+    </div>
+    )
+  }
+
+  renderBoxes = (evaluations) => {
+
+    return (
+      <button 
+      key={evaluations.id}
+      className="progressionBar" 
+      style={{background: `${evaluations.colour}`}}
+      > </button>
+    )
+  }
 
   renderOneStudent = (student) => {
 
@@ -47,7 +66,6 @@ class ShowOneStudent extends PureComponent {
             <p className="studentName">{student.firstName} {student.lastName}</p>
             <img className="studentPicture" src={student.profilePic} alt={student.firstName}/>
             <p className="studentInfo">Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>
-            <button className="newEvalButton" onClick={() => this.showEvaluation(student.id)}>Show Evaluation</button>
         </div>
       </div>
     )}
@@ -55,21 +73,28 @@ class ShowOneStudent extends PureComponent {
 
 
   render() {
-    const { evalus, student, authenticated} = this.props
+    const { evaluations, students, authenticated} = this.props
 
     if (!authenticated) return (
 			<Redirect to="/login" />
     )
-    // if (student === null) return null
+    if (students === null) return null
+    if (evaluations === null) return null
 
     return (
       <div className="studentPage">
         <div>
-          {/* Student's progression:  {evalus.map(evalu => this.renderBoxes(evalu))} */}
+          <h2>Student's progression: </h2> 
+          <h2 className="stat">{evaluations.map(evaluation => this.renderBoxes(evaluation))}</h2>
+      </div><br />
+      <div>
+      <div className="percentages">
+              {this.calculatePercent()}
+        </div>
       </div>
       <div className="evaluation">
         <div className="box" >
-            {student.map(student => this.renderOneStudent(student))}
+            {students.map(student => this.renderOneStudent(student))}
           </div>
           <div className="box">
             <NewEvaluationPage />
@@ -81,12 +106,11 @@ class ShowOneStudent extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state.oneStudent.map(a => a.evalu), "hiii")
 
   return {
     authenticated: state.currentUser !== null,
-    student: state.students,
-    // evalus: state.oneEvaluation
+    students: state.students,
+    evaluations: state.evaluations
   
   }
 }

@@ -6,13 +6,8 @@ import {isExpired} from '../jwt'
 export const GET_BATCHES = 'GET_BATCHES'
 export const GET_BATCH = 'GET_BATCH'
 export const GET_BATCH_ID = 'GET_BATCH_ID'
-// export const ADD_STUDENT = "ADD_STUDENT"
 export const ADD_BATCH= 'ADD_BATCH'
 
-// const addStudent = student => ({
-//   type: ADD_STUDENT,
-//   payload: student
-// })
 
 export const showBatch = (batchId) => (dispatch, getState) => {
     const state = getState()

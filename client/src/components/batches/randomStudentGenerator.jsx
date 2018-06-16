@@ -144,7 +144,7 @@ class GetRandom extends PureComponent {
         return ( 
         <div>   
             <div>
-                <button onClick={this.selectStudent}>Ask a question!</button>
+                <button className="batchDetailButton" onClick={this.selectStudent}>Ask a question!</button>
             </div>
         </div>
         )
@@ -155,7 +155,7 @@ const mapStateToProps = state => {
     console.log(state.randStud, "heelooo")
     return {
     authenticated: state.currentUser !== null,
-    randStud: state.oneBatch,
+    randStud: state.students,
     }
   }
 

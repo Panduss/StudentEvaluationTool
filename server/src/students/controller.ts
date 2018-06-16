@@ -43,42 +43,41 @@ export default class StudentController {
     @Post('/batches/:batchId/students/')
     async createStudent(            
         @Param('batchId') batchId: number,
-        @Body() student: Students,
+        @Body() body: Students,
     ){
         const batch = await Batch.findOne(batchId)
         if(!batch) throw new NotFoundError("Batch doesn't exist")
 
-        return student.save()
+        return Students.create(body).save()
     }
 
     // @Authorized()
-    @Delete('/students/:studentId')
-    async deleteStudent(
-        @Param('studentId') studentId: number
+    @Delete('/students/:id')
+    async removeStudent(
+        @Param('id') id: number
     ) {
-        const student = await Students.findOne(studentId)
+        const student = await Students.findOne(id)
         if (!student) throw new NotFoundError("Student doesn't exist")
         
-        await Students.delete(student)
+        await Students.remove(student)
 
-        return `${student.firstName} was deleted successfully`
+        return "removed!"
         }
 
 
     // // @Authorized()
-    @Put('/batches/:batchId/students/:studentId')
+    @Put('/batches/:batchId/students/:id')
     async editStudent(
         @Param('batchId') batchId: number,
-        @Param('studentId') studentId: number,
+        @Param('id') id: number,
         @Body() update: Partial<Students>
     ) {
         const batch = await Batch.findOne(batchId)
-        const student = await Students.findOne(studentId)
+        const student = await Students.findOne(id)
         if (!batch) throw new NotFoundError("Batch doesn't exist")
         if (!student) throw new NotFoundError("Batch doesn't exist")
 
         return Students.merge(student, update).save()
     }
-
 
 }

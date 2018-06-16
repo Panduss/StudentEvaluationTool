@@ -32,7 +32,7 @@ export default class AddEvaluationForm extends PureComponent {
 						onChange={ this.handleChange } />
 					</div>
 
-          <div>
+          {/* <div>
 						<input 
 						type="colour" 
             name="colour" 
@@ -40,41 +40,44 @@ export default class AddEvaluationForm extends PureComponent {
 						placeholder="Colour" 
 						id="colour" 
 						value={this.state.colour || ''} 
-						onChange={ this.handleChange } />
-					</div>
+						onClick={ this.handleChange } />
+					</div> */}
 
-					{/* <span>
-            <input 
-            style={{background: 'red'}} 
+					<span>
+            <button
+            style={{background: "red"}} 
 						type="radio"
-						name="red" 
+						name="colour" 
 						className="evalButton"
 						id="red" 
-						value={"red"} 
-						onChange={ this.handleChange } />
+						value="red" 
+						label="Red"
+						onClick={ this.handleChange } />					
 					</span>
 
 					<span>
-            <input 
-            style={{background: 'yellow'}} 
+            <button 
+            style={{background: "yellow"}} 
 						type="radio"
-						name="yellow" 
+						name="colour" 
 						className="evalButton"
 						id="yellow" 
-						value={"yellow"} 
-						onChange={ this.handleChange } />
+						value="yellow" 
+						label="Yellow"
+						onClick={ this.handleChange } />
 					</span>
 
           <span>
-            <input
-            style={{background: 'green'}} 
+            <button
+            style={{background: "green"}} 
 						type="radio"
-						name="green" 
+						name="colour" 
 						className="evalButton"
 						id="green" 
-            value={"green"}
-						onChange={ this.handleChange } />
-					</span> */}
+						value="green"
+						label="Green"
+						onClick={ this.handleChange } />
+					</span>
 
                     {/* <div>
 						<input 
@@ -85,14 +88,14 @@ export default class AddEvaluationForm extends PureComponent {
 						id="batch" 
 						value={this.state.batch || ''} 
 						onChange={ this.handleChange } />
-					</div> */}
+					</div> 
 
           <button 
           type="submit" 
           className="newEvalButton"
           >
           Save
-          </button>
+          </button>*/}
 				</div>
 			</form>
 		)

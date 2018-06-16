@@ -66,15 +66,15 @@ export default class StudentController {
 
 
     // // @Authorized()
-    @Put('/batches/:batchId/students/:id')
+    @Put('/students/:id')
     async editStudent(
-        @Param('batchId') batchId: number,
-        @Param('id') id: number,
+        // @Param('batchId') batchId: number,
+        @Param('id') studentId: number,
         @Body() update: Partial<Students>
     ) {
-        const batch = await Batch.findOne(batchId)
-        const student = await Students.findOne(id)
-        if (!batch) throw new NotFoundError("Batch doesn't exist")
+        // const batch = await Batch.findOne(batchId)
+        const student = await Students.findOne(studentId)
+        // if (!batch) throw new NotFoundError("Batch doesn't exist")
         if (!student) throw new NotFoundError("Batch doesn't exist")
 
         return Students.merge(student, update).save()

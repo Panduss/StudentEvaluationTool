@@ -8,7 +8,6 @@ export const GET_BATCH = 'GET_BATCH'
 export const GET_BATCH_ID = 'GET_BATCH_ID'
 export const ADD_BATCH= 'ADD_BATCH'
 
-
 export const showBatch = (batchId) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
@@ -63,15 +62,5 @@ export const showBatches = () => (dispatch, getState) => {
           payload: result.body
         })
       })
-    
-    // request
-    //   .get(`${baseUrl}/batches`)
-    //   .set('Authorization', `Bearer ${jwt}`)
-    //   .then(result => 
-    //     dispatch({
-    //         type: GET_BATCHES,
-    //         payload: state.batches
-    //     })
-    // )
       .catch(err => console.error(err))
   }

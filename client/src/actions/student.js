@@ -11,7 +11,7 @@ export const ADD_STUDENT = "ADD_STUDENT"
 export const DELETE_STUDENT = "DELETE_STUDENT"
 
 
-export const showStudent = (studentId) => (dispatch, getState) => {
+export const showStudent = (id) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
@@ -22,7 +22,7 @@ export const showStudent = (studentId) => (dispatch, getState) => {
     if (isExpired(jwt)) return dispatch(logout())
   
     request
-      .get(`${baseUrl}/batches/${batchId}/students/${studentId}`)
+      .get(`${baseUrl}/batches/${batchId}/students/${id}`)
       .set('Authorization', `Bearer ${jwt}`)
       .then(result => 
         dispatch({
@@ -31,7 +31,7 @@ export const showStudent = (studentId) => (dispatch, getState) => {
         }
     ))
     request
-    .get(`${baseUrl}/batches/${batchId}/students/${studentId}/evaluations`)
+    .get(`${baseUrl}/students/${id}/evaluations`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(result => 
         dispatch({
@@ -42,12 +42,11 @@ export const showStudent = (studentId) => (dispatch, getState) => {
   .catch(err => console.error(err))
 }
 
-  export const newStudent = ( firstName, lastName, profilePic, lastEvaluation, batchId ) => (dispatch, getState) => {
+  export const newStudent = ( firstName, lastName, profilePic, lastEvaluation, batch ) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
 
-    // const batchId = ((window.location.href).split('/')[4])
-    // console.log((window.location.href).split('/')[4])
+    const batchId = ((window.location.href).split('/')[4])
   
     if (isExpired(jwt)) return dispatch(logout())
   

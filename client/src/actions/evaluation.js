@@ -27,26 +27,14 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
     .catch(err => console.error(err))
     }
 
-  export const newEvaluation = (studentId, batchId, colour, remarks ) => (dispatch, getState) => {
+  export const newEvaluation = (student, batch, colour, remarks ) => (dispatch, getState) => {
     const state = getState()
     const jwt = state.currentUser.jwt
 
     const studentId = (window.location.href).split('/').pop()
-    console.log((window.location.href).split('/').pop(), "heyystudentid")
     const batchId = ((window.location.href).split('/')[4])
-    console.log(((window.location.href).split('/')[4]), "heyyybatchid")
   
     if (isExpired(jwt)) return dispatch(logout())
-
-    request
-    .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
-    .send({ student: studentId, batch: batchId, lastEvaluation: colour})
-    .then(result => {
-        dispatch({
-            type: LAST_EVAL_UPD,
-            payload: result.body
-        })
-    }) 
 
     request
         .post(`${baseUrl}/batches/${batchId}/students/${studentId}/evaluations`)
@@ -58,15 +46,15 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
             })
         })
 
-    // request
-    //     .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
-    //     .send({ student: studentId, batch: batchId, lastEvaluation: colour})
-    //     .then(result => {
-    //         dispatch({
-    //             type: LAST_EVAL_UPD,
-    //             payload: result.body
-    //         })
-    //     }) 
+    request
+    .put(`${baseUrl}/students/${studentId}`)
+    .send({ student: studentId, batch: batchId, lastEvaluation: colour})
+    .then(result => {
+        dispatch({
+            type: LAST_EVAL_UPD,
+            payload: result.body
+        })
+    }) 
 .catch(err => {console.error(err)})
 }
 

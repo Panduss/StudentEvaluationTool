@@ -45,6 +45,11 @@
     border: none;
     padding: 0;
 }
+.evalButton {
+    min-width: 10%;
+    min-height: 2em;
+    padding: 3px;
+}
 
 .studenPage {
     display: block; 

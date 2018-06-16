@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react'
 import {showStudent} from '../../actions/student'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import {showEvaluation} from '../../actions/evaluation'
-import NewEvaluationPage from './addEvaluationPage'
+import {Redirect, Link} from 'react-router-dom'
+import {showEvaluation, newEvaluation} from '../../actions/evaluation'
+import AddEvaluationForm from './addEvaluationForm'
+import {baseUrl} from '../../constants'
 import './student.css'
 
 class ShowOneStudent extends PureComponent {
@@ -14,6 +15,16 @@ class ShowOneStudent extends PureComponent {
       this.props.showEvaluation()
     }
   }
+
+  handleSubmit = (data) => {
+		const {batchId, studentId} = this.props
+
+		this.props.postNewEvaluation(data.studentId, data.batchId, data.colour, data.remarks)
+
+		// if(data) return (
+		// 	<Redirect to="/batches/batchId" />
+		// )
+	}
 
   showEvaluation(studentId) {
     this.props.showEvaluation(studentId)
@@ -73,7 +84,7 @@ class ShowOneStudent extends PureComponent {
 
 
   render() {
-    const { evaluations, students, authenticated} = this.props
+    const { batchId, studentId, evaluations, students, authenticated} = this.props
 
     if (!authenticated) return (
 			<Redirect to="/login" />
@@ -97,7 +108,10 @@ class ShowOneStudent extends PureComponent {
             {students.map(student => this.renderOneStudent(student))}
           </div>
           <div className="box">
-            <NewEvaluationPage />
+            <h1>Create a new evaluation</h1>
+				    <AddEvaluationForm onSubmit={this.handleSubmit} />
+            <button>
+            <Link to={`/batches/${batchId}`}>Batch</Link></button>
           </div>
         </div>
       </div>
@@ -106,13 +120,15 @@ class ShowOneStudent extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-
+console.log((window.location.href).split('/')[4], "meowmeow")
   return {
     authenticated: state.currentUser !== null,
     students: state.students,
-    evaluations: state.evaluations
+    evaluations: state.evaluations,
+    batchId : (window.location.href).split('/')[4],
+		studentId: ((window.location.href).split('/').pop())
   
   }
 }
 
-export default connect(mapStateToProps, {showStudent, showEvaluation})(ShowOneStudent)
+export default connect(mapStateToProps, {showStudent, showEvaluation, postNewEvaluation: newEvaluation})(ShowOneStudent)

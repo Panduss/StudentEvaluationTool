@@ -7,7 +7,7 @@ type Colour = "red" | "yellow" | "green"
 let today  = new Date().toLocaleDateString("en-US");
 
 @Entity()
-export default class Evalu extends BaseEntity {
+export default class Evaluations extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number
@@ -18,12 +18,12 @@ export default class Evalu extends BaseEntity {
     @Column('text', {nullable: false})
     colour: Colour
 
-    @Column('text', {default: today} )
+    @Column('text', {default: today, nullable: false} )
     date: string
 
-    @ManyToOne(_ => Student, student => student.evalu, { onDelete: 'CASCADE' })
+    @ManyToOne(_ => Student, student => student.evaluations, { onDelete: 'CASCADE', nullable: false })
     student: Student
 
-    @ManyToOne(_ => Batch, batch => batch.evalu)
+    @ManyToOne(_ => Batch, batch => batch.evaluations, { onDelete: 'CASCADE', nullable: false })
     batch: Batch
 }

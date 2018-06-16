@@ -8,7 +8,7 @@ export default (state = [], action ) => {
   switch (action.type) {
 
     case GET_BATCH:
-    return action.payload
+    return [action.payload]
 
     case GET_BATCHES:
         return action.payload

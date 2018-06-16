@@ -1,11 +1,11 @@
 .batches {
-    /* width: 30%;
-    height: 50%; */
-	float: left;
-	/* margin: 1.33%; */
+    float: left;
+    max-width: 40%;
     border-radius: 10px 10px 10px 10px;
     border: 2px solid rgb(73, 199, 182);
     background: rgb(73, 199, 182);
+    margin: 2.5%;
+    float: left;
 }
 
 .batchName {
@@ -13,36 +13,45 @@
     text-align: center;
 }
 
+.batchPage .box {
+    max-width: 70%;
+    float: left;
+    text-align: center
+}
+
 .batchInfo {
     font-size: 1.6em;
     text-align: center;
 }
 
-.bachPage .box {
-    width: 50%;
-    text-align: center
-}
-
-.bachPage .batches {
-    width: 50%;
-    float: left;
-    text-align: center;
-}
 .box {
     width: 50%;
-    text-align: center
+    text-align: center;
+
 }
-/* .students {
-    width: 30%;
-    height: 50%;
-	float: left;
-	margin: 1.33%;
-    border-radius: 10px 10px 10px 10px;
-    border: 2px solid white;
-    padding: 0 0 15px 0;
+
+/* .batchesHolder {
+    width: 70%;
+    float: left;
+    text-align: center;
 } */
 
-/* .studentName.a:link {
+/* .box {
+    width: 50%;
+    text-align: center
+} */
+
+.students {
+    float: left;
+    min-width: 40%;
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid rgb(73, 199, 182);
+    background: rgb(73, 199, 182);
+    margin: 2.5%;
+    float: left;
+} 
+
+/*.studentName.a:link {
     font-style: black;
 }
 .studentName.a:visited {
@@ -57,14 +66,12 @@
 .studentInfo {
     font-size: 1.6em;
     text-align: center;
-}
-
-.deleteStudent {
-    width: 30%;
-    border-radius: 5px 5px 5px 5px;
-    margin-left: 35%;
-    margin-right: 35%;
 } */
+
+.batchDetailButton {
+    min-height: 30px;
+    border-radius: 5px 5px 5px 5px;
+}
 
 .progressionBar {
     max-width: 10%;
@@ -75,18 +82,19 @@
 }
 
 .percentageBar {
-    margin-left: 20px;
-    margin-right: auto;
+    max-width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .percentages {
     margin-left: 20px;
 }
 
-.batchPageButton {
-    height: 70px;
+.batchPageButtons {
     border-radius: 5px 5px 5px 5px;
-    padding: 20px;
+    text-align: center;
+    padding: 1%;
 }
 
 .batchPage {
@@ -96,4 +104,4 @@
     margin-right: auto;
     text-align: center
 
-}
+} 

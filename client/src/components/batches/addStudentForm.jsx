@@ -56,7 +56,7 @@ export default class AddStudentForm extends PureComponent {
 
 					<button 
 						type="submit"
-                        className="newBatchButton"
+                        className="batchDetailButton"
 					>
 						Create Student!
 					</button>

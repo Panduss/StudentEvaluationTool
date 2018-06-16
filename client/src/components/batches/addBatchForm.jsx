@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react'
-import {Link} from 'react-router-dom'
 import './newBatch.css'
 
 export default class AddBatchForm extends PureComponent {
@@ -26,7 +25,7 @@ export default class AddBatchForm extends PureComponent {
 						<input 
 						type="batchNumber" 
 						name="batchNumber" 
-						// className="signupInfo"
+						className="signupInfo"
 						placeholder="Batch number" 
 						id="batchNumber" 
 						value={this.state.batchNumber || ''} 
@@ -37,7 +36,7 @@ export default class AddBatchForm extends PureComponent {
 						<input 
 						type="startDate" 
 						name="startDate" 
-						// className="signupInfo"
+						className="signupInfo"
 						placeholder="Start date: MM/DD/YYYY" 
 						id="startDate" 
 						value={this.state.startDate || ''} 
@@ -48,7 +47,7 @@ export default class AddBatchForm extends PureComponent {
 						<input 
 						type="endDate" 
 						name="endDate" 
-						// className="signupInfo"
+						className="signupInfo"
 						placeholder="End date: MM/DD/YYYY" 
 						id="endDate" 
 						value={this.state.endDate || ''} 
@@ -57,11 +56,9 @@ export default class AddBatchForm extends PureComponent {
 
 					<button 
 						type="submit"
-						// className="newBatchButton"
-						// ><Link to={`/batches`}>
+						className="newBatchButton"
 						>
 						Create Batch!
-						{/* // </Link> */}
 					</button>
 				</div>
 			</form>

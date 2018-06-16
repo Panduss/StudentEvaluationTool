@@ -27,7 +27,7 @@ newBatch() {
   renderBatch = (batch) => {
 
     return (
-    <div key={batch.id} className="game-card">
+    <div key={batch.id}>
         <div className="batches">
             <Link
                 className="link"
@@ -52,24 +52,15 @@ newBatch() {
 
     return (
     <div className="batchPage">
-      <div>
-      {/* <button className="newBatchButton">
-        {/* <Link
-            to={`/batch/create`}>
-            Create a new Batch
-        </Link>
-      </button> */}
-      {/* <div className="newBatchButton">
-
-      </div> */}
-      <div className="batches">
-        {batches.map(batch => this.renderBatch(batch))}
-        </div>          
-        <div className="box">
-            <NewBatchPage />
-         </div>
+        <div>
+            <div className="box">
+                {batches.map(batch => this.renderBatch(batch))}
+            </div>          
+            <div className="box">
+                <NewBatchPage />
+            </div>
         </div>
-        </div>
+    </div>
     )
   }
 }

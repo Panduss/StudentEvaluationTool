@@ -46,25 +46,27 @@ class GetRandom extends PureComponent {
 
         const getRedYellow = getEvals.filter(student => student.lastEvaluation !== "green" )
         // no red or yellow => questions for greens!
-        const noRedYellow = getEvals.filter(student => student.lastEvaluation === "green")
+        const noRedYellow = getReds.push(getYellows)
+        //getEvals.filter(student => student.lastEvaluation === "green")
 
         const getRedGreen = getEvals.filter(student => student.lastEvaluation !== "yellow")
 
-        const getYellowGreen = getEvals.filter(student => student.lastEvaluation !== "red")
+        const getYellowGreen = getReds.push(getGreens)
+        //getEvals.filter(student => student.lastEvaluation !== "red")
 
-        console.log(getReds, "onlyReds here")
-        console.log(getYellows, "onlyYellows here")
-        console.log(getGreens, "onlyGreens here")     
-        console.log(getRedYellow, "onlyRedandYellow here")  
+        // console.log(getReds, "onlyReds here")
+        // console.log(getYellows, "onlyYellows here")
+        // console.log(getGreens, "onlyGreens here")     
+        // console.log(getRedYellow, "onlyRedandYellow here")  
         
-        console.log(noReds, "no Reds here")
-        console.log(noYellows, "no Yellows here")
-        console.log(noGreens, "no Greens here")     
-        console.log(noRedYellow, "no RedandYellow here") 
+        // console.log(noReds, "no Reds here")
+        // console.log(noYellows, "no Yellows here")
+        // console.log(noGreens, "no Greens here")     
+        // console.log(noRedYellow, "no RedandYellow here") 
         
         const classSize = getEvals.length
         console.log(classSize, "size")
-        const randNumb = Math.floor(Math.random() * classSize+1)
+        const randNumb = Math.floor(Math.random() * (classSize.toFixed(2)) +1.00)
         console.log(randNumb, "randNumb")
 
 
@@ -74,12 +76,12 @@ class GetRandom extends PureComponent {
         const yellowNum = classSize * 0.35
         const greenNum = classSize * 0.20
         const secondWall = redNum+yellowNum
-        console.log(redNum, "redNum")
-        console.log(yellowNum, "yellowNum")
-        console.log(greenNum, "greenNum")
-        console.log(secondWall, "secondWall")
+        // console.log(redNum, "redNum")
+        // console.log(yellowNum, "yellowNum")
+        // console.log(greenNum, "greenNum")
+        // console.log(secondWall, "secondWall")
 
-        console.log(redNum+yellowNum+greenNum, "meow")
+        // console.log(redNum+yellowNum+greenNum, "meow")
 
         if (randNumb <= redNum) {
             stud = randStud.filter(student => student.lastEvaluation === "red") 
@@ -87,7 +89,7 @@ class GetRandom extends PureComponent {
         if (randNumb <= secondWall && randNumb > redNum) {
             stud = randStud.filter(student => student.lastEvaluation === "yellow")
         }
-        if (randNumb <= classSize && randNumb > secondWall) {
+        if (randNumb <= greenNum && randNumb > secondWall) {
             stud = randStud.filter(student => student.lastEvaluation === "green")
         }
 

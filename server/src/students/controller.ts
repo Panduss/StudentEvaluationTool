@@ -40,9 +40,9 @@ export default class StudentController {
           }
 
     // @Authorized()
-    @Post('/batches/:batchId/students/')
+    @Post('/batches/:id/students')
     async createStudent(            
-        @Param('batchId') batchId: number,
+        @Param('id') batchId: number,
         @Body() body: Students,
     ){
         const batch = await Batch.findOne(batchId)

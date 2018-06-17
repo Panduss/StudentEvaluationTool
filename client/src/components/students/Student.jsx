@@ -11,8 +11,8 @@ class ShowOneStudent extends PureComponent {
 
   componentWillMount() {
     if (this.props.authenticated) {
-      this.props.showStudent()
-      this.props.showEvaluation()
+      // this.props.showStudent()
+      // this.props.showEvaluation()
     }
   }
 

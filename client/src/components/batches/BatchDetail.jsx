@@ -14,7 +14,7 @@ class BatchDetail extends PureComponent {
 
   componentWillMount() {
     if (this.props.authenticated) {
-      this.props.showBatch()
+      // this.props.showBatch(state.batchId)
     }
   }
 

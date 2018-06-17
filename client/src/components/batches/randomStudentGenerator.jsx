@@ -46,12 +46,12 @@ class GetRandom extends PureComponent {
 
         const getRedYellow = getEvals.filter(student => student.lastEvaluation !== "green" )
         // no red or yellow => questions for greens!
-        const noRedYellow = getReds.push(getYellows)
+        const noRedYellow = getEvals.filter(student => student.lastEvaluation === "green" )
         //getEvals.filter(student => student.lastEvaluation === "green")
 
         const getRedGreen = getEvals.filter(student => student.lastEvaluation !== "yellow")
 
-        const getYellowGreen = getReds.push(getGreens)
+        const getYellowGreen = getEvals.filter(student => student.lastEvaluation !== "red" )
         //getEvals.filter(student => student.lastEvaluation !== "red")
 
         // console.log(getReds, "onlyReds here")
@@ -65,9 +65,9 @@ class GetRandom extends PureComponent {
         // console.log(noRedYellow, "no RedandYellow here") 
         
         const classSize = getEvals.length
-        // console.log(classSize, "size")
+        console.log(classSize, "size")
         const randNumb = Math.floor(Math.random() * (classSize.toFixed(2)) +1.00)
-        // console.log(randNumb, "randNumb")
+        console.log(randNumb, "randNumb")
 
 
         ////// CALCULATING THE PERCENTAGES
@@ -89,7 +89,7 @@ class GetRandom extends PureComponent {
         if (randNumb <= secondWall && randNumb > redNum) {
             stud = randStud.filter(student => student.lastEvaluation === "yellow")
         }
-        if (randNumb <= greenNum && randNumb > secondWall) {
+        if (randNumb <= classSize && randNumb > secondWall) {
             stud = randStud.filter(student => student.lastEvaluation === "green")
         }
 
@@ -154,7 +154,7 @@ class GetRandom extends PureComponent {
 }
 
 const mapStateToProps = state => {
-    // console.log(state.randStud, "heelooo")
+    console.log(state.randStud, "heelooo")
     return {
     authenticated: state.currentUser !== null,
     randStud: state.students,

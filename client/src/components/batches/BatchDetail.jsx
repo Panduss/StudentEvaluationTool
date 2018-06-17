@@ -12,7 +12,7 @@ import './batch.css'
 
 class BatchDetail extends PureComponent {
 
-  componentMount() {
+  componentWillMount() {
 
     const batchId = this.props.match.params.batchId
 

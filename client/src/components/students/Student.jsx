@@ -26,7 +26,7 @@ class ShowOneStudent extends PureComponent {
     
       console.log(batchId, studentId, "batchId+studentId")
 
-		this.props.postNewEvaluation(studentId, batchId, data.colour, data.remarks)
+		this.props.postNewEvaluation(data.studentId, data.batchId, data.colour, data.remarks)
 
 		// if(data) return (
 		// 	<Redirect to="/batches/batchId" />
@@ -74,7 +74,7 @@ class ShowOneStudent extends PureComponent {
 
   renderOneStudent = (student) => {
 
-    console.log(student, "stuuudent")
+    // console.log(student, "stuuudent")
 
     return (
 
@@ -96,7 +96,7 @@ class ShowOneStudent extends PureComponent {
   render() {
     const { batchId, studentId, evaluations, students, authenticated} = this.props
 
-    console.log(this.props, "propospob")
+    // console.log(this.props, "propospob")
 
     if (!authenticated) return (
 			<Redirect to="/login" />
@@ -137,8 +137,8 @@ const mapStateToProps = (state) => {
     authenticated: state.currentUser !== null,
     students: state.students,
     evaluations: state.evaluations,
-    // batchId: (window.location.href).split('/')[4],
-		// studentId: ((window.location.href).split('/').pop())
+    batchId: (window.location.href).split('/')[4],
+		studentId: ((window.location.href).split('/').pop())
   
   }
 }

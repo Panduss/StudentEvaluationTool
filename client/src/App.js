@@ -8,7 +8,7 @@ import showOneStudent from './components/students/Student'
 import LogoutPage from './components/logout/LogoutPage'
 import TopBar from './components/layout/TopBar'
 import NewBatchPage from './components/batches/addBatchPage'
-import NewStudentPage from './components/batches/addStudentPage'
+// import NewStudentPage from './components/batches/addStudentPage'
 import './App.css';
 
 class App extends Component {
@@ -27,7 +27,7 @@ class App extends Component {
             <Route exact path="/batch/create" component={NewBatchPage} />
             <Route exact path="/batches/:batchId" component={BatchDetail} />
             <Route exact path="/batches/:batchId/students/:studentId" component={showOneStudent} />
-            <Route exact path="/batches/:batchId/students" component={NewStudentPage} />
+            {/* <Route exact path="/batches/:batchId/students" component={NewStudentPage} /> */}
             <Route exact path="/" render={ () => <Redirect to="/login" /> } />
           </main>
           </div>

@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {showBatches, showBatch, newBatch} from '../../actions/batches'
+import {showBatches, showBatch, newBatch, deleteBatch} from '../../actions/batches'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import NewBatchPage from './addBatchPage'
@@ -25,6 +25,10 @@ newBatch() {
     this.props.addBatch()
 }
 
+deleteBatch(batchId) {
+    this.props.deleteBatch(batchId)
+  }
+
   renderBatch = (batch) => {
 
     return (
@@ -37,6 +41,7 @@ newBatch() {
                 <p className="batchName">Batch #{batch.batchNumber}</p>
             </Link>
                 <p className="batchInfo">Date: {batch.startDate} - {batch.endDate}</p>
+                <button className="batchDetailButton" onClick={() => this.deleteBatch(batch.id)}>Delete Batch</button>
         </div>
     </div>
 )}
@@ -72,4 +77,4 @@ const mapStateToProps = state => ({
     null : Object.values(state.batches).sort((a, b) => a.id - b.id)
 })
 
-export default connect(mapStateToProps, {showBatches, showBatch, newBatch})(BatchList)
+export default connect(mapStateToProps, {showBatches, showBatch, newBatch, deleteBatch})(BatchList)

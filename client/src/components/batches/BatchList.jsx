@@ -9,10 +9,8 @@ class BatchList extends PureComponent {
 
 
 componentWillMount() {
-    this.props.showBatches()
         if (this.props.authenticated) {
-        if (this.props.batches === null) this.props.showBatches()
-        if (this.props.users === null) this.props.getUsers()
+        this.props.showBatches()
     }
 }
 
@@ -65,10 +63,13 @@ newBatch() {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+    console.log(state.batches, "batches")
+    return {
     authenticated: state.currentUser !== null,
-    batches: state.batches === null ?
-    null : Object.values(state.batches).sort((a, b) => a.id - b.id)
-})
+    batches: state.batches 
+    // === null ? null : Object.values(state.batches).sort((a, b) => a.id - b.id)
+    }
+}
 
 export default connect(mapStateToProps, {showBatches, showBatch, newBatch})(BatchList)

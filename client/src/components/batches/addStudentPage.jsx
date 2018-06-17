@@ -2,11 +2,12 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {newStudent} from '../../actions/student'
 import AddStudentForm from './addStudentForm'
-import './newBatch.css'
+// import './newBatch.css'
 
 class NewStudentPage extends PureComponent {
     
     handleSubmit = (data) => {
+		const {batchId} = this.props
 		this.props.postNewStudent(data.firstName, data.lastName, data.profilePic, data.lastEvaluation, data.batchId)
 	}
 
@@ -25,7 +26,7 @@ class NewStudentPage extends PureComponent {
 
 const mapStateToProps = function (state) {
 	return {
-        batchId : ((window.location.href).split('/')[4]),
+        batchId: state.batches.id,
         batches: state.batches
 	}
 }

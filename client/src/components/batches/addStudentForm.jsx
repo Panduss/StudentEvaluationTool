@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import './newBatch.css'
+// import './newBatch.css'
 
 export default class AddStudentForm extends PureComponent {
 	state = {}

@@ -152,7 +152,7 @@ class GetRandom extends PureComponent {
 }
 
 const mapStateToProps = state => {
-    console.log(state.randStud, "heelooo")
+    // console.log(state.randStud, "heelooo")
     return {
     authenticated: state.currentUser !== null,
     randStud: state.students,

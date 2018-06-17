@@ -34,17 +34,17 @@ class BatchDetail extends PureComponent {
     const { students } = this.props
 
     const getEvals = students.filter(student => student.lastEvaluation !== "white")
-    console.log(getEvals, "evals?")
+    // console.log(getEvals, "evals?")
     const getRed = getEvals.filter(student => student.lastEvaluation === "red")
-    console.log(getRed, "reds?")
+    // console.log(getRed, "reds?")
     const getYellow = getEvals.filter(student => student.lastEvaluation === "yellow")
-    console.log(getYellow, "yellows?")
+    // console.log(getYellow, "yellows?")
     const getGreen = getEvals.filter(student => student.lastEvaluation === "green")
-    console.log(getGreen, "greens?")
+    // console.log(getGreen, "greens?")
 
     let bar = Array.prototype.concat.apply([], [getRed, getYellow, getGreen])
 
-    console.log(bar, "showmeabar")
+    // console.log(bar, "showmeabar")
 
     const redPercent = (getRed.length/getEvals.length * 100).toFixed()
     const yellowPercent = (getYellow.length/getEvals.length * 100).toFixed()
@@ -76,7 +76,7 @@ class BatchDetail extends PureComponent {
   }
 
   renderStudent = (student) => {
-    const { batchId } = this.props
+    const { batch } = this.props
 
     return (
         <div 
@@ -84,7 +84,7 @@ class BatchDetail extends PureComponent {
         className="students" style={{backgroundColor: `${student.lastEvaluation}`}}>
             <Link
                 className="link"
-                to={`/batches/${batchId}/students/${student.id}`}
+                to={`students/${student.id}`}
                 onClick={() => this.showStudent(student.id)}
                 >
                 <img className="studentPicture" src={student.profilePic} alt={student.firstName} />
@@ -126,11 +126,11 @@ class BatchDetail extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log(((window.location.href).split('/')[4]), 'halo')
-  console.log(((window.location.href).split('/')), 'halo')
+  // console.log(((window.location.href).split('/')[4]), 'halo')
+  // console.log(((window.location.href).split('/')), 'halo')
   return {
   authenticated: state.currentUser !== null,
-  batchId : ((window.location.href).split('/')[4]),
+  batch: state.batches,
   students: state.students
 
   }

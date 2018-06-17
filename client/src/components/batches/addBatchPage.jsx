@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {newBatch} from '../../actions/batches'
 import AddBatchForm from './addBatchForm'
-import './newBatch.css'
+// import './newBatch.css'
 
 class NewBatchPage extends PureComponent {
 	handleSubmit = (data) => {

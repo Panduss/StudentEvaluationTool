@@ -1,6 +1,5 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne } from 'typeorm'
 import Student from '../students/entity'
-import Batch from '../batches/entity'
 
 type Colour = "red" | "yellow" | "green"
 
@@ -23,7 +22,4 @@ export default class Evaluations extends BaseEntity {
 
     @ManyToOne(_ => Student, student => student.evaluations, { onDelete: 'CASCADE', nullable: false })
     student: Student
-
-    @ManyToOne(_ => Batch, batch => batch.evaluations, { onDelete: 'CASCADE', nullable: false })
-    batch: Batch
 }

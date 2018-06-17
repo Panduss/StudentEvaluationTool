@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import {showEvaluation, newEvaluation} from '../../actions/evaluation'
 import AddEvaluationForm from './addEvaluationForm'
-import {baseUrl} from '../../constants'
+// import {baseUrl} from '../../constants'
 import './student.css'
 
 class ShowOneStudent extends PureComponent {
@@ -17,7 +17,7 @@ class ShowOneStudent extends PureComponent {
   }
 
   handleSubmit = (data) => {
-		const {batchId, studentId} = this.props
+		const {studentId} = this.props
 
 		this.props.postNewEvaluation(data.studentId, data.batchId, data.colour, data.remarks)
 
@@ -34,11 +34,11 @@ class ShowOneStudent extends PureComponent {
     const { evaluations } = this.props
 
     const getRed = evaluations.filter(evalu => evalu.colour === "red")
-    console.log(getRed, "reds?")
+    // console.log(getRed, "reds?")
     const getYellow = evaluations.filter(evalu => evalu.colour === "yellow")
-    console.log(getYellow, "yellows?")
+    // console.log(getYellow, "yellows?")
     const getGreen = evaluations.filter(evalu => evalu.colour === "green")
-    console.log(getGreen, "greens?")
+    // console.log(getGreen, "greens?")
 
     const redPercent = (getRed.length/evaluations.length * 100).toFixed()
     const yellowPercent = (getYellow.length/evaluations.length * 100).toFixed()
@@ -125,8 +125,8 @@ console.log((window.location.href).split('/')[4], "meowmeow")
     authenticated: state.currentUser !== null,
     students: state.students,
     evaluations: state.evaluations,
-    batchId : (window.location.href).split('/')[4],
-		studentId: ((window.location.href).split('/').pop())
+    batchId : state.batches.id,
+		studentId: state.students.id
   
   }
 }

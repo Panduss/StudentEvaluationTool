@@ -1,5 +1,5 @@
 import {Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany} from "typeorm";
-import Batch from "../batches/entity";
+import Batches from "../batches/entity";
 import Evaluations from "../evaluation/entity";
 import { IsString } from "class-validator";
 
@@ -27,8 +27,8 @@ export default class Students extends BaseEntity  {
     @Column('text', { default: 'white' })
     lastEvaluation: Colour
     
-    @ManyToOne(_ => Batch, batch => batch.students, { onDelete: 'CASCADE' })
-    batch: Batch
+    @ManyToOne(_ => Batches, batches => batches.students, { onDelete: 'CASCADE' })
+    batches: Batches
 
     // @Column({ name: 'batch' })
     // batchNumber: string

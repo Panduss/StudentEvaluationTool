@@ -1,15 +1,14 @@
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm'
 import Student from '../students/entity'
-import Evaluations from '../evaluation/entity'
 
 @Entity()
-export default class Batch extends BaseEntity {
+export default class Batches extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id?: number
 
     @Column('text', { nullable: true })
-    batchNumber: number
+    batchNumber: string
 
     @Column('text', { nullable: true })
     startDate: string
@@ -17,9 +16,6 @@ export default class Batch extends BaseEntity {
     @Column('text', { nullable: true })
     endDate: string
 
-    @OneToMany(_ => Student, student => student.batch, {eager:true})
+    @OneToMany(_ => Student, student => student.batches, {eager:true})
     students: Student[]
-
-    @OneToMany(_ => Evaluations, evaluations => evaluations.batch, {eager:true})
-    evaluations: Evaluations[]
 }

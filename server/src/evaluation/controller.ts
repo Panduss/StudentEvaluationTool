@@ -1,7 +1,7 @@
 import { JsonController, Get, Param, Body, Post, NotFoundError, BadRequestError } from 'routing-controllers'
 import Students from '../students/entity'
 import Evaluations from './entity';
-import Batch from '../batches/entity'
+// import Batch from '../batches/entity'
 
 @JsonController()
 export default class EvaluController {
@@ -17,31 +17,25 @@ export default class EvaluController {
       return student.evaluations
     }
 
-    @Get('/batches/:batchId/students/:studentId/evaluations')
+    @Get('/students/:id/evaluations')
     async getAllEvaluations(
-      @Param('studentId') studentId: number,
-      @Param('batchId') batchId: number
+      @Param('id') studentId: number,
     ) {
         
-        const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)
         if(!student) throw new BadRequestError(`Student not found`)
-        if(!batch) throw new NotFoundError('Student does not exist')
   
       return student.evaluations
     }
 
     // @Authorized()
-    @Post('/batches/:batchId/students/:studentId/evaluations')
+    @Post('/evaluations')
     async createEvaluation(
-      @Param('studentId') studentId: number,
-      @Param('batchId') batchId: number,
+      // @Param('id') studentId: number,
       @Body() body: Evaluations
     ) {
-        const batch = await Batch.findOne(batchId)
-        const student = await Students.findOne(studentId)
-        if(!student) throw new NotFoundError('Student does not exist')
-        if(!batch) throw new NotFoundError('Batch does not exist')
+        // const student = await Students.findOne(studentId)
+        // if(!student) throw new NotFoundError('Student does not exist')
     
         return Evaluations.create(body).save()
     }

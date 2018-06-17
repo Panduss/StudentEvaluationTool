@@ -1,54 +1,34 @@
 import { JsonController, Get, Param, Put, Body, Post, Delete, NotFoundError, HttpCode, Authorized } from 'routing-controllers'
-import Batch from './entity'
+import Batches from './entity'
 
 @JsonController()
-export default class BatchController {
+export default class BatchesController {
 
     // @Authorized()
     @Get('/batches')
-    allBatches() {
-        return Batch.find()
+    getBatches() {
+      return Batches.find()
     }
     
-    // @Authorized()
-    @Get('/batches/:id')
-    async getBatchById(
-        @Param('id') id: number
+
+    @Get('/batches/:id([0-9]+)')
+    @HttpCode(200)
+    async getBatch(
+      @Param('id') batchId: number
     ) {
-        const batchById = await Batch.findOne(id)
-        return batchById
+      const batch = await Batches.findOne(batchId)
+      if (!batch) throw new NotFoundError('Batch does not exist!')
+      return batch
     }
 
     // @Authorized()
     @Post('/batches')
     @HttpCode(201)
     async createBatch(
-        @Body() body: Batch 
-    ){
-        return Batch.create(body).save()
-    }
-
-    @Authorized()
-    @Put('/batches/:id')
-    async editBatch(
-        @Param('id') id: number,
-        @Body() update: Partial<Batch>
+      @Body() batches: Batches,
     ) {
-        const batch = await Batch.findOne(id)
-        if (!batch) throw new NotFoundError("Batch doesn't exist")
-
-        return Batch.merge(batch, update).save()
+      const newBatch = await Batches.create(batches).save()
+      return newBatch
     }
 
-    @Authorized()
-    @Delete('/batches/:id')
-    async deleteBatch(
-        @Param('id') id: number
-    ) {
-        const batch = await Batch.findOne(id)
-        if (!batch) throw new NotFoundError("Batch doesn't exist")
-
-        if (batch) Batch.delete(id)
-        return 'Batch deleted'
-    }
-}
+  }

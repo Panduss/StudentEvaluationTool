@@ -10,16 +10,23 @@ import './student.css'
 class ShowOneStudent extends PureComponent {
 
   componentWillMount() {
+    const studentId = this.props.match.params.studentId
+    const batchId = this.props.match.params.batchId
+
     if (this.props.authenticated) {
-      // this.props.showStudent()
-      // this.props.showEvaluation()
+      this.props.showStudent(studentId)
+      this.props.showEvaluation(studentId)
     }
   }
 
   handleSubmit = (data) => {
-		const {batchId, studentId} = this.props
+    const studentId = this.props.match.params.studentId
+    const batchId = this.props.match.params.batchId
+    // const {batchId, studentId} = this.props
+    
+      console.log(batchId, studentId, "batchId+studentId")
 
-		this.props.postNewEvaluation(data.studentId, data.batchId, data.colour, data.remarks)
+		this.props.postNewEvaluation(studentId, batchId, data.colour, data.remarks)
 
 		// if(data) return (
 		// 	<Redirect to="/batches/batchId" />
@@ -28,17 +35,18 @@ class ShowOneStudent extends PureComponent {
 
   showEvaluation(studentId) {
     this.props.showEvaluation(studentId)
+    
   }
 
   calculatePercent() {
     const { evaluations } = this.props
 
     const getRed = evaluations.filter(evalu => evalu.colour === "red")
-    console.log(getRed, "reds?")
+    // console.log(getRed, "reds?")
     const getYellow = evaluations.filter(evalu => evalu.colour === "yellow")
-    console.log(getYellow, "yellows?")
+    // console.log(getYellow, "yellows?")
     const getGreen = evaluations.filter(evalu => evalu.colour === "green")
-    console.log(getGreen, "greens?")
+    // console.log(getGreen, "greens?")
 
     const redPercent = (getRed.length/evaluations.length * 100).toFixed()
     const yellowPercent = (getYellow.length/evaluations.length * 100).toFixed()
@@ -66,6 +74,8 @@ class ShowOneStudent extends PureComponent {
 
   renderOneStudent = (student) => {
 
+    console.log(student, "stuuudent")
+
     return (
 
       <div>
@@ -85,6 +95,8 @@ class ShowOneStudent extends PureComponent {
 
   render() {
     const { batchId, studentId, evaluations, students, authenticated} = this.props
+
+    console.log(this.props, "propospob")
 
     if (!authenticated) return (
 			<Redirect to="/login" />
@@ -120,13 +132,13 @@ class ShowOneStudent extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-console.log((window.location.href).split('/')[4], "meowmeow")
+// console.log((window.location.href).split('/')[4], "meowmeow")
   return {
     authenticated: state.currentUser !== null,
     students: state.students,
     evaluations: state.evaluations,
-    batchId : (window.location.href).split('/')[4],
-		studentId: ((window.location.href).split('/').pop())
+    // batchId: (window.location.href).split('/')[4],
+		// studentId: ((window.location.href).split('/').pop())
   
   }
 }

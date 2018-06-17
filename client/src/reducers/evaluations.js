@@ -4,7 +4,7 @@ export default (state = [], action ) => {
   switch (action.type) {
 
     case GET_EVALUATION:
-      return action.payload
+      return [action.payload]
 
     case ADD_EVALUATION:
         return [...state, action.payload]

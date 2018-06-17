@@ -7,15 +7,15 @@ import Batch from '../batches/entity'
 export default class EvaluController {
 
     // @Authorized()
-    @Get('/students/:id/evaluations')
-    async getEvaluations(
-      @Param('id') studentId: number
-    ) {
-      const student = await Students.findOne(studentId)
-      if(!student) throw new BadRequestError(`Student not found`)
+    // @Get('/students/:studentId/evaluations')
+    // async getEvaluations(
+    //   @Param('studentId') studentId: number
+    // ) {
+    //   const student = await Students.findOne(studentId)
+    //   if(!student) throw new BadRequestError(`Student not found`)
   
-      return student.evaluations
-    }
+    //   return student.evaluations
+    // }
 
     @Get('/batches/:batchId/students/:studentId/evaluations')
     async getAllEvaluations(
@@ -40,6 +40,7 @@ export default class EvaluController {
     ) {
         const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)
+        console.log(batch, student, "batchandstudentfrom thebackend")
         if(!student) throw new NotFoundError('Student does not exist')
         if(!batch) throw new NotFoundError('Batch does not exist')
     

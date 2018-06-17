@@ -65,9 +65,9 @@ class GetRandom extends PureComponent {
         // console.log(noRedYellow, "no RedandYellow here") 
         
         const classSize = getEvals.length
-        console.log(classSize, "size")
+        // console.log(classSize, "size")
         const randNumb = Math.floor(Math.random() * (classSize.toFixed(2)) +1.00)
-        console.log(randNumb, "randNumb")
+        // console.log(randNumb, "randNumb")
 
 
         ////// CALCULATING THE PERCENTAGES
@@ -154,7 +154,7 @@ class GetRandom extends PureComponent {
 }
 
 const mapStateToProps = state => {
-    console.log(state.randStud, "heelooo")
+    // console.log(state.randStud, "heelooo")
     return {
     authenticated: state.currentUser !== null,
     randStud: state.students,

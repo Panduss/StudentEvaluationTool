@@ -34,8 +34,6 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
 
     const studentId = (window.location.href).split('/').pop()
     const batchId = ((window.location.href).split('/')[4])
-    // const studentId = this.props.match.params.studentId
-    // const batchId = this.props.match.params.batchId
 
     console.log(studentId, batchId, "studentandbatch")
   
@@ -49,17 +47,27 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
             type: ADD_EVALUATION,
             payload: result.body
             })
+            
+            request
+            .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
+            .send({ studentId, batch: batchId, lastEvaluation: colour})
+            .then(result => {
+                dispatch({
+                    type: LAST_EVAL_UPD,
+                    payload: result.body
+                })
+            }) 
         })
 
-    request
-        .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
-        .send({ studentId, batch: batchId, lastEvaluation: colour})
-        .then(result => {
-            dispatch({
-                type: LAST_EVAL_UPD,
-                payload: result.body
-            })
-        }) 
+    // request
+    //     .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
+    //     .send({ studentId, batch: batchId, lastEvaluation: colour})
+    //     .then(result => {
+    //         dispatch({
+    //             type: LAST_EVAL_UPD,
+    //             payload: result.body
+    //         })
+    //     }) 
 .catch(err => {console.error(err)})
 }
 

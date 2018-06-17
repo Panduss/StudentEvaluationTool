@@ -73,6 +73,7 @@ export default class StudentController {
         @Param('studentId') studentId: number,
         @Body() update: Partial<Students>
     ) {
+        console.log(batchId, studentId, "studentController")
         const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)
         if (!batch) throw new NotFoundError("Batch doesn't exist")

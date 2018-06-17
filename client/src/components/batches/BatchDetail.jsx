@@ -95,7 +95,7 @@ class BatchDetail extends PureComponent {
             </Link>
             <p className="studentName">{student.firstName} {student.lastName}</p>
             <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>
-            <button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>EXTERMINATE</button>
+            <button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>Delete Student</button>
     </div>
     )}
 

@@ -40,7 +40,7 @@ export default class EvaluController {
     ) {
         const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)
-        console.log(batch, student, "batchandstudentfrom thebackend")
+        console.log(batchId, studentId, "batchandstudentfrom thebackend")
         if(!student) throw new NotFoundError('Student does not exist')
         if(!batch) throw new NotFoundError('Batch does not exist')
     

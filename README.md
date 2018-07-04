@@ -7,9 +7,9 @@ Quickstart 🚀
 
 ‼️Database is set up in postgres ‼️
 
-  clone this repo
-  run yarn on client & server
-  terminal, in server folder: "nodemon ."
-  terminal, in client folder: "yarn start" 
+  clone this repo < /br>
+  run yarn on client & server < /br>
+  terminal, in server folder: "nodemon ." < /br>
+  terminal, in client folder: "yarn start"  < /br>
 
 happy hacking! 👌

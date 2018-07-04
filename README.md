@@ -1,4 +1,4 @@
-Class Tracker
+Class Tracker <br>
 A tool to track classes and evaluations
 
 IN PROGRESS ✌️

@@ -7,15 +7,15 @@ import Batch from '../batches/entity'
 export default class EvaluController {
 
     // @Authorized()
-    @Get('/students/:id/evaluations')
-    async getEvaluations(
-      @Param('id') studentId: number
-    ) {
-      const student = await Students.findOne(studentId)
-      if(!student) throw new BadRequestError(`Student not found`)
+    // @Get('/students/:studentId/evaluations')
+    // async getEvaluations(
+    //   @Param('studentId') studentId: number
+    // ) {
+    //   const student = await Students.findOne(studentId)
+    //   if(!student) throw new BadRequestError(`Student not found`)
   
-      return student.evaluations
-    }
+    //   return student.evaluations
+    // }
 
     @Get('/batches/:batchId/students/:studentId/evaluations')
     async getAllEvaluations(
@@ -26,7 +26,7 @@ export default class EvaluController {
         const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)
         if(!student) throw new BadRequestError(`Student not found`)
-        if(!batch) throw new NotFoundError('Student does not exist')
+        if(!batch) throw new NotFoundError('Batch does not exist')
   
       return student.evaluations
     }
@@ -36,13 +36,29 @@ export default class EvaluController {
     async createEvaluation(
       @Param('studentId') studentId: number,
       @Param('batchId') batchId: number,
-      @Body() body: Evaluations
+      @Body() evaluation: Evaluations
     ) {
         const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)
+        console.log(batchId, studentId, "batchandstudentfrom thebackend")
         if(!student) throw new NotFoundError('Student does not exist')
         if(!batch) throw new NotFoundError('Batch does not exist')
     
-        return Evaluations.create(body).save()
+        return Evaluations.create(evaluation).save()
     }
+
+    // @Post('/batches/:batchId/students/:studentId/evaluations')
+    // async createEvaluation(
+    //   @Param('studentId') studentId: number,
+    //   @Param('batchId') batchId: number,
+    //   @Body() evaluation: Evaluations
+    // ) {
+    //     const batch = await Batch.findOne(batchId)
+    //     const student = await Students.findOne(studentId)
+    //     console.log(batch, student, "batchandstudentfrom thebackend")
+    //     if(!student) throw new NotFoundError('Student does not exist')
+    //     if(!batch) throw new NotFoundError('Batch does not exist')
+    
+    //     return Evaluations.create(evaluation).save()
+    // }
 }

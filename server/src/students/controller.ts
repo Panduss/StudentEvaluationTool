@@ -40,9 +40,9 @@ export default class StudentController {
           }
 
     // @Authorized()
-    @Post('/batches/:batchId/students/')
+    @Post('/batches/:id/students')
     async createStudent(            
-        @Param('batchId') batchId: number,
+        @Param('id') batchId: number,
         @Body() body: Students,
     ){
         const batch = await Batch.findOne(batchId)
@@ -66,18 +66,35 @@ export default class StudentController {
 
 
     // // @Authorized()
-    @Put('/students/:id')
+    @Put('/batches/:batchId/students/:studentId')
     async editStudent(
         // @Param('batchId') batchId: number,
-        @Param('id') studentId: number,
+        @Param('batchId') batchId: number,
+        @Param('studentId') studentId: number,
         @Body() update: Partial<Students>
     ) {
-        // const batch = await Batch.findOne(batchId)
+        console.log(batchId, studentId, "studentController")
+        const batch = await Batch.findOne(batchId)
         const student = await Students.findOne(studentId)
-        // if (!batch) throw new NotFoundError("Batch doesn't exist")
-        if (!student) throw new NotFoundError("Batch doesn't exist")
+        if (!batch) throw new NotFoundError("Batch doesn't exist")
+        if (!student) throw new NotFoundError("Student doesn't exist")
 
         return Students.merge(student, update).save()
     }
+
+    // @Put('/batches/:batchId/students/:studentId')
+    // async editStudent(
+    //     // @Param('batchId') batchId: number,
+    //     @Param('batchId') batchId: number,
+    //     @Param('studentId') studentId: number,
+    //     @Body() update: Partial<Students>
+    // ) {
+    //     const batch = await Batch.findOne(batchId)
+    //     const student = await Students.findOne(studentId)
+    //     if (!batch) throw new NotFoundError("Batch doesn't exist")
+    //     if (!student) throw new NotFoundError("Student doesn't exist")
+
+    //     return Students.merge(student, update).save()
+    // }
 
 }

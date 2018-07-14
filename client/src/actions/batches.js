@@ -6,15 +6,16 @@ import {isExpired} from '../jwt'
 export const GET_BATCHES = 'GET_BATCHES'
 export const GET_BATCH = 'GET_BATCH'
 export const GET_BATCH_ID = 'GET_BATCH_ID'
-export const ADD_BATCH= 'ADD_BATCH'
+export const ADD_BATCH = 'ADD_BATCH'
+export const DELETE_BATCH = "DELETE_BATCH"
 
 export const showBatch = (batchId) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
     
-  
     if (isExpired(jwt)) return dispatch(logout())
+    console.log(batchId, "batchIdIDIDID")
   
     request
       .get(`${baseUrl}/batches/${batchId}`)
@@ -63,4 +64,19 @@ export const showBatches = () => (dispatch, getState) => {
         })
       })
       .catch(err => console.error(err))
+  }
+
+  export const deleteBatch = (id) => (dispatch, getState) => {
+    const state = getState()
+    const jwt = state.currentUser.jwt
+
+  if (isExpired(jwt)) return dispatch(logout())
+    
+    request
+    .delete(`${baseUrl}/batches/${id}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(response => dispatch({
+      type: DELETE_BATCH,
+      payload: id
+    }))
   }

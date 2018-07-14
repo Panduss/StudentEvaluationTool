@@ -8,13 +8,16 @@ import {Redirect, Link} from 'react-router-dom'
 import NewStudentPage from './addStudentPage'
 import './batch.css'
 
-
+// const batchId = this.props.match.params.batchId
 
 class BatchDetail extends PureComponent {
 
   componentWillMount() {
+
+    const batchId = this.props.match.params.batchId
+
     if (this.props.authenticated) {
-      this.props.showBatch()
+      this.props.showBatch(batchId)
     }
   }
 
@@ -34,17 +37,17 @@ class BatchDetail extends PureComponent {
     const { students } = this.props
 
     const getEvals = students.filter(student => student.lastEvaluation !== "white")
-    console.log(getEvals, "evals?")
+    // console.log(getEvals, "evals?")
     const getRed = getEvals.filter(student => student.lastEvaluation === "red")
-    console.log(getRed, "reds?")
+    // console.log(getRed, "reds?")
     const getYellow = getEvals.filter(student => student.lastEvaluation === "yellow")
-    console.log(getYellow, "yellows?")
+    // console.log(getYellow, "yellows?")
     const getGreen = getEvals.filter(student => student.lastEvaluation === "green")
-    console.log(getGreen, "greens?")
+    // console.log(getGreen, "greens?")
 
     let bar = Array.prototype.concat.apply([], [getRed, getYellow, getGreen])
 
-    console.log(bar, "showmeabar")
+    // console.log(bar, "showmeabar")
 
     const redPercent = (getRed.length/getEvals.length * 100).toFixed()
     const yellowPercent = (getYellow.length/getEvals.length * 100).toFixed()
@@ -75,8 +78,9 @@ class BatchDetail extends PureComponent {
     )
   }
 
-  renderStudent = (student) => {
-    const { batchId } = this.props
+  renderStudent = (student, batches) => {
+   const batchId = batches[0].id
+   console.log(batchId, "batcheeees")
 
     return (
         <div 
@@ -91,12 +95,12 @@ class BatchDetail extends PureComponent {
             </Link>
             <p className="studentName">{student.firstName} {student.lastName}</p>
             <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>
-            <button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>EXTERMINATE</button>
+            <button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>Delete Student</button>
     </div>
     )}
 
   render() {
-    const {students, authenticated} = this.props
+    const {students, batches, authenticated} = this.props
 
     if (!authenticated) return (
 			<Redirect to="/login" />
@@ -114,7 +118,7 @@ class BatchDetail extends PureComponent {
         </div>
         <div className="batchPage">
             <div className="box">
-                {students.map(student => this.renderStudent(student))} 
+                {students.map(student => this.renderStudent(student, batches))} 
             </div>
             <div className="box">
                 <NewStudentPage />
@@ -126,20 +130,12 @@ class BatchDetail extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log(((window.location.href).split('/')[4]), 'halo')
-  console.log(((window.location.href).split('/')), 'halo')
   return {
   authenticated: state.currentUser !== null,
-  batchId : ((window.location.href).split('/')[4]),
-  students: state.students
+  students: state.students,
+  batches: state.batches
 
   }
 }
 
 export default connect(mapStateToProps, { showBatch, showStudent, showEvaluation, deleteStudent })(BatchDetail)
-
-
-
-// console.log(redPercent, "whytho1")
-// console.log(yellowPercent, "whytho2")
-// console.log(greenPercent, "whytho3")

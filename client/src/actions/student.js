@@ -11,18 +11,20 @@ export const ADD_STUDENT = "ADD_STUDENT"
 export const DELETE_STUDENT = "DELETE_STUDENT"
 
 
-export const showStudent = (id) => (dispatch, getState) => {
+export const showStudent = (studentId) => (dispatch, getState) => {
     const state = getState()
     if (!state.currentUser) return null
     const jwt = state.currentUser.jwt
      
     const batchId = ((window.location.href).split('/')[4])
-    console.log((window.location.href).split('/'))
+    // console.log((window.location.href).split('/'))
+
+    console.log(batchId, studentId, "idsssss")
   
     if (isExpired(jwt)) return dispatch(logout())
   
     request
-      .get(`${baseUrl}/batches/${batchId}/students/${id}`)
+      .get(`${baseUrl}/batches/${batchId}/students/${studentId}`)
       .set('Authorization', `Bearer ${jwt}`)
       .then(result => 
         dispatch({
@@ -31,14 +33,14 @@ export const showStudent = (id) => (dispatch, getState) => {
         }
     ))
     request
-    .get(`${baseUrl}/students/${id}/evaluations`)
-    .set('Authorization', `Bearer ${jwt}`)
-    .then(result => 
-        dispatch({
-            type: GET_EVALUATION,
-            payload: result.body
-        })
-      )
+      .get(`${baseUrl}/batches/${batchId}/students/${studentId}/evaluations`)
+      .set('Authorization', `Bearer ${jwt}`)
+      .then(result => 
+          dispatch({
+              type: GET_EVALUATION,
+              payload: result.body
+          })
+        )
   .catch(err => console.error(err))
 }
 

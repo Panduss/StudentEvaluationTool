@@ -17,7 +17,7 @@ export const showStudent = (studentId) => (dispatch, getState) => {
     const jwt = state.currentUser.jwt
      
     const batchId = ((window.location.href).split('/')[4])
-    console.log((window.location.href).split('/'))
+    // console.log((window.location.href).split('/'))
 
     console.log(batchId, studentId, "idsssss")
   
@@ -33,14 +33,14 @@ export const showStudent = (studentId) => (dispatch, getState) => {
         }
     ))
     request
-    .get(`${baseUrl}/batches/${batchId}/students/${studentId}/evaluations`)
-    .set('Authorization', `Bearer ${jwt}`)
-    .then(result => 
-        dispatch({
-            type: GET_EVALUATION,
-            payload: result.body
-        })
-      )
+      .get(`${baseUrl}/batches/${batchId}/students/${studentId}/evaluations`)
+      .set('Authorization', `Bearer ${jwt}`)
+      .then(result => 
+          dispatch({
+              type: GET_EVALUATION,
+              payload: result.body
+          })
+        )
   .catch(err => console.error(err))
 }
 

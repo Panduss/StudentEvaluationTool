@@ -49,14 +49,14 @@ export const LAST_EVAL_UPD = "LAST_EVAL_UPD"
             })
             
             request
-            .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
-            .send({ studentId, batch: batchId, lastEvaluation: colour})
-            .then(result => {
-                dispatch({
-                    type: LAST_EVAL_UPD,
-                    payload: result.body
-                })
-            }) 
+                .put(`${baseUrl}/batches/${batchId}/students/${studentId}`)
+                .send({ studentId, batch: batchId, lastEvaluation: colour})
+                .then(result => {
+                    dispatch({
+                        type: LAST_EVAL_UPD,
+                        payload: result.body
+                    })
+                 }) 
         })
 
     // request

@@ -4,14 +4,12 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import {showEvaluation, newEvaluation} from '../../actions/evaluation'
 import AddEvaluationForm from './addEvaluationForm'
-import {baseUrl} from '../../constants'
 import './student.css'
 
 class ShowOneStudent extends PureComponent {
 
   componentWillMount() {
     const studentId = this.props.match.params.studentId
-    const batchId = this.props.match.params.batchId
 
     if (this.props.authenticated) {
       this.props.showStudent(studentId)
@@ -20,17 +18,13 @@ class ShowOneStudent extends PureComponent {
   }
 
   handleSubmit = (data) => {
-    const studentId = this.props.match.params.studentId
-    const batchId = this.props.match.params.batchId
-    // const {batchId, studentId} = this.props
+    const {studentId} = this.props.match.params.studentId
+    const {batchId} = this.props.match.params.batchId
     
       console.log(batchId, studentId, "batchId+studentId")
 
 		this.props.postNewEvaluation(data.studentId, data.batchId, data.colour, data.remarks)
 
-		// if(data) return (
-		// 	<Redirect to="/batches/batchId" />
-		// )
 	}
 
   showEvaluation(studentId) {
@@ -94,7 +88,7 @@ class ShowOneStudent extends PureComponent {
 
 
   render() {
-    const { batchId, studentId, evaluations, students, authenticated} = this.props
+    const { batchId, evaluations, students, authenticated} = this.props
 
     // console.log(this.props, "propospob")
 

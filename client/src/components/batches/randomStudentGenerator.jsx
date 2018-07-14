@@ -49,10 +49,10 @@ class GetRandom extends PureComponent {
         const noRedYellow = getEvals.filter(student => student.lastEvaluation === "green" )
         //getEvals.filter(student => student.lastEvaluation === "green")
 
-        const getRedGreen = getEvals.filter(student => student.lastEvaluation !== "yellow")
+        const getRedGreen = getEvals.filter(student => student.lastEvaluation === "red" || student.lastEvaluation === "green" )
+        console.log(getRedGreen, "red and green")
 
-        const getYellowGreen = getEvals.filter(student => student.lastEvaluation !== "red" )
-        //getEvals.filter(student => student.lastEvaluation !== "red")
+        const getYellowGreen = getEvals.filter(student => student.lastEvaluation === "yellow" || student.lastEvaluation === "green" )
 
         // console.log(getReds, "onlyReds here")
         // console.log(getYellows, "onlyYellows here")
@@ -74,7 +74,7 @@ class GetRandom extends PureComponent {
 
         const redNum = classSize * 0.45
         const yellowNum = classSize * 0.35
-        const greenNum = classSize * 0.20
+        // const greenNum = classSize * 0.20
         const secondWall = redNum+yellowNum
         // console.log(redNum, "redNum")
         // console.log(yellowNum, "yellowNum")
@@ -103,40 +103,46 @@ class GetRandom extends PureComponent {
             console.log("i ran 1")
             window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
-
+        // if choosestud is undefined, no reds in the class and less than 3 yellow student
+        // ask anyone
         if ( !chooseStud && getReds.length === 0 && getYellows.length <= 3 ) {
              randomStudent = getYellowGreen[Math.floor(Math.random() * getYellowGreen.length)]
              console.log("i ran 2")
              window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
-
+        // if choosestud is undefined, no reds in the class and more than 3 yellow student
+        // ask every red question from a yellow student
         if ( !chooseStud && getReds.length === 0 && getYellows.length > 3 ) {
              randomStudent = noReds[Math.floor(Math.random() * noReds.length)]
              console.log("i ran 3")
              window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
-
+        // if choosestud is undefined, no yellows in the class and less than 3 red,
+        // ask anyone
         if ( !chooseStud && getYellows.length === 0 && getReds.length <= 3) {
             randomStudent = getRedGreen[Math.floor(Math.random() * getRedGreen.length)]
             console.log("i ran 4")
             window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
-
+        // if choosestud is undefined, no yellows in the class and more than 3 reds,
+        // as evey yellow question from a red.
         if ( !chooseStud && getYellows.length === 0 && getReds.length > 3) {
             randomStudent = noYellows[Math.floor(Math.random() * noYellows.length)]
-            console.log("i ran 4")
-            window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
-        }
-
-        if ( !chooseStud && getGreens.lenght === 0 ) {
-            randomStudent = noGreens[Math.floor(Math.random() * noGreens.length)]
             console.log("i ran 5")
             window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
-
+        // if chosenstud is undefined, and there are no greens, 
+        // as evey green question from a red or yellow student 
+        if ( !chooseStud && getGreens.lenght === 0 ) {
+            randomStudent = noGreens[Math.floor(Math.random() * noGreens.length)]
+            console.log("i ran 6")
+            window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
+        }
+        // if chosenstud is undefined and there are no yellow or red students,
+        // ask only greens
         if ( !chooseStud && getRedYellow.length === 0 ) {
             randomStudent = noRedYellow[Math.floor(Math.random() * noRedYellow.length)]
-            console.log("i ran 6")
+            console.log("i ran 7")
             window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).toUpperCase()} evaluation.`)
         }
     }
@@ -154,7 +160,6 @@ class GetRandom extends PureComponent {
 }
 
 const mapStateToProps = state => {
-    console.log(state.randStud, "heelooo")
     return {
     authenticated: state.currentUser !== null,
     randStud: state.students,

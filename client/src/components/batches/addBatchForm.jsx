@@ -1,8 +1,6 @@
 import React, {PureComponent} from 'react'
 import TextField from '@material-ui/core/TextField';
 import { Button } from 'material-ui';
-import {Link} from 'react-router-dom'
-import {closeModal} from './addBatchPage'
 
 export default class AddBatchForm extends PureComponent {
 	state = {}
@@ -10,9 +8,6 @@ export default class AddBatchForm extends PureComponent {
 	handleSubmit = (e) => {
 		e.preventDefault()
 		this.props.onSubmit(this.state)
-		this.setState({
-			name: ""
-		})
 	}
 
 	closeModal() {

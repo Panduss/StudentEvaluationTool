@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {newStudent} from '../../actions/student'
 import AddStudentForm from './addStudentForm'
-import './newBatch.css'
 
 class NewStudentPage extends PureComponent {
     

@@ -6,7 +6,6 @@ import GetRandom from './randomStudentGenerator'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import NewStudentPage from './addStudentPage'
-import './batch.css'
 
 // const batchId = this.props.match.params.batchId
 

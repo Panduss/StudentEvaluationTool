@@ -10,8 +10,15 @@ export default class AddBatchForm extends PureComponent {
 	handleSubmit = (e) => {
 		e.preventDefault()
 		this.props.onSubmit(this.state)
+		this.setState({
+			name: ""
+		})
 	}
 
+	closeModal() {
+		this.setState({modalIsOpen: false});
+	}
+	
 	handleChange = (event) => {
     const {name, value} = event.target
 

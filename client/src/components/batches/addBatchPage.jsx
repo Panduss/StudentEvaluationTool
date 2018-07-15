@@ -43,7 +43,6 @@ class NewBatchPage extends PureComponent {
 	}
 	
 	handleSubmit = (data) => {
-		const {resetForm} = this.props
 		this.props.postNewBatch(data.batchNumber, data.startDate, data.endDate)
 	}
 

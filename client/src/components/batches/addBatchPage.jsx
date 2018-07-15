@@ -25,7 +25,7 @@ class NewBatchPage extends PureComponent {
 	};
 	  
 	this.openModal = this.openModal.bind(this);
-	this.afterOpenModal = this.afterOpenModal.bind(this);
+	// this.afterOpenModal = this.afterOpenModal.bind(this);
 	this.closeModal = this.closeModal.bind(this);
 	}
 	  
@@ -33,10 +33,10 @@ class NewBatchPage extends PureComponent {
 		this.setState({modalIsOpen: true});
 	}
 	  
-	afterOpenModal() {
-		// references are now sync'd and can be accessed.
-		this.subtitle.style.color = '#f00';
-	}
+	// afterOpenModal() {
+	// 	// references are now sync'd and can be accessed.
+	// 	this.subtitle.style.color = '#f00';
+	// }
 	  
 	closeModal() {
 		this.setState({modalIsOpen: false});
@@ -44,6 +44,7 @@ class NewBatchPage extends PureComponent {
 	
 	handleSubmit = (data) => {
 		this.props.postNewBatch(data.batchNumber, data.startDate, data.endDate)
+		this.setState({modalIsOpen: false});
 	}
 
 	render() {
@@ -52,15 +53,12 @@ class NewBatchPage extends PureComponent {
 				<Button onClick={this.openModal}>Add Batch</Button>
 				<Modal
 					isOpen={this.state.modalIsOpen}
-					onAfterOpen={this.afterOpenModal}
+					ariaHideApp={false}
 					onRequestClose={this.closeModal}
 					style={customStyles}
 					contentLabel="Example Modal"
        			>
-				
-				<h2 ref={subtitle => this.subtitle = subtitle}>Add one or more batches!</h2>
 				<AddBatchForm onSubmit={this.handleSubmit}/>
-				<Button onClick={this.closeModal}>Close</Button>
 				</Modal>
 			</div>
 		)

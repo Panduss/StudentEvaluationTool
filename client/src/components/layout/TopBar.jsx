@@ -31,15 +31,11 @@ const TopBar = (props) => {
           <Button color="inherit" onClick={() => history.push('/signup')}>Sign up</Button>
         }
         {
-          location.pathname.indexOf('batches') > 0 &&
+          location.pathname.indexOf('batches/') > 0 &&
           <Button color="inherit" onClick={() => history.push('/batches')}>All Batches</Button>
         }
         {
-          location.pathname.indexOf('batch/create') > 0 &&
-          <Button color="inherit" onClick={() => history.push('/batch/create')}>Create Batch</Button>
-        }
-        {
-          /games$/.test(location.pathname) &&
+          location.pathname.indexOf('batches') > 0 &&
           <Button color="inherit" onClick={() => history.push('/logout')}>Log out</Button>
         }
       </Toolbar>

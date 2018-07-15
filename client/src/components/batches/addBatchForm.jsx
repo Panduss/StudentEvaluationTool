@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import TextField from '@material-ui/core/TextField';
-import { Button } from 'material-ui';
+import { Button } from '@material-ui/core';
 
 export default class AddBatchForm extends PureComponent {
 	state = {}
@@ -63,7 +63,8 @@ export default class AddBatchForm extends PureComponent {
 
 				<Button
 					type="submit"
-
+					variant="contained" 
+					color="secondary"
 					>
 					Create Batch!
 				</Button>

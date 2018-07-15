@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import {showEvaluation, newEvaluation} from '../../actions/evaluation'
 import AddEvaluationForm from './addEvaluationForm'
-import './student.css'
 
 class ShowOneStudent extends PureComponent {
 

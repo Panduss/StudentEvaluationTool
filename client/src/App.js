@@ -24,7 +24,7 @@ class App extends Component {
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/batches" component={BatchList} />
-            <Route exact path="/batch/create" component={NewBatchPage} />
+            <Route exact path="/batch/new" component={NewBatchPage} />
             <Route exact path="/batches/:batchId" component={BatchDetail} />
             <Route exact path="/batches/:batchId/students/:studentId" component={showOneStudent} />
             {/* <Route exact path="/batches/:batchId/students" component={NewStudentPage} /> */}

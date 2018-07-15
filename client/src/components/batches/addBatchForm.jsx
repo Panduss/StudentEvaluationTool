@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react'
 import TextField from '@material-ui/core/TextField';
-import './newBatch.css'
+import { Button } from 'material-ui';
+import {Link} from 'react-router-dom'
+import {closeModal} from './addBatchPage'
 
 export default class AddBatchForm extends PureComponent {
 	state = {}
@@ -20,55 +22,49 @@ export default class AddBatchForm extends PureComponent {
 
 	render() {
 		return (
+			
 			<form onSubmit={this.handleSubmit}>
-				<div>
-					<div>
-						<TextField
-							required
-							id="required"
-							label="Batch Number"
-							name="batchNumber" 
-							value={this.state.batchNumber || ''} 
-							onChange={ this.handleChange } />
-					</div>
+			
+				<TextField
+					required
+					id="required"
+					label="Batch Number"
+					name="batchNumber" 
+					value={this.state.batchNumber || ''} 
+					onChange={ this.handleChange } />
 
-					<div>
-						<TextField
-							required
-							id="date"
-							label="Start Date"
-							name="startDate"
-							type="date"
-							// defaultValue="2017-05-24"
-							InputLabelProps={{
-							shrink: true,
-							}}
-							value={this.state.startDate || ''} 
-							onChange={ this.handleChange } />
-					</div>
+				<TextField
+					required
+					id="datetime"
+					type="date"
+					label="Start Date"
+					name="startDate"
+					type="date"
+					InputLabelProps={{
+					shrink: true,
+					}}
+					value={this.state.startDate || ''} 
+					onChange={ this.handleChange } />
 
-					<div>
-						<TextField
-							required
-							id="date"
-							label="End Date"
-							name="endDate"
-							type="date"
-							// defaultValue="2017-05-24"
-							InputLabelProps={{
-							shrink: true,
-							}}
-							value={this.state.endDate || ''} 
-							onChange={ this.handleChange } />
-					</div>
+				<TextField
+					required
+					id="datetime"
+					type="date"
+					label="End Date"
+					name="endDate"
+					type="date"
+					InputLabelProps={{
+					shrink: true,
+					}}
+					value={this.state.endDate || ''} 
+					onChange={ this.handleChange } />
 
-					<button 
-						type="submit"
-						className="newBatchButton"
-						>
-						Create Batch!
-					</button>
-				</div>
+				<Button
+					type="submit"
+
+					>
+					Create Batch!
+				</Button>
 			</form>
 		)
 	}

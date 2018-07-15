@@ -3,11 +3,12 @@ import {showBatches, showBatch, newBatch, deleteBatch} from '../../actions/batch
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import NewBatchPage from './addBatchPage'
-import { Grid, CardContent } from 'material-ui';
+import { Grid, CardContent, CardMedia } from 'material-ui';
+import { withStyles } from '@material-ui/core/styles';
 import { Paper, Button, Typography, CardActions, Card } from '@material-ui/core';
+import 'typeface-roboto'
 
 class BatchList extends PureComponent {
-
 
 componentWillMount() {
     this.props.showBatches()
@@ -30,50 +31,67 @@ deleteBatch(batchId) {
     this.props.deleteBatch(batchId)
   }
 
-  renderBatch = (batch) => {
-
+render = () => {
+    if (!this.props.authenticated) {
+        return <Redirect to="/login" />
+      }
+      if (
+        !this.props.batches
+      ) {
+        return <div>Create a batch!</div>
+      }
+  
+      const media = {
+        paddingTop: '27%',
+        width:"250px"
+      }
+  
+      const {batches} = this.props
     return (
-    <Grid key={batch.id}>
-        <Card>
-            <CardContent>
-                <Typography>
-                    Batch #{batch.batchNumber}
-                </Typography>
-                <Typography>
-                    Date: {batch.startDate} - {batch.endDate}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Link to={`/batches/${batch.id}`}>
-                    <Button onClick={() => this.showBatch(batch.id)}>Show Batch</Button>
-                </Link>
-                <Button onClick={() => this.deleteBatch(batch.id)}>Delete Batch</Button>
-            </CardActions>
-        </Card>
-    </Grid>
+    <div>
+        <NewBatchPage />
+        <Grid
+            className="main"
+            style={{
+            display: 'grid',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '80%',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gridAutoRows: 'minMax(50px, auto)',
+            gridGap: '1rem',
+            padding: '1rem',
+            margin: 'auto'
+        }}>
+            {batches.map(batch => (
+                <Card key={batch.batchNumber}>
+                    <CardContent>
+                        <Typography variant="headline">
+                            Batch #{batch.batchNumber}
+                        </Typography>
+                        <Typography variant="subheading">
+                            {batch.startDate} - {batch.endDate}
+                        </Typography>
+                        
+                        <CardActions
+                            style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <Link 
+                                to={`/batches/${batch.id}`}
+                                style={{ textDecoration: 'none'}}>
+                                <Button onClick={() => this.showBatch(batch.id)}>Show Batch</Button>
+                            </Link>
+                            <Button onClick={() => this.deleteBatch(batch.id)}>Delete Batch</Button>
+                        </CardActions>
+                    </CardContent>
+                </Card>
+           ))}
+        </Grid>
+    </div>
 )}
-
-  render() {
-    const {batches, authenticated} = this.props
-
-    if (!authenticated) return (
-			<Redirect to="/login" />
-        )
-        
-
-    if (batches === null) return null
-
-    return (
-        <Paper className="outer-paper">
-            <h2>Create new batch</h2>
-            <NewBatchPage />
-            <h2>All batches</h2>
-            <Grid container spacing={24}>
-                {batches.map(batch => this.renderBatch(batch))}
-            </Grid>
-        </Paper>
-    )
-  }
 }
 
 const mapStateToProps = state => ({

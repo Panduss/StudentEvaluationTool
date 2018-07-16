@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import { TextField, Button } from '@material-ui/core';
 
 export default class AddStudentForm extends PureComponent {
 	state = {}
@@ -19,47 +20,41 @@ export default class AddStudentForm extends PureComponent {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<div className="signup">
-					<div>
-						<input 
-						type="firstName" 
-						name="firstName" 
-						className="signupInfo"
-						placeholder="First Name" 
-						id="firstName" 
-						value={this.state.firstName || ''} 
-						onChange={ this.handleChange } />
-					</div>
+				<TextField
+					required
+					id="required"
+					label="First name"
+					name="firstName" 
+					value={this.state.firstName || ''} 
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
 
-					<div>
-						<input 
-						type="lastName" 
-						name="lastName" 
-						className="signupInfo"
-						placeholder="Last Name" 
-						id="lastName" 
-						value={this.state.lastName || ''} 
-						onChange={ this.handleChange } />
-					</div>
+				<TextField
+					required
+					id="required"
+					label="Last name"
+					name="lastName" 
+					value={this.state.lastName || ''} 
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
 
-					<div>
-						<input 
-						type="profilePic" 
-						name="profilePic" 
-						className="signupInfo"
-						placeholder="Profile Picture" 
-						id="profilePic" 
-						value={this.state.profilePic || ''} 
-						onChange={ this.handleChange } />
-					</div>
+				<TextField
+					required
+					id="required"
+					label="Profile picture"
+					name="profilePic" 
+					value={this.state.profilePic || ''} 
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
 
-					<button 
-						type="submit"
-                        className="batchDetailButton"
+				<Button
+					type="submit"
+					variant="contained" 
+					color="secondary"
+					style={{margin: '1.5rem'}}
 					>
-						Create Student!
-					</button>
-				</div>
+					Create & Close
+				</Button>
 			</form>
 		)
 	}

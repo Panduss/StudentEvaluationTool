@@ -9,7 +9,15 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: ['Aldrich'],
-  }
+  },
+  card: {
+      maxWidth: 345,
+    },
+  media: {
+      height: '0',
+      paddingTop: '56.25%', // 16:9
+      marginTop: '30'
+    },
 });
 
 export default theme

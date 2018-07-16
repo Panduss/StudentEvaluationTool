@@ -6,6 +6,7 @@ import GetRandom from './randomStudentGenerator'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import NewStudentPage from './addStudentPage'
+import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button, Avatar } from '@material-ui/core';
 
 // const batchId = this.props.match.params.batchId
 
@@ -82,20 +83,58 @@ class BatchDetail extends PureComponent {
    console.log(batchId, "batcheeees")
 
     return (
-        <div 
-        key={student.id} 
-        className="students" style={{backgroundColor: `${student.lastEvaluation}`}}>
-            <Link
-                className="link"
-                to={`/batches/${batchId}/students/${student.id}`}
-                onClick={() => this.showStudent(student.id)}
-                >
-                <img className="studentPicture" src={student.profilePic} alt={student.firstName} />
-            </Link>
-            <p className="studentName">{student.firstName} {student.lastName}</p>
-            <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>
-            <button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>Delete Student</button>
-    </div>
+      <Grid
+      className="main"
+      style={{
+      display: 'grid',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '80%',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+      gridAutoRows: 'minMax(50px, auto)',
+      gridGap: '1rem',
+      padding: '1rem',
+      margin: 'auto'
+  }}>
+        <Card 
+            style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+            }}
+            key={student.id}>
+        <CardContent>
+          <CardMedia
+              className='media'
+              style={{ objectFit: 'contain', width: 200, height: 200, marginLeft: 'auto', marginRight: 'auto'}}
+              image={student.profilePic}
+              title="student's profile picture"
+              />
+            <Typography variant="headline">
+                {student.firstName} {student.lastName}
+            </Typography>
+            <Typography>
+                Last evaluation: {student.lastEvaluation}
+            </Typography>
+    
+            <CardActions
+                style={{
+                display: 'grid',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <Link
+                    to={`/batches/${batches.id}/students/${student.id}`}
+                    style={{ textDecoration: 'none'}}>
+                    <Button variant="contained" color="secondary" onClick={() => this.showStudent(student.id)}>More detail</Button>
+                </Link>
+                  <Button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>Delete Student</Button>
+      {/* <p className="studentName">{student.firstName} {student.lastName}</p>
+      <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p> */}
+      </CardActions>
+              </CardContent>
+          </Card>
+          </Grid>
     )}
 
   render() {

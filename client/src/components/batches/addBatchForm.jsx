@@ -33,7 +33,8 @@ export default class AddBatchForm extends PureComponent {
 					label="Batch Number"
 					name="batchNumber" 
 					value={this.state.batchNumber || ''} 
-					onChange={ this.handleChange } />
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
 
 				<TextField
 					required
@@ -46,7 +47,8 @@ export default class AddBatchForm extends PureComponent {
 					shrink: true,
 					}}
 					value={this.state.startDate || ''} 
-					onChange={ this.handleChange } />
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
 
 				<TextField
 					required
@@ -59,14 +61,16 @@ export default class AddBatchForm extends PureComponent {
 					shrink: true,
 					}}
 					value={this.state.endDate || ''} 
-					onChange={ this.handleChange } />
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
 
 				<Button
 					type="submit"
 					variant="contained" 
 					color="secondary"
+					style={{margin: '1.5rem'}}
 					>
-					Create Batch!
+					Create & Close
 				</Button>
 			</form>
 		)

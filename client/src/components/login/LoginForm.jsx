@@ -1,4 +1,6 @@
 import React, {PureComponent} from 'react'
+import { TextField, Button, Paper } from '@material-ui/core';
+import { Grid, Card, CardContent } from 'material-ui';
 
 export default class LoginForm extends PureComponent {
 	state = {}
@@ -16,38 +18,43 @@ export default class LoginForm extends PureComponent {
     })
   }
 
+
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<div className="login">
-					<div>
-						<input 
-						type="email" 
-						name="email"
-						className="loginInfo"
-						placeholder="Your e-mail" 
-						id="email" 
-						value={ this.state.email || ''} 
-						onChange={ this.handleChange } />
-					</div>
-
-					<div>
-						<input 
-						type="password" 
-						name="password" 
-						className="loginInfo"
-						placeholder="Your password" 
-						id="password" 
-						value={this.state.password || ''} 
-						onChange={ this.handleChange } />
-					</div>
-
-					<button 
-						className="loginButton"
-						type="submit">
-						Login
-					</button>	
+				<div>
+				<TextField
+					required
+					id="required"
+					label="Your e-mail address"
+					name="email"
+					id="email" 
+					value={ this.state.email || ''} 
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
 				</div>
+				<div>
+				<TextField
+					required
+					id="required"
+					label="Your password"
+					type="password"
+					name="password"
+					id="password" 
+					value={this.state.password || ''} 
+					onChange={ this.handleChange } 
+					style={{margin: '0.3rem'}}/>
+				</div>
+				<div>
+				<Button 
+					type="submit"
+					variant="contained" 
+					color="secondary"
+					type="submit"
+					style={{margin: '1.5rem'}}>
+					Login
+				</Button>
+				</div>	
 			</form>
 		)
 	}

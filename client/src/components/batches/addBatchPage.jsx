@@ -12,7 +12,13 @@ const customStyles = {
 	  right                 : 'auto',
 	  bottom                : 'auto',
 	  marginRight           : '-50%',
-	  transform             : 'translate(-50%, -50%)'
+	  transform             : 'translate(-50%, -50%)',
+	  display				: 'grid',
+	  textAlign				: 'center',
+	  justifyContent		: 'center',
+	  padding				: '3rem',
+	  margin				: '4rem',
+	  alignItems			: 'center'
 	}
   };
 
@@ -50,7 +56,7 @@ class NewBatchPage extends PureComponent {
 	render() {
 		return (
 			<div>
-				<Button onClick={this.openModal}>Add Batch</Button>
+				<Button variant="contained" color="secondary" onClick={this.openModal}>Add Batch</Button>
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					ariaHideApp={false}

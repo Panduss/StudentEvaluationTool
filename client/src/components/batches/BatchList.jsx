@@ -63,7 +63,7 @@ render = () => {
             margin: 'auto'
         }}>
             {batches.map(batch => (
-                <Card key={batch.batchNumber}>
+                <Card key={batch.id}>
                     <CardContent>
                         <Typography variant="headline">
                             Batch #{batch.batchNumber}

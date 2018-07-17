@@ -7,13 +7,13 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import NewStudentPage from './addStudentPage'
 import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button, Avatar } from '@material-ui/core';
+import { Paper } from 'material-ui';
 
 // const batchId = this.props.match.params.batchId
 
 class BatchDetail extends PureComponent {
 
   componentWillMount() {
-
     const batchId = this.props.match.params.batchId
 
     if (this.props.authenticated) {
@@ -36,13 +36,13 @@ class BatchDetail extends PureComponent {
   calculatePercent() {
     const { students } = this.props
 
-    const getEvals = students.filter(student => student.lastEvaluation !== "white")
+    const getEvals = students.filter(student => student.lastEvaluation.split('\/')[0] !== "white")
     // console.log(getEvals, "evals?")
-    const getRed = getEvals.filter(student => student.lastEvaluation === "red")
+    const getRed = getEvals.filter(student => student.lastEvaluation.split('\/')[0] === "red")
     // console.log(getRed, "reds?")
-    const getYellow = getEvals.filter(student => student.lastEvaluation === "yellow")
+    const getYellow = getEvals.filter(student => student.lastEvaluation.split('\/')[0] === "yellow")
     // console.log(getYellow, "yellows?")
-    const getGreen = getEvals.filter(student => student.lastEvaluation === "green")
+    const getGreen = getEvals.filter(student => student.lastEvaluation.split('\/')[0] === "green")
     // console.log(getGreen, "greens?")
 
     let bar = Array.prototype.concat.apply([], [getRed, getYellow, getGreen])
@@ -70,23 +70,23 @@ class BatchDetail extends PureComponent {
   renderBoxes = (student) => {
 
     return (
-      <button 
+      <Button 
       key={student.id}
       className="progressionBar" 
-      style={{background: `${student.lastEvaluation}`}}
-      > </button>
+      style={{background: `${student.lastEvaluation.split('\/')[1]}`}}
+      > </Button>
     )
   }
 
   renderStudent = (student, batches) => {
-   const batchId = batches[0].id
-   console.log(batchId, "batcheeees")
+  //  const batchId = batches[0].id
+   console.log(batches, "batcheeees")
 
     return (
       <Grid
       className="main"
       style={{
-      display: 'grid',
+      display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       width: '80%',
@@ -100,7 +100,8 @@ class BatchDetail extends PureComponent {
             style={{
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            backgroundColor: `${student.lastEvaluation.split('\/')[1]}`
             }}
             key={student.id}>
         <CardContent>
@@ -114,7 +115,7 @@ class BatchDetail extends PureComponent {
                 {student.firstName} {student.lastName}
             </Typography>
             <Typography>
-                Last evaluation: {student.lastEvaluation}
+                Last evaluation: {student.lastEvaluation.split('\/')[0]}
             </Typography>
     
             <CardActions
@@ -123,11 +124,13 @@ class BatchDetail extends PureComponent {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
+            {batches.map(batch =>
                 <Link
-                    to={`/batches/${batches.id}/students/${student.id}`}
+                    to={`/batches/${batch.id}/students/${student.id}`}
                     style={{ textDecoration: 'none'}}>
                     <Button variant="contained" color="secondary" onClick={() => this.showStudent(student.id)}>More detail</Button>
                 </Link>
+              )}
                   <Button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>Delete Student</Button>
       {/* <p className="studentName">{student.firstName} {student.lastName}</p>
       <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p> */}
@@ -147,22 +150,12 @@ class BatchDetail extends PureComponent {
     if (students === null) return null
 
     return (
-      <div>
-        <div className="percentages">
-              {this.calculatePercent()}
-        </div>
-        <div className="batchPageButtons">
-            <GetRandom />
-        </div>
-        <div className="batchPage">
-            <div className="box">
-                {students.map(student => this.renderStudent(student, batches))} 
-            </div>
-            <div className="box">
-                <NewStudentPage />
-          </div>
-        </div>
-      </div>
+      <Paper>
+          <NewStudentPage />
+          {this.calculatePercent()}
+          <GetRandom />
+          {students.map(student => this.renderStudent(student, batches))} 
+      </Paper>
     )
   }
 }

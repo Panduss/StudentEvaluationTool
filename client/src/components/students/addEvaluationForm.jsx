@@ -45,36 +45,36 @@ export default class AddEvaluationForm extends PureComponent {
 
 					<span>
             <button
-            style={{background: "red"}} 
+            style={{background: "#e57373"}} 
 						type="radio"
 						name="colour" 
 						className="evalButton"
 						id="red" 
-						value="red" 
+						value="red/#e57373" 
 						label="Red"
 						onClick={ this.handleChange } />					
 					</span>
 
 					<span>
             <button 
-            style={{background: "yellow"}} 
+            style={{background: "#fff176"}} 
 						type="radio"
 						name="colour" 
 						className="evalButton"
 						id="yellow" 
-						value="yellow" 
+						value="yellow/#fff176" 
 						label="Yellow"
 						onClick={ this.handleChange } />
 					</span>
 
           <span>
             <button
-            style={{background: "green"}} 
+            style={{background: "#81c784"}} 
 						type="radio"
 						name="colour" 
 						className="evalButton"
 						id="green" 
-						value="green"
+						value="green/#81c784"
 						label="Green"
 						onClick={ this.handleChange } />
 					</span>

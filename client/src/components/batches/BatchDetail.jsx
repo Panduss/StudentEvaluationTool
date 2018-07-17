@@ -13,7 +13,6 @@ import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button, Av
 class BatchDetail extends PureComponent {
 
   componentWillMount() {
-
     const batchId = this.props.match.params.batchId
 
     if (this.props.authenticated) {
@@ -73,14 +72,14 @@ class BatchDetail extends PureComponent {
       <button 
       key={student.id}
       className="progressionBar" 
-      style={{background: `${student.lastEvaluation}`}}
+      style={{background: `${student.lastEvaluation.split('\/')[0]}`}}
       > </button>
     )
   }
 
   renderStudent = (student, batches) => {
-   const batchId = batches[0].id
-   console.log(batchId, "batcheeees")
+  //  const batchId = batches[0].id
+   console.log(batches, "batcheeees")
 
     return (
       <Grid
@@ -100,7 +99,8 @@ class BatchDetail extends PureComponent {
             style={{
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            backgroundColor: `${student.lastEvaluation.split('\/')[1]}`
             }}
             key={student.id}>
         <CardContent>
@@ -114,7 +114,7 @@ class BatchDetail extends PureComponent {
                 {student.firstName} {student.lastName}
             </Typography>
             <Typography>
-                Last evaluation: {student.lastEvaluation}
+                Last evaluation: {student.lastEvaluation.split('\/')[0]}
             </Typography>
     
             <CardActions
@@ -123,11 +123,13 @@ class BatchDetail extends PureComponent {
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
+            {batches.map(batch =>
                 <Link
-                    to={`/batches/${batches.id}/students/${student.id}`}
+                    to={`/batches/${batch.id}/students/${student.id}`}
                     style={{ textDecoration: 'none'}}>
                     <Button variant="contained" color="secondary" onClick={() => this.showStudent(student.id)}>More detail</Button>
                 </Link>
+              )}
                   <Button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>Delete Student</Button>
       {/* <p className="studentName">{student.firstName} {student.lastName}</p>
       <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p> */}

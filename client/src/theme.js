@@ -1,12 +1,30 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import teal from '@material-ui/core/colors/teal';
-import lime from '@material-ui/core/colors/lime';
+// import teal from '@material-ui/core/colors/teal';
+// import lime from '@material-ui/core/colors/lime';
 
 const theme = createMuiTheme({
   palette: {
-    primary: teal,
-    secondary: lime,
+    primary: {
+        main: '#00796B',
+    },
+    secondary: {
+        main: '#CDDC39'
+    },
+    accent: {
+      main: '#757575'
+    }
+},
+overrides: {
+    MuiButton: {
+      raisedPrimary: {
+        color: 'white',
+      },
+      raisedSecondary: {
+        color: 'black',
+      },
+    },
   },
+
   typography: {
     fontFamily: ['Aldrich'],
   },
@@ -21,7 +39,3 @@ const theme = createMuiTheme({
 });
 
 export default theme
-
-// font-family: 'Aldrich', sans-serif;
-
-// 'Courier', 'Helvetica', 

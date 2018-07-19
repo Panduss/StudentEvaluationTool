@@ -3,8 +3,7 @@ import {showBatches, showBatch, newBatch, deleteBatch} from '../../actions/batch
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import NewBatchPage from './addBatchPage'
-import { Grid, CardContent } from 'material-ui';
-import { Button, Typography, CardActions, Card } from '@material-ui/core';
+import { Grid, CardContent, Button, Typography, CardActions, Card } from '@material-ui/core';
 import 'typeface-bitter'
 
 class BatchList extends PureComponent {
@@ -39,11 +38,6 @@ render = () => {
       ) {
         return <div>Create a batch!</div>
       }
-  
-    //   const media = {
-    //     paddingTop: '27%',
-    //     width:"250px"
-    //   }
   
       const {batches} = this.props
     return (
@@ -96,7 +90,7 @@ render = () => {
 const mapStateToProps = state => ({
     authenticated: state.currentUser !== null,
     batches: state.batches === null ?
-    null : Object.values(state.batches).sort((a, b) => b.name - a.name)
+    null : Object.values(state.batches).sort((a, b) => a.batchNumber - b.batchNumber)
 })
 
 export default connect(mapStateToProps, {showBatches, showBatch, newBatch, deleteBatch})(BatchList)

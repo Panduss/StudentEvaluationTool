@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import {getAllStudent} from '../../actions/student'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import { Button } from '@material-ui/core';
 
 class GetRandom extends PureComponent {
 
@@ -150,11 +151,16 @@ class GetRandom extends PureComponent {
     
     render() {
         return ( 
-        <div>   
-            <div>
-                <button className="batchDetailButton" onClick={this.selectStudent}>Ask a question!</button>
+            <div style={{textAlign: 'center'}}>
+                <Button 
+                variant="contained" 
+                color="secondary" 
+                onClick={this.selectStudent}
+                style={{margin: '1.5rem'}}
+                >
+                Ask a question!
+                </Button>
             </div>
-        </div>
         )
     }
 }

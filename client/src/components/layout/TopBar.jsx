@@ -1,11 +1,7 @@
 import React from 'react'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
-import Button from '@material-ui/core/Button';
+import {Button, Typography, Toolbar, AppBar} from '@material-ui/core';
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
-import AccountIcon from 'material-ui-icons/AccountBox'
 
 const TopBar = (props) => {
   const { location, history, user } = props
@@ -18,7 +14,7 @@ const TopBar = (props) => {
         </Typography>
         {
           user && location.pathname.indexOf('batches') > 0 &&
-          <Button color="inherit"><AccountIcon /> { user.name }</Button>
+          <Button color="inherit"> { user.name }</Button>
         }
 
         {

@@ -38,16 +38,23 @@ class ShowOneStudent extends PureComponent {
     const getYellow = evaluations.filter(evalu => evalu.colour === "yellow/#fff176")
     const getGreen = evaluations.filter(evalu => evalu.colour === "green/#81c784")
 
-    const redPercent = (getRed.length/evaluations.length * 100).toFixed()
-    const yellowPercent = (getYellow.length/evaluations.length * 100).toFixed()
-    const greenPercent = (getGreen.length/evaluations.length * 100).toFixed()
+    let redPercent = (getRed.length/evaluations.length * 100).toFixed()
+    let yellowPercent = (getYellow.length/evaluations.length * 100).toFixed()
+    let greenPercent = (getGreen.length/evaluations.length * 100).toFixed()
+
+
+    if (isNaN(redPercent)) redPercent = 0 
+    if (isNaN(yellowPercent)) yellowPercent = 0
+    if (isNaN(greenPercent)) greenPercent = 0
 
     return (
       <div>
-          <Typography variant="subheading">Red: {redPercent}%</Typography>
-          <Typography variant="subheading">Yellow: {yellowPercent}%</Typography>
-          <Typography variant="subheading">Green: {greenPercent}%</Typography>
-    </div>
+          <br />
+              <Typography variant="subheading">Red: {redPercent}%</Typography>
+              <Typography variant="subheading">Yellow: {yellowPercent}%</Typography>
+              <Typography variant="subheading">Green: {greenPercent}%</Typography>
+          <br />
+      </div>
     )
   }
 
@@ -57,8 +64,7 @@ class ShowOneStudent extends PureComponent {
       <span style={{width: '90%'}}>
       <Button 
       key={evaluations.id}
-      className="progressionBar" 
-      style={{background: `${evaluations.colour}`.split('/')[1]}}
+      style={{border: '1px solid black', background: `${evaluations.colour}`.split('/')[1], borderRadius: '0'}}
       />
       </span>
     )
@@ -126,11 +132,18 @@ class ShowOneStudent extends PureComponent {
                         <Typography variant="headline">Create a new evaluation</Typography>
                             <AddEvaluationForm onSubmit={this.handleSubmit} />
                         
-                        <CardActions style={{textAlign: 'middle'}}>
+                        <CardActions 
+                            style={{ 
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                        }}>
                           {batches.map(batch => (
-                            <Button>
-                                <Link to={`/batches/${batch.id}`}>Back to batch</Link>
-                            </Button>
+                              <Link 
+                                  to={`/batches/${batch.id}`}
+                                  style={{ textDecoration: 'none'}}>
+                                  <Button variant="contained" color="secondary">Back to Batch</Button>
+                            </Link>
                             ))}
                         </CardActions>
                     </CardContent>

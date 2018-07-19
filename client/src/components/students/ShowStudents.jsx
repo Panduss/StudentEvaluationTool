@@ -41,18 +41,18 @@ class ShowStudents extends PureComponent {
       alignItems: 'center',
       width: '80%',
       gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-      gridAutoRows: 'minMax(50px, auto)',
+      gridAutoRows: 'minMax(40px, auto)',
       gridGap: '1rem',
       padding: '1rem',
       margin: 'auto'
   }}>
         {students.map(student => (
-        <Card 
+        <Card
+            key={student.id} 
             style={{
                 textAlign: 'center',
                 backgroundColor: `${student.lastEvaluation.split('/')[1]}`
-            }}
-            key={student.id}>
+            }}>
         <CardContent>
           <CardMedia
               className='media'

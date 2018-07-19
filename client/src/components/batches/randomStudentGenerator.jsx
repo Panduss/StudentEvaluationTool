@@ -61,7 +61,10 @@ class GetRandom extends PureComponent {
         
         const classSize = getEvals.length
         console.log(classSize, "size")
-        const randNumb = Math.floor(Math.random() * (classSize.toFixed(2)) +1.00)
+        let min = 0.001
+        let max = classSize - 0.001
+
+        const randNumb = Math.random() * (max - min) + min
         console.log(randNumb, "randNumb")
 
 

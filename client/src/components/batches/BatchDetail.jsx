@@ -72,7 +72,7 @@ const data = {
         width: '90%',
         textAlign: 'center'}}
         >
-        <Typography style={{paddingTop: '2%'}} variant="headline"> Latest evaluation for current batch: </Typography>
+        <Typography variant="headline"> Latest evaluation for current batch: </Typography>
           <div style={{maxWidth:"500px", margin: 'auto'}}>
               <Doughnut data={data}/>
           </div>
@@ -80,8 +80,8 @@ const data = {
         <ShowStudents />
       </Paper>
   )
+}
 
-  }
 
   render() {
     const {students,authenticated} = this.props

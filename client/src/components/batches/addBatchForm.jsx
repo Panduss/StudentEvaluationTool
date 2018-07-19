@@ -25,7 +25,7 @@ export default class AddBatchForm extends PureComponent {
 			
 				<TextField
 					required
-					id="required"
+					id="batchNumber"
 					label="Batch Number"
 					name="batchNumber" 
 					value={this.state.batchNumber || ''} 
@@ -34,7 +34,7 @@ export default class AddBatchForm extends PureComponent {
 
 				<TextField
 					required
-					id="datetime"
+					id="startDate"
 					type="date"
 					label="Start Date"
 					name="startDate"
@@ -47,7 +47,7 @@ export default class AddBatchForm extends PureComponent {
 
 				<TextField
 					required
-					id="datetime"
+					id="endDate"
 					type="date"
 					label="End Date"
 					name="endDate"

@@ -6,11 +6,24 @@ import { storeJwt } from './middleware';
  const saveToLocalStorage = (state) => {
    try {
       const serializedState = JSON.stringify(state)
-      localStorage.setState('state', serializedState)
+      localStorage.setItem('state', serializedState)
    } catch(e) {
      console.log(e)
    }
  }
+
+ function loadFromLocalStorage() {
+  try {
+    const serializedState = localStorage.getItem('state')
+    if (serializedState === null) return undefined
+    return JSON.parse(serializedState)
+  } catch(e) {
+    console.log(e)
+    return undefined
+  }
+}
+
+const persistedState = loadFromLocalStorage()
 
 const reducer = combineReducers(reducers)
 
@@ -21,7 +34,7 @@ const enhancer = compose(
   devTools
 )
 
-const store = createStore(reducer, enhancer)
+const store = createStore(reducer, persistedState, enhancer)
 
 store.subscribe(() => saveToLocalStorage(store.getState()))
 

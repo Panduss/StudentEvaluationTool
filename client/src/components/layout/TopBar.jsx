@@ -18,8 +18,8 @@ const TopBar = (props) => {
           CODAISSEUR - Student evaluation 
         </Typography>
         {
-          user &&
-          <Button color="inherit"><AccountIcon /> { user.firstName }</Button>
+          user && location.pathname.indexOf('batches') > 0 &&
+          <Button color="inherit"><AccountIcon /> { user.name }</Button>
         }
 
         {
@@ -44,8 +44,7 @@ const TopBar = (props) => {
 }
 
 const mapStateToProps = state => ({
-  user: state.currentUser && state.users &&
-    state.users[userId(state.currentUser.jwt)]
+  user: state.currentUser
 })
 
 export default withRouter(

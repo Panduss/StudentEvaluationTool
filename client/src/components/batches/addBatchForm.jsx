@@ -10,10 +10,6 @@ export default class AddBatchForm extends PureComponent {
 		this.props.onSubmit(this.state)
 	}
 
-	closeModal() {
-		this.setState({modalIsOpen: false});
-	}
-	
 	handleChange = (event) => {
     const {name, value} = event.target
 
@@ -42,7 +38,6 @@ export default class AddBatchForm extends PureComponent {
 					type="date"
 					label="Start Date"
 					name="startDate"
-					type="date"
 					InputLabelProps={{
 					shrink: true,
 					}}
@@ -56,7 +51,6 @@ export default class AddBatchForm extends PureComponent {
 					type="date"
 					label="End Date"
 					name="endDate"
-					type="date"
 					InputLabelProps={{
 					shrink: true,
 					}}

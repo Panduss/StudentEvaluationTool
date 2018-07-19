@@ -15,7 +15,7 @@ export default class Evaluations extends BaseEntity {
     @Column('text', {nullable: true})
     remarks: string
 
-    @Column('text', {default: "white/#ffffff", nullable: false})
+    @Column('text', {nullable: false})
     colour: Colour
 
     @Column('text', {default: today, nullable: false} )

@@ -1,7 +1,6 @@
 import {USER_LOGIN_SUCCESS, USER_LOGOUT} from '../actions/users'
-import {localStorageJwtKey} from '../constants'
 
-let initialState = JSON.parse(localStorage.getItem('currentUserJwt')) || null
+let initialState = null
 
 
 export default function (state = initialState, action ) {

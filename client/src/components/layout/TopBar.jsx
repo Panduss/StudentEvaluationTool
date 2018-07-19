@@ -4,7 +4,6 @@ import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from '@material-ui/core/Button';
 import {withRouter} from 'react-router'
-import {userId} from '../../jwt'
 import {connect} from 'react-redux'
 import AccountIcon from 'material-ui-icons/AccountBox'
 

@@ -15,7 +15,6 @@ export const showBatch = (batchId) => (dispatch, getState) => {
     const jwt = state.currentUser.jwt
     
     if (isExpired(jwt)) return dispatch(logout())
-    console.log(batchId, "batchIdIDIDID")
   
     request
       .get(`${baseUrl}/batches/${batchId}`)

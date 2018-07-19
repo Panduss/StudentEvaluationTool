@@ -14,7 +14,7 @@ const TopBar = (props) => {
         </Typography>
         {
           user && location.pathname.indexOf('batches') > 0 &&
-          <Button color="inherit"> { user.name }</Button>
+          <Button color="inherit"> Welcome, { user.name }! </Button>
         }
 
         {

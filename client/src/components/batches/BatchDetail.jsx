@@ -7,9 +7,9 @@ import NewStudentPage from './addStudentPage'
 import {connect} from 'react-redux'
 import {Redirect } from 'react-router-dom'
 import ShowStudents from '../students/ShowStudents'
-import { Paper, Button, Typography } from '@material-ui/core';
+import { LinearProgress, Paper, Button, Typography, Card, CardMedia, CardContent } from '@material-ui/core';
+import {Doughnut, HorizontalBar} from 'react-chartjs-2';
 
-// const batchId = this.props.match.params.batchId
 
 class BatchDetail extends PureComponent {
 
@@ -40,10 +40,46 @@ class BatchDetail extends PureComponent {
     let bar = Array.prototype.concat.apply([], [getRed, getYellow, getGreen])
 
     // console.log(bar, "showmeabar")
-
+    
     const redPercent = (getRed.length/getEvals.length * 100).toFixed(2)
     const yellowPercent = (getYellow.length/getEvals.length * 100).toFixed(2)
     const greenPercent = (getGreen.length/getEvals.length * 100).toFixed(2)
+
+const data = {
+	labels: [
+		'Red',
+		'Yellow',
+		'Green'
+	],
+	datasets: [{
+		data: [redPercent, yellowPercent, greenPercent],
+		backgroundColor: [
+		'#e57373',
+		'#fff176',
+		'#81c784'
+		],
+		hoverBackgroundColor: [
+		'#FF5252',
+		'#FFEB3B',
+		'#4CAF50'
+		]
+	}]
+};
+
+const data2 = {
+  labels: ['January' ],
+  datasets: [
+    {
+      label: 'My First dataset',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: [65 + 59 + 80]
+    }
+  ]
+};
 
     
   return (
@@ -53,14 +89,14 @@ class BatchDetail extends PureComponent {
         marginBottom: '30px', 
         marginRight: 'auto',
         padding: '20px',
-        width: '90%'}}>
-        <Typography variant="headline"> Latest evaluation for current batch: </Typography>
-        <br />
-        <Button style={{width: Math.round( redPercent ) + '%', borderRadius: 0, backgroundColor: '#e57373', textShadow: '0px 1px #cc2a48', float: "left", textAlign: "center"}}>{Math.floor(redPercent)}%</Button>        
-        <Button style={{width: Math.round( yellowPercent ) + '%', borderRadius: 0, backgroundColor: '#fff176', textShadow: '0px 1px #ccc12a', float: "left", textAlign: "center"}}>{Math.floor(yellowPercent)}%</Button>
-        <Button style={{width: Math.round( greenPercent ) + '%', borderRadius: 0, backgroundColor: '#81c784', textShadow: '0px 1px #4acc2a', float: "left", textAlign: "center"}}>{Math.floor(greenPercent)}%</Button>
-        <br />
-        <GetRandom />
+        width: '90%',
+        textAlign: 'center'}}
+        >
+        <Typography style={{paddingTop: '2%'}} variant="headline"> Latest evaluation for current batch: </Typography>
+          <div style={{maxWidth:"500px", margin: 'auto'}}>
+              <Doughnut data={data}/>
+          </div>
+          <GetRandom />
         <ShowStudents />
       </Paper>
   )

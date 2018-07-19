@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import {getAllStudent} from '../../actions/student'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import { Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import swal from 'sweetalert'
 
 class GetRandom extends PureComponent {
@@ -32,45 +32,39 @@ class GetRandom extends PureComponent {
 
         //getting all the students that has an evaluation already
         const getEvals = randStud.filter(student => student.lastEvaluation.split('/')[1] !== "white")
-        console.log(getEvals, 'all evaluations')
 
         // check if there are reds
         const getReds = getEvals.filter(student => student.lastEvaluation === "red/#e57373")
-        console.log(getReds, 'reds and greens')
         //if there are no reds, every question that would go to reds, goes to yellows
         const noReds = getEvals.filter(student => student.lastEvaluation === "yellow/#fff176")
 
+        // check if there are yellows
         const getYellows = getEvals.filter(student => student.lastEvaluation === "yellow/#fff176")
         // if there are no yellows, every question goes to reds
         const noYellows = getEvals.filter(student => student.lastEvaluation === "red")
 
+        // check if there are greens
         const getGreens = getEvals.filter(student => student.lastEvaluation === "green/#81c784")
         // if there are no greens, every question goes to yellow + red
         const noGreens = getEvals.filter(student => student.lastEvaluation !== "green/#81c784")
 
+        // check if there are reds and yellows
         const getRedYellow = getEvals.filter(student => student.lastEvaluation !== "green/#81c784" )
         // no red or yellow => questions for greens!
         const noRedYellow = getEvals.filter(student => student.lastEvaluation === "green/#81c784" )
-        //getEvals.filter(student => student.lastEvaluation === "green")
-
-        const getRedGreen = getEvals.filter(student => student.lastEvaluation === "red/#e57373" || student.lastEvaluation === "green/#81c784" )
-        console.log(getRedGreen, "red and green")
-
-        const getYellowGreen = getEvals.filter(student => student.lastEvaluation === "yellow/#fff176" || student.lastEvaluation === "green/#81c784" )
-
-        // console.log(getReds, "onlyReds here")
-        // console.log(getYellows, "onlyYellows here")
-        // console.log(getGreens, "onlyGreens here")     
-        // console.log(getRedYellow, "onlyRedandYellow here")  
         
-        // console.log(noReds, "no Reds here")
-        // console.log(noYellows, "no Yellows here")
-        // console.log(noGreens, "no Greens here")     
-        // console.log(noRedYellow, "no RedandYellow here") 
+        // check if there are reds and greens
+        const getRedGreen = getEvals.filter(student => student.lastEvaluation === "red/#e57373" || student.lastEvaluation === "green/#81c784" )
+
+        // check if there are yellows and greens
+        const getYellowGreen = getEvals.filter(student => student.lastEvaluation === "yellow/#fff176" || student.lastEvaluation === "green/#81c784" )
         
         const classSize = getEvals.length
         console.log(classSize, "size")
-        const randNumb = Math.floor(Math.random() * (classSize.toFixed(2)) +1.00)
+        let min = 0.001
+        let max = classSize - 0.001
+
+        const randNumb = Math.random() * (max - min) + min
         console.log(randNumb, "randNumb")
 
 

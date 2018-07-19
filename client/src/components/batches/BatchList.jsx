@@ -17,7 +17,6 @@ componentWillMount() {
 }
 
 showBatch(batchId) {
-    console.log(batchId, "log form batchlist component")
     this.props.showBatch(batchId)
 }
 

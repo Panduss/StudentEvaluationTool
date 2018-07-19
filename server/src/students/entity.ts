@@ -24,7 +24,7 @@ export default class Students extends BaseEntity  {
     profilePic: string 
 
     @IsString()
-    @Column('text', { default: 'white' })
+    @Column('text', { default: 'white/#ffffff' })
     lastEvaluation: Colour
     
     @ManyToOne(_ => Batch, batch => batch.students, { onDelete: 'CASCADE' })

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import {showEvaluation, newEvaluation} from '../../actions/evaluation'
 import AddEvaluationForm from './addEvaluationForm'
+import { Button, Grid, CardActions, CardContent, CardMedia, Typography, Paper } from '@material-ui/core';
 
 class ShowOneStudent extends PureComponent {
 
@@ -17,10 +18,9 @@ class ShowOneStudent extends PureComponent {
   }
 
   handleSubmit = (data) => {
-    const {studentId} = this.props.match.params.studentId
-    const {batchId} = this.props.match.params.batchId
-    
-      console.log(batchId, studentId, "batchId+studentId")
+    const {students, batches} = this.props
+    let studentId = students.map(student => student.id)
+    let batchId = batches.map(batch => batch.id)
 
 		this.props.postNewEvaluation(data.studentId, data.batchId, data.colour, data.remarks)
 
@@ -34,60 +34,45 @@ class ShowOneStudent extends PureComponent {
   calculatePercent() {
     const { evaluations } = this.props
 
-    const getRed = evaluations.filter(evalu => evalu.colour === "red")
-    // console.log(getRed, "reds?")
-    const getYellow = evaluations.filter(evalu => evalu.colour === "yellow")
-    // console.log(getYellow, "yellows?")
-    const getGreen = evaluations.filter(evalu => evalu.colour === "green")
-    // console.log(getGreen, "greens?")
+    const getRed = evaluations.filter(evalu => evalu.colour === "red/#e57373")
+    const getYellow = evaluations.filter(evalu => evalu.colour === "yellow/#fff176")
+    const getGreen = evaluations.filter(evalu => evalu.colour === "green/#81c784")
 
-    const redPercent = (getRed.length/evaluations.length * 100).toFixed()
-    const yellowPercent = (getYellow.length/evaluations.length * 100).toFixed()
-    const greenPercent = (getGreen.length/evaluations.length * 100).toFixed()
+    let redPercent = (getRed.length/evaluations.length * 100).toFixed()
+    let yellowPercent = (getYellow.length/evaluations.length * 100).toFixed()
+    let greenPercent = (getGreen.length/evaluations.length * 100).toFixed()
+
+
+    if (isNaN(redPercent)) redPercent = 0 
+    if (isNaN(yellowPercent)) yellowPercent = 0
+    if (isNaN(greenPercent)) greenPercent = 0
 
     return (
       <div>
-          <p>Red Percentage: {redPercent}%</p>
-          <p>Yellow Percentage: {yellowPercent}%</p>
-          <p>Green Percentage: {greenPercent}%</p>
-    </div>
+          <br />
+              <Typography variant="subheading">Red: {redPercent}%</Typography>
+              <Typography variant="subheading">Yellow: {yellowPercent}%</Typography>
+              <Typography variant="subheading">Green: {greenPercent}%</Typography>
+          <br />
+      </div>
     )
   }
 
   renderBoxes = (evaluations) => {
 
     return (
-      <button 
+      <span style={{width: '90%'}}>
+      <Button 
       key={evaluations.id}
-      className="progressionBar" 
-      style={{background: `${evaluations.colour}`}}
-      > </button>
+      style={{border: '1px solid black', background: `${evaluations.colour}`.split('/')[1], borderRadius: '0'}}
+      />
+      </span>
     )
   }
 
-  renderOneStudent = (student) => {
-
-    // console.log(student, "stuuudent")
-
-    return (
-
-      <div>
-        <div 
-          className="studentInfo"
-          key={student.id} 
-          style={{backgroundColor: `${student.lastEvaluation}`}}
-          >
-            <p className="studentName">{student.firstName} {student.lastName}</p>
-            <img className="studentPicture" src={student.profilePic} alt={student.firstName}/>
-            <p className="studentInfo">Last evaluation: {(student.lastEvaluation).toUpperCase()}</p>
-        </div>
-      </div>
-    )}
-
-
 
   render() {
-    const { batchId, evaluations, students, authenticated} = this.props
+    const { batches, evaluations, students, authenticated} = this.props
 
     // console.log(this.props, "propospob")
 
@@ -98,41 +83,83 @@ class ShowOneStudent extends PureComponent {
     if (evaluations === null) return null
 
     return (
-      <div className="studentPage">
-        <div>
-          <h2>Student's progression: </h2> 
-          <h2 className="stat">{evaluations.map(evaluation => this.renderBoxes(evaluation))}</h2>
-      </div><br />
-      <div>
-      <div className="percentages">
-              {this.calculatePercent()}
-        </div>
-      </div>
-      <div className="evaluation">
-        <div className="box" >
-            {students.map(student => this.renderOneStudent(student))}
-          </div>
-          <div className="box">
-            <h1>Create a new evaluation</h1>
-				    <AddEvaluationForm onSubmit={this.handleSubmit} />
-            <button>
-            <Link to={`/batches/${batchId}`}>Batch</Link></button>
-          </div>
-        </div>
-      </div>
+      <Grid container spacing={16}
+            style={{
+              display: 'flex',
+              flexDirection: 'row wrap',
+              padding: 20,
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <Grid item xs={'auto'}>
+                {students.map(student => (
+                <Paper 
+                    style={{
+                        flex: 1,
+                        margin: 10,
+                        textAlign: 'center',
+                        padding: 10,
+                        backgroundColor: `${student.lastEvaluation.split('/')[1]}`
+                }}>
+                    <CardContent>
+                        <CardMedia
+                            className='media'
+                            style={{ objectFit: 'contain', width: 200, height: 200, marginLeft: 'auto', marginRight: 'auto'}}
+                            image={student.profilePic}
+                            title="student's profile picture"
+                        />
+                        <Typography style={{margin: '1.5rem'}} variant="headline">
+                            {student.firstName} {student.lastName}
+                        </Typography>
+                    </CardContent>
+                </Paper>
+                ))}
+            </Grid>
+
+            <Grid item xs={'auto'}>
+                <Paper
+                    style={{
+                      flex: 4,
+                      margin: 10,
+                      textAlign: 'center'
+                }}>
+                    <CardContent>
+                        <Typography variant="headline">Student's progression: </Typography> 
+                            {evaluations.map(evaluation => this.renderBoxes(evaluation))}
+                            {this.calculatePercent()}
+                
+                        <Typography variant="headline">Create a new evaluation</Typography>
+                            <AddEvaluationForm onSubmit={this.handleSubmit} />
+                        
+                        <CardActions 
+                            style={{ 
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                        }}>
+                          {batches.map(batch => (
+                              <Link 
+                                  to={`/batches/${batch.id}`}
+                                  style={{ textDecoration: 'none'}}>
+                                  <Button variant="contained" color="secondary">Back to Batch</Button>
+                            </Link>
+                            ))}
+                        </CardActions>
+                    </CardContent>
+                </Paper>
+            </Grid>
+      </Grid>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-// console.log((window.location.href).split('/')[4], "meowmeow")
   return {
     authenticated: state.currentUser !== null,
     students: state.students,
     evaluations: state.evaluations,
-    batchId: (window.location.href).split('/')[4],
-		studentId: ((window.location.href).split('/').pop())
-  
+    batches: state.batches
   }
 }
 

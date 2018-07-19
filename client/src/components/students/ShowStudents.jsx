@@ -3,11 +3,9 @@ import {showBatch} from '../../actions/batches'
 import { showStudent, deleteStudent } from '../../actions/student'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
-import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button, IconButton } from '@material-ui/core';
+import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import theme from '../../theme.js';
 
 class ShowStudents extends PureComponent {
 
@@ -43,18 +41,18 @@ class ShowStudents extends PureComponent {
       alignItems: 'center',
       width: '80%',
       gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-      gridAutoRows: 'minMax(50px, auto)',
+      gridAutoRows: 'minMax(40px, auto)',
       gridGap: '1rem',
       padding: '1rem',
       margin: 'auto'
   }}>
         {students.map(student => (
-        <Card 
+        <Card
+            key={student.id} 
             style={{
                 textAlign: 'center',
                 backgroundColor: `${student.lastEvaluation.split('/')[1]}`
-            }}
-            key={student.id}>
+            }}>
         <CardContent>
           <CardMedia
               className='media'

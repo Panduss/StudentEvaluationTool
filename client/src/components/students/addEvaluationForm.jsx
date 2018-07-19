@@ -21,7 +21,9 @@ export default class AddEvaluationForm extends PureComponent {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<div className="evaluationForm">
+					
+					<br />
+
 					<div>
 						<TextField 
 						type="remarks" 
@@ -33,42 +35,39 @@ export default class AddEvaluationForm extends PureComponent {
 						onChange={ this.handleChange } />
 					</div>
 
+					<br />
+
 					<span>
             <Button
-            style={{background: "#e57373"}} 
+            style={{background: "#e57373", margin: '2px'}} 
 						type="radio"
 						name="colour" 
 						className="evalButton"
 						id="red" 
 						value="red/#e57373" 
-						label="Red"
 						onClick={ this.handleChange } />					
 					</span>
 
 					<span>
             <Button 
-            style={{background: "#fff176"}} 
+            style={{background: "#fff176", margin: '2px'}} 
 						type="radio"
 						name="colour" 
 						className="evalButton"
 						id="yellow" 
 						value="yellow/#fff176" 
-						label="Yellow"
 						onClick={ this.handleChange } />
 					</span>
 
           <span>
             <Button
-            style={{background: "#81c784"}} 
+            style={{background: "#81c784", margin: '2px'}} 
 						type="radio"
 						name="colour" 
-						className="evalButton"
 						id="green" 
 						value="green/#81c784"
-						label="Green"
 						onClick={ this.handleChange } />
 					</span>
-				</div>
 			</form>
 		)
 	}

@@ -20,41 +20,46 @@ export default class AddStudentForm extends PureComponent {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<TextField
-					required
-					id="required"
-					label="First name"
-					name="firstName" 
-					value={this.state.firstName || ''} 
-					onChange={ this.handleChange } 
-					style={{margin: '0.3rem'}}/>
-
-				<TextField
-					required
-					id="required"
-					label="Last name"
-					name="lastName" 
-					value={this.state.lastName || ''} 
-					onChange={ this.handleChange } 
-					style={{margin: '0.3rem'}}/>
-
-				<TextField
-					required
-					id="required"
-					label="Profile picture"
-					name="profilePic" 
-					value={this.state.profilePic || ''} 
-					onChange={ this.handleChange } 
-					style={{margin: '0.3rem'}}/>
-
-				<Button
-					type="submit"
-					variant="contained" 
-					color="secondary"
-					style={{margin: '1.5rem'}}
-					>
-					Create & Close
-				</Button>
+				<div>
+					<TextField
+						required
+						id="firsName"
+						label="First name"
+						name="firstName" 
+						value={this.state.firstName || ''} 
+						onChange={ this.handleChange } 
+						style={{margin: '0.3rem'}}/>
+				</div>
+				<div>
+					<TextField
+						required
+						id="lastName"
+						label="Last name"
+						name="lastName" 
+						value={this.state.lastName || ''} 
+						onChange={ this.handleChange } 
+						style={{margin: '0.3rem'}}/>
+				</div>
+				<div>
+					<TextField
+						required
+						id="profilePic"
+						label="Profile picture"
+						name="profilePic" 
+						value={this.state.profilePic || ''} 
+						onChange={ this.handleChange } 
+						style={{margin: '0.3rem'}}/>
+				</div>
+				<div>
+					<Button
+						type="submit"
+						variant="contained" 
+						color="secondary"
+						style={{margin: '1.5rem'}}
+						>
+						Create & Close
+					</Button>
+				</div>
 			</form>
 		)
 	}

@@ -17,9 +17,6 @@ export const showStudent = (studentId) => (dispatch, getState) => {
     const jwt = state.currentUser.jwt
      
     const batchId = ((window.location.href).split('/')[4])
-    // console.log((window.location.href).split('/'))
-
-    console.log(batchId, studentId, "idsssss")
   
     if (isExpired(jwt)) return dispatch(logout())
   
@@ -54,7 +51,7 @@ export const showStudent = (studentId) => (dispatch, getState) => {
   
     request
       .post(`${baseUrl}/batches/${batchId}/students`)
-      .send({ firstName, lastName, profilePic, lastEvaluation: "white", batch: batchId })
+      .send({ firstName, lastName, profilePic, lastEvaluation: 'white/#ffffff', batch: batchId })
       .then(result => {
         dispatch({
           type: ADD_STUDENT,

@@ -1,29 +1,31 @@
-import { IsString } from 'class-validator'
-import { JsonController, Post, Body, BadRequestError } from 'routing-controllers'
+import { JsonController, Post, Body, BadRequestError, NotFoundError } from 'routing-controllers'
 import { sign } from '../jwt'
 import User from '../users/entity'
 
-class AuthenticatePayload {
-  @IsString()
+type ValidateLoginData = {
   email: string
-
-  @IsString()
   password: string
 }
 
 @JsonController()
 export default class LoginController {
-
   @Post('/logins')
-  async authenticate(
-    @Body() { email, password }: AuthenticatePayload
-  ) {
+  async login(@Body() data: ValidateLoginData) {
+    const { email, password } = data
+
     const user = await User.findOne({ where: { email } })
-    if (!user || !user.id) throw new BadRequestError('Email does not exist')
 
-    if (!await user.checkPassword(password)) throw new BadRequestError('Password is not correct')
+    if (!user) throw new NotFoundError('User does not exist.')
 
-    const jwt = sign({ id: user.id })
-    return { jwt }
+    const { id } = user
+
+    if (!id) throw new NotFoundError('ID does not exist.')
+
+    if (!(await user.checkPassword(password)))
+      throw new BadRequestError('Incorrect password.')
+
+    const jwt = sign({ id })
+
+    return { jwt, id: user.id, name: user.firstName }
   }
 }

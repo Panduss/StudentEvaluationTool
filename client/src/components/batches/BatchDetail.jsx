@@ -3,10 +3,11 @@ import {showBatch} from '../../actions/batches'
 import {showStudent, deleteStudent} from '../../actions/student'
 import {showEvaluation} from '../../actions/evaluation'
 import GetRandom from './randomStudentGenerator'
-import {connect} from 'react-redux'
-import {Redirect, Link} from 'react-router-dom'
 import NewStudentPage from './addStudentPage'
-import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button } from '@material-ui/core';
+import {connect} from 'react-redux'
+import {Redirect } from 'react-router-dom'
+import ShowStudents from '../students/ShowStudents'
+import { Paper, Button, Typography } from '@material-ui/core';
 
 // const batchId = this.props.match.params.batchId
 
@@ -20,17 +21,9 @@ class BatchDetail extends PureComponent {
     }
   }
 
-  showStudent(studentId) {
-    this.props.showStudent(studentId)
-}
-
   showEvaluation(studentId) {
   this.props.showEvaluation(studentId)
 }
-
-  deleteStudent(studentId) {
-    this.props.deleteStudent(studentId)
-  }
 
   calculatePercent() {
     const { students } = this.props
@@ -48,99 +41,34 @@ class BatchDetail extends PureComponent {
 
     // console.log(bar, "showmeabar")
 
-    const redPercent = (getRed.length/getEvals.length * 100).toFixed()
-    const yellowPercent = (getYellow.length/getEvals.length * 100).toFixed()
-    const greenPercent = (getGreen.length/getEvals.length * 100).toFixed()
+    const redPercent = (getRed.length/getEvals.length * 100).toFixed(2)
+    const yellowPercent = (getYellow.length/getEvals.length * 100).toFixed(2)
+    const greenPercent = (getGreen.length/getEvals.length * 100).toFixed(2)
 
     
   return (
-    <div>
-      <h2>Latest evaluation for current batch:</h2>
-        <div className="percentageBar">
-              {bar.map(student => this.renderBoxes(student))}<br />
-        </div>
-        <p>Red Percentage: {redPercent}%</p>
-        <p>Yellow Percentage: {yellowPercent}%</p>
-        <p>Green Percentage: {greenPercent}%</p>
-    </div>
+      <Paper style={{
+        marginTop: '30px', 
+        marginLeft: 'auto', 
+        marginBottom: '30px', 
+        marginRight: 'auto',
+        padding: '20px',
+        width: '90%'}}>
+        <Typography variant="headline"> Latest evaluation for current batch: </Typography>
+        <br />
+        <Button style={{width: Math.round( redPercent ) + '%', borderRadius: 0, backgroundColor: '#e57373', textShadow: '0px 1px #cc2a48', float: "left", textAlign: "center"}}>{Math.floor(redPercent)}%</Button>        
+        <Button style={{width: Math.round( yellowPercent ) + '%', borderRadius: 0, backgroundColor: '#fff176', textShadow: '0px 1px #ccc12a', float: "left", textAlign: "center"}}>{Math.floor(yellowPercent)}%</Button>
+        <Button style={{width: Math.round( greenPercent ) + '%', borderRadius: 0, backgroundColor: '#81c784', textShadow: '0px 1px #4acc2a', float: "left", textAlign: "center"}}>{Math.floor(greenPercent)}%</Button>
+        <br />
+        <GetRandom />
+        <ShowStudents />
+      </Paper>
   )
 
   }
-  renderBoxes = (student) => {
-
-    return (
-      <Button 
-      key={student.id}
-      className="progressionBar" 
-      style={{background: `${student.lastEvaluation.split('/')[1]}`}}
-      > </Button>
-    )
-  }
-
-  renderStudent = (student, batches) => {
-  //  const batchId = batches[0].id
-   console.log(batches, "batcheeees")
-
-    return (
-      <Grid
-      className="main"
-      style={{
-      display: 'grid',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '80%',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-      gridAutoRows: 'minMax(50px, auto)',
-      gridGap: '1rem',
-      padding: '1rem',
-      margin: 'auto'
-  }}>
-        <Card 
-            style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: `${student.lastEvaluation.split('/')[1]}`
-            }}
-            key={student.id}>
-        <CardContent>
-          <CardMedia
-              className='media'
-              style={{ objectFit: 'contain', width: 200, height: 200, marginLeft: 'auto', marginRight: 'auto'}}
-              image={student.profilePic}
-              title="student's profile picture"
-              />
-            <Typography variant="headline">
-                {student.firstName} {student.lastName}
-            </Typography>
-            <Typography>
-                Last evaluation: {student.lastEvaluation.split('/')[0]}
-            </Typography>
-    
-            <CardActions
-                style={{
-                display: 'grid',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-            {batches.map(batch =>
-                <Link
-                    to={`/batches/${batch.id}/students/${student.id}`}
-                    style={{ textDecoration: 'none'}}>
-                    <Button variant="contained" color="secondary" onClick={() => this.showStudent(student.id)}>More detail</Button>
-                </Link>
-              )}
-                  <Button className="batchDetailButton" onClick={() => this.deleteStudent(student.id)}>Delete Student</Button>
-      {/* <p className="studentName">{student.firstName} {student.lastName}</p>
-      <p className="studentInfo" >Last evaluation: {(student.lastEvaluation).toUpperCase()}</p> */}
-      </CardActions>
-              </CardContent>
-          </Card>
-          </Grid>
-    )}
 
   render() {
-    const {students, batches, authenticated} = this.props
+    const {students,authenticated} = this.props
 
     if (!authenticated) return (
 			<Redirect to="/login" />
@@ -150,20 +78,8 @@ class BatchDetail extends PureComponent {
 
     return (
       <div>
-        <div className="percentages">
-              {this.calculatePercent()}
-        </div>
-        <div className="batchPageButtons">
-            <GetRandom />
-        </div>
-        <div className="batchPage">
-            <div className="box">
-                {students.map(student => this.renderStudent(student, batches))} 
-            </div>
-            <div className="box">
-                <NewStudentPage />
-          </div>
-        </div>
+          <NewStudentPage />
+          {this.calculatePercent()}
       </div>
     )
   }

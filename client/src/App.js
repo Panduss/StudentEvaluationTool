@@ -9,7 +9,7 @@ import LogoutPage from './components/logout/LogoutPage'
 import TopBar from './components/layout/TopBar'
 import NewBatchPage from './components/batches/addBatchPage'
 import './App.css';
-import { MuiThemeProvider } from 'material-ui/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from './theme.js';
 
 

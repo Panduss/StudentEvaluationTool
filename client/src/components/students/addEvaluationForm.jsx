@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import { Button, TextField } from '@material-ui/core';
 
 export default class AddEvaluationForm extends PureComponent {
   state = {}
@@ -22,7 +23,7 @@ export default class AddEvaluationForm extends PureComponent {
 			<form onSubmit={this.handleSubmit}>
 				<div className="evaluationForm">
 					<div>
-						<input 
+						<TextField 
 						type="remarks" 
             name="remarks" 
             className="newEval"
@@ -32,19 +33,8 @@ export default class AddEvaluationForm extends PureComponent {
 						onChange={ this.handleChange } />
 					</div>
 
-          {/* <div>
-						<input 
-						type="colour" 
-            name="colour" 
-            className="newEval"
-						placeholder="Colour" 
-						id="colour" 
-						value={this.state.colour || ''} 
-						onClick={ this.handleChange } />
-					</div> */}
-
 					<span>
-            <button
+            <Button
             style={{background: "#e57373"}} 
 						type="radio"
 						name="colour" 
@@ -56,7 +46,7 @@ export default class AddEvaluationForm extends PureComponent {
 					</span>
 
 					<span>
-            <button 
+            <Button 
             style={{background: "#fff176"}} 
 						type="radio"
 						name="colour" 
@@ -68,7 +58,7 @@ export default class AddEvaluationForm extends PureComponent {
 					</span>
 
           <span>
-            <button
+            <Button
             style={{background: "#81c784"}} 
 						type="radio"
 						name="colour" 
@@ -78,24 +68,6 @@ export default class AddEvaluationForm extends PureComponent {
 						label="Green"
 						onClick={ this.handleChange } />
 					</span>
-
-                    {/* <div>
-						<input 
-						type="batch" 
-						name="batch" 
-						className="signupInfo"
-						placeholder="Batch Number" 
-						id="batch" 
-						value={this.state.batch || ''} 
-						onChange={ this.handleChange } />
-					</div> 
-
-          <button 
-          type="submit" 
-          className="newEvalButton"
-          >
-          Save
-          </button>*/}
 				</div>
 			</form>
 		)

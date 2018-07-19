@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {login} from '../../actions/users'
 import LoginForm from './LoginForm'
 import {Redirect} from 'react-router-dom'
-import { CardContent, CardActions, Paper, Card } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 
 
 class LoginPage extends PureComponent {

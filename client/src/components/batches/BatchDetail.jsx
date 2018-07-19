@@ -6,7 +6,7 @@ import GetRandom from './randomStudentGenerator'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 import NewStudentPage from './addStudentPage'
-import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button, Avatar } from '@material-ui/core';
+import { Grid, Card, CardContent, CardMedia, Typography, CardActions, Button } from '@material-ui/core';
 
 // const batchId = this.props.match.params.batchId
 

@@ -4,8 +4,6 @@ import Batch from '../batches/entity'
 
 type Colour = "red" | "yellow" | "green"
 
-let today  = new Date().toLocaleDateString("en-US");
-
 @Entity()
 export default class Evaluations extends BaseEntity {
 
@@ -18,7 +16,7 @@ export default class Evaluations extends BaseEntity {
     @Column('text', {nullable: false})
     colour: Colour
 
-    @Column('text', {default: today, nullable: false} )
+    @Column('text', { default: new Date().toISOString() })
     date: string
 
     @ManyToOne(_ => Student, student => student.evaluations, { onDelete: 'CASCADE', nullable: false })

@@ -5,6 +5,7 @@ import {Redirect, Link} from 'react-router-dom'
 import {showEvaluation, newEvaluation} from '../../actions/evaluation'
 import AddEvaluationForm from './addEvaluationForm'
 import { Button, Grid, CardActions, CardContent, CardMedia, Typography, Paper } from '@material-ui/core';
+import {Chart as ChartJS} from 'chart.js/src/chart';
 
 class ShowOneStudent extends PureComponent {
 
@@ -30,6 +31,7 @@ class ShowOneStudent extends PureComponent {
     this.props.showEvaluation(studentId)
     
   }
+
 
   calculatePercent() {
     const { evaluations } = this.props
@@ -58,14 +60,16 @@ class ShowOneStudent extends PureComponent {
     )
   }
 
-  renderBoxes = (evaluations) => {
-
+  renderBoxes = (evaluation) => {
+    
+    console.log(evaluation, "evals from renderBoxes, student")
     return (
       <span style={{width: '90%'}}>
       <Button 
-      key={evaluations.id}
-      style={{border: '1px solid black', background: `${evaluations.colour}`.split('/')[1], borderRadius: '0'}}
-      />
+      key={evaluation.id}
+      variant="fab"
+      style={{background: `${evaluation.colour}`.split('/')[1]}}
+      >{evaluation.date.split('T')[0].substring(5, 10)}</Button>
       </span>
     )
   }
@@ -158,7 +162,8 @@ const mapStateToProps = (state) => {
   return {
     authenticated: state.currentUser !== null,
     students: state.students,
-    evaluations: state.evaluations,
+    evaluations: state.evaluations === null ?
+    null : Object.values(state.evaluations).sort((a, b) => a.id - b.id),
     batches: state.batches
   }
 }

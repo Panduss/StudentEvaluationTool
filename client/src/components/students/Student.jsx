@@ -143,12 +143,12 @@ class ShowOneStudent extends PureComponent {
                                 alignItems: 'center'
                         }}>
                           {batches.map(batch => (
-                              <Link 
-                                  to={`/batches/${batch.id}`}
-                                  style={{ textDecoration: 'none'}}>
-                                  <Button variant="contained" color="secondary">Back to Batch</Button>
-                            </Link>
-                            ))}
+                                <Link 
+                                    to={`/batches/${batch.id}`}
+                                    style={{ textDecoration: 'none'}}>
+                                    <Button variant="contained" color="secondary">Back to Batch</Button>
+                                </Link>
+                          ))}
                         </CardActions>
                     </CardContent>
                 </Paper>

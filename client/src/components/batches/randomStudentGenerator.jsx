@@ -3,7 +3,7 @@ import {getAllStudent} from '../../actions/student'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import { Button } from '@material-ui/core';
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 
 class GetRandom extends PureComponent {
 
@@ -144,11 +144,36 @@ class GetRandom extends PureComponent {
             //window.alert(`You should ask: ${randomStudent.firstName} ${randomStudent.lastName}, with ${(randomStudent.lastEvaluation).split('/')[0].toUpperCase()} evaluation.`)
         }
         swal({
-            text: `You should ask: ${(randomStudent.firstName + " " + randomStudent.lastName).toUpperCase()}, with ${(randomStudent.lastEvaluation).split('/')[0].toUpperCase()} evaluation.`,
-            button: false,
+            imageUrl: `${randomStudent.profilePic}`,
+            imageHeight: 300,
+            imageAlt: 'A tall image',
+            title: `You should ask: ${(randomStudent.firstName + " " + randomStudent.lastName).toUpperCase()}, with ${(randomStudent.lastEvaluation).split('/')[0].toUpperCase()} evaluation.`,
+            width: 600,
             timer: 4000,
-            icon: `${randomStudent.profilePic}`
-          });
+            showConfirmButton: false,
+            padding: '3em',
+            background: `${randomStudent.lastEvaluation.split('/')[1]}`,
+            backdrop: `
+              rgba(0,0,123,0.4)
+              url("https://sweetalert2.github.io/images/nyan-cat.gif")
+              left
+              no-repeat
+            `
+          })
+        // Swal( {
+        //     text: `You should ask: ${(randomStudent.firstName + " " + randomStudent.lastName).toUpperCase()}, with ${(randomStudent.lastEvaluation).split('/')[0].toUpperCase()} evaluation.`,
+        //     showCancelButton: false,
+        //     // timer: 2000,
+        //     width: 600,
+        //     // : `${randomStudent.profilePic}`,
+        //     background: '#fff url(/images/trees.png)',
+        //     backdrop: `
+        //       rgba(0,0,123,0.4)
+        //       url("")
+        //       center left
+        //       no-repeat
+        //     `
+        //   });
     }
 
     

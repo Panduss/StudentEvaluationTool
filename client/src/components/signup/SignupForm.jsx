@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import { TextField, Button } from '@material-ui/core';
 
 export default class SignupForm extends PureComponent {
 	state = {}
@@ -19,31 +20,32 @@ export default class SignupForm extends PureComponent {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<div className="signup">
 					<div>
-						<input 
+						<TextField
 						type="firstName" 
 						name="firstName" 
 						className="signupInfo"
 						placeholder="First name" 
 						id="firstName" 
 						value={this.state.firstName || ''} 
-						onChange={ this.handleChange } />
+						onChange={ this.handleChange }
+						style={{margin: '0.3rem'}}/>
 					</div>
 
 					<div>
-						<input 
+						<TextField
 						type="lastName" 
 						name="lastName" 
 						className="signupInfo"
 						placeholder="Last name" 
 						id="lastName" 
 						value={this.state.lastName || ''} 
-						onChange={ this.handleChange } />
+						onChange={ this.handleChange }
+						style={{margin: '0.3rem'}}/>
 					</div>
 
 					<div>
-						<input 
+						<TextField
 						type="email" 
 						name="email" 
 						className="signupInfo"
@@ -54,25 +56,27 @@ export default class SignupForm extends PureComponent {
 					</div>
 
 					<div>
-						<input 
+						<TextField
 						type="password" 
 						name="password" 
 						className="signupInfo"
 						placeholder="Password" 
 						id="password" 
 						value={this.state.password || ''} 
-						onChange={ this.handleChange } />
+						onChange={ this.handleChange }
+						style={{margin: '0.3rem'}}/>
 					</div>
 
 					<div>
-						<input 
+						<TextField
 						type="password" 
 						name="confirmPassword" 
 						className="signupInfo"
 						placeholder="Confirm password" 
 						id="confirmPassword" 
 						value={this.state.confirmPassword || ''} 
-						onChange={ this.handleChange } />
+						onChange={ this.handleChange }
+						style={{margin: '0.3rem'}}/>
 					</div>
 
 					{
@@ -82,13 +86,13 @@ export default class SignupForm extends PureComponent {
 						<p style={{color:'red'}}>The passwords do not match!</p>
 					}
 
-					<button 
-						type="submit"
-						className="signupButton"
-					>
+					<Button 
+					type="submit"
+					variant="contained" 
+					color="secondary"
+					style={{margin: '1.5rem'}}>
 						Sign me up!
-					</button>
-				</div>
+					</Button>
 			</form>
 		)
 	}

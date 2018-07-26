@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {signup} from '../../actions/users'
 import SignupForm from './SignupForm'
 import {Redirect} from 'react-router-dom'
+import { Paper } from '@material-ui/core';
 
 class SignupPage extends PureComponent {
 	handleSubmit = (data) => {
@@ -15,13 +16,22 @@ class SignupPage extends PureComponent {
 		)
 
 		return (
-			<div className="signup">
+			<Paper					
+			style={{
+			display: 'grid',
+			maxWidth: '30%',
+			textAlign: 'center',
+			justifyContent: 'center',
+			padding: '3rem',
+			margin: 'auto',
+			alignItems: 'center'
+			}}>
 				<h1>Sign up</h1>
 
 				<SignupForm onSubmit={this.handleSubmit} />
 
 				<p style={{color:'red'}}>{ this.props.signup.error }</p>
-			</div>
+			</Paper>
 		)
 	}
 }

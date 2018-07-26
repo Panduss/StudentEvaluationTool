@@ -22,8 +22,9 @@ class LoginPage extends PureComponent {
 				display: 'grid',
 				textAlign: 'center',
 				justifyContent: 'center',
+				maxWidth: '30%',
 				padding: '3rem',
-				margin: '4rem',
+				margin: 'auto',
 				alignItems: 'center'
 				}}>
 					<h1 className="loginTitle">Login</h1>

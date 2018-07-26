@@ -9,8 +9,7 @@ IN PROGRESS ✌️
 
   clone this repo <br>
   run yarn on client & server <br>
-  terminal, run "yarn tsc -w"
-  terminal, in server folder: "nodemon ." <br>
+  terminal, in server folder: "yarn dev" <br>
   terminal, in client folder: "yarn start"  <br>
 
 happy hacking! 👌
